@@ -15,11 +15,6 @@ public class AlphaApplication extends Application {
 
     private final String TAG="AlphaApplication";
 
-    // Member variables for fragment
-    int mCurrentFragmentIndex;
-    public final static int FRAGMENT_CONTROLLER = 0;
-    public final static int FRAGMENT_APPSTORE = 1;
-
     private IDataTransferService DataTransferService;
     private ServiceConnection mConnection = new ServiceConnection() {
 
@@ -44,6 +39,7 @@ public class AlphaApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        // Services
         startService(new Intent(this, DataTransferManager.class));
         bindService(new Intent(this, DataTransferManager.class), mConnection, BIND_AUTO_CREATE);
     }
