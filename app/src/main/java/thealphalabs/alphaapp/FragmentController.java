@@ -1,6 +1,7 @@
 package thealphalabs.alphaapp;
 
 import android.app.Activity;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -9,6 +10,9 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 
@@ -20,7 +24,7 @@ import android.widget.ImageView;
  * Use the {@link FragmentController#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentController extends Fragment {
+public class FragmentController extends Fragment implements View.OnClickListener {
     private final String TAG = "FragmentController";
 
     // TODO: Rename parameter arguments, choose names that match
@@ -57,12 +61,23 @@ public class FragmentController extends Fragment {
     }
 
     @Override
+    public void onClick(View view) {
+        Log.d(TAG, "[FragmentController] onClick ");
+        InputMethodManager keyboard = (InputMethodManager)
+                getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        EditText editText = new EditText(null);
+        keyboard.showSoftInput(editText, 0);
+        Log.d(TAG, "onClick: " + editText.getText().toString());
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -84,6 +99,10 @@ public class FragmentController extends Fragment {
 //        });
 
 //here the rest of your code
+
+        // Set onclicklistener as this instance.
+        Button toggleKeyboard = (Button)  view.findViewById(R.id.btn_keyboard);
+        toggleKeyboard.setOnClickListener(this);
 
         return inflater.inflate(R.layout.fragment_fragment_controlle, container, false);
     }
