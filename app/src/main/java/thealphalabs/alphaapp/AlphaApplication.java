@@ -9,11 +9,17 @@ import android.os.RemoteException;
 import android.util.Log;
 
 /**
- * Created by yeol on 15. 6. 8.
+ * Created by AlphaLabs on 15. 6. 8.
  */
 public class AlphaApplication extends Application {
 
     private final String TAG="AlphaApplication";
+
+    // Member variables for fragment
+    int mCurrentFragmentIndex;
+    public final static int FRAGMENT_CONTROLLER = 0;
+    public final static int FRAGMENT_APPSTORE = 1;
+
     private IDataTransferService DataTransferService;
     private ServiceConnection mConnection = new ServiceConnection() {
 
@@ -21,12 +27,12 @@ public class AlphaApplication extends Application {
         public void onServiceConnected(ComponentName name, IBinder service) {
             // TODO Auto-generated method stub
             DataTransferService=IDataTransferService.Stub.asInterface(service);
-            try {
-
-            } catch (RemoteException e) {
-                // TODO Auto-generated catch block
-                Log.d(TAG,e.getMessage());
-            }
+//            try {
+//
+//            } catch (RemoteException e) {
+//                // TODO Auto-generated catch block
+//                Log.d(TAG,e.getMessage());
+//            }
         }
 
         @Override
