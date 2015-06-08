@@ -1,22 +1,25 @@
 package thealphalabs.alphaapp;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.os.RemoteException;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
 
-public class GlassAppMain extends Activity implements View.OnClickListener {
+public class GlassAppMain extends FragmentActivity implements View.OnClickListener, View.OnTouchListener {
     private final String TAG = "GlassAppMain";
+    private IDataTransferService dataTransferService = ((AlphaApplication)getApplication()).getDataTransferService();
     // Member variables for fragment
     int mCurrentFragmentIndex;
     public final static int FRAGMENT_CONTROLLER = 0;
-    public final static int FRAGMENT_APPSTORE = 1;
+    public final static int FRAGMENT_APPSTORE   = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,8 @@ public class GlassAppMain extends Activity implements View.OnClickListener {
         // Fragment
         Button bt_controller = (Button) findViewById(R.id.bt_controller);
         Button bt_appstore   = (Button) findViewById(R.id.bt_appstore);
+        bt_controller.setOnClickListener(this);
+        bt_appstore.setOnClickListener(this);
 
         mCurrentFragmentIndex = FRAGMENT_CONTROLLER;
         fragmentReplace(mCurrentFragmentIndex);
@@ -54,19 +59,14 @@ public class GlassAppMain extends Activity implements View.OnClickListener {
     }
 
     public void fragmentReplace(int reqNewFragmentIndex) {
-        Fragment newFragment = null;
-        Log.d(TAG, "fragmentReplace " + reqNewFragmentIndex);
+        Fragment newFragment;
 
         newFragment = getFragment(reqNewFragmentIndex);
-
-        // replace fragment
-        final FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        final FragmentTransaction transaction =
+                        getFragmentManager().beginTransaction();
 
         transaction.replace(R.id.fragment_content, newFragment);
-
-        // Commit the transaction
         transaction.commit();
-
     }
     private Fragment getFragment(int idx) {
         Fragment newFragment = null;
@@ -79,7 +79,7 @@ public class GlassAppMain extends Activity implements View.OnClickListener {
                 newFragment = new FragmentAppstore();
                 break;
             default:
-                Log.d(TAG, "Unhandle case");
+                Log.d(TAG, "Unexpected case");
                 break;
         }
         return newFragment;
@@ -87,9 +87,7 @@ public class GlassAppMain extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-
         switch (v.getId()) {
-
             case R.id.bt_controller:
                 mCurrentFragmentIndex = FRAGMENT_CONTROLLER;
                 fragmentReplace(mCurrentFragmentIndex);
@@ -99,5 +97,33 @@ public class GlassAppMain extends Activity implements View.OnClickListener {
                 fragmentReplace(mCurrentFragmentIndex);
                 break;
         }
+    }
+
+    public void onControllerFragmentInteraction(String string)
+    {
+        Log.d(TAG, "controllerFragment");
+    }
+
+    public void onAppstroeFragmentInteraction(String string)
+    {
+        Log.d(TAG, "appstoreFragment");
+    }
+
+    public boolean onTouch(View v, MotionEvent event) {
+        Log.d(TAG, "x = " + event.getX() + ", y = " + event.getY());
+
+        return true;
+    }
+
+    public boolean onTouchEvent(MotionEvent event) {
+        Log.d(TAG, "x = " + event.getX() + ", y = " + event.getY());
+
+        try {
+            dataTransferService.transferMouseData(event.getX(), event.getY());
+        }
+        catch (RemoteException ex) {
+            Log.e(TAG, "RemoteException occurred: " + ex);
+        }
+        return super.onTouchEvent(event);
     }
 }

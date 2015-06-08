@@ -110,6 +110,9 @@
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/src/main/res/values/refs.xml -->
+    <eat-comment/>
+    <item name="controller_img" type="drawable">@mipmap/controller_img</item>
     <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/res/values/values.xml -->
     <eat-comment/>
     <item name="action_bar_activity_content" type="id"/>

@@ -40,15 +40,15 @@ public class AlphaApplication extends Application {
     public void onCreate() {
         super.onCreate();
         // Services
-        startService(new Intent(this, DataTransferManager.class));
-        bindService(new Intent(this, DataTransferManager.class), mConnection, BIND_AUTO_CREATE);
+//        startService(new Intent(this, DataTransferManager.class));
+//        bindService(new Intent(this, DataTransferManager.class), mConnection, BIND_AUTO_CREATE);
     }
 
     @Override
     public void onTerminate() {
         super.onTerminate();
-        unbindService(mConnection);
-        stopService(new Intent(this, DataTransferManager.class));
+//        unbindService(mConnection);
+//        stopService(new Intent(this, DataTransferManager.class));
     }
 
     public IDataTransferService getDataTransferService()
