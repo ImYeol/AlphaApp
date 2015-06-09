@@ -2,81 +2,54 @@ package thealphalabs.alphaapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.os.RemoteException;
+import android.text.method.Touch;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethod;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link FragmentController.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link FragmentController#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class FragmentController extends Fragment implements View.OnClickListener {
+public class FragmentController extends Fragment {
     private final String TAG = "FragmentController";
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    // Member for event handler
+    private btnClickListener btnL;
+    private TouchEventListener touchL;
+    private SensorManager sensorManager;
+    private SensorEventListener accL;
+    private SensorEventListener gyroL;
+    private Sensor accSensor;
+    private Sensor gyroSensor;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private boolean toggleKeyboard;
 
-    private OnFragmentInteractionListener mListener;
+    // Data transfer service
+    private IDataTransferService dataTransferService;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentController.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FragmentController newInstance(String param1, String param2) {
-        FragmentController fragment = new FragmentController();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    public FragmentController() {
-        // Required empty public constructor
-    }
-
-    @Override
-    public void onClick(View view) {
-        Log.d(TAG, "[FragmentController] onClick ");
-        InputMethodManager keyboard = (InputMethodManager)
-                getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        EditText editText = new EditText(null);
-        keyboard.showSoftInput(editText, 0);
-        Log.d(TAG, "onClick: " + editText.getText().toString());
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        toggleKeyboard = false;
+        dataTransferService = ((AlphaApplication) getActivity().getApplication()).getDataTransferService();
 
     }
 
@@ -86,63 +59,136 @@ public class FragmentController extends Fragment implements View.OnClickListener
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_fragment_controlle, container, false);
 
-        Log.d(TAG, "onCreatView ; initialize");
+        touchL = new TouchEventListener();
+        view.setOnTouchListener(touchL);
 
-//        view.setOnTouchListener(new View.OnTouchListener() {
-//            public boolean onTouch(View v, MotionEvent event) {
-//                Log.d(TAG, "x = " + event.getX() + ", y = " + event.getY());
-//
-//                if(event.getAction() == MotionEvent.ACTION_MOVE){
-//                }
-//                return true;
-//            }
-//        });
-
-//here the rest of your code
-
-        // Set onclicklistener as this instance.
+        // Button
+        btnL = new btnClickListener();
         Button toggleKeyboard = (Button)  view.findViewById(R.id.btn_keyboard);
-        toggleKeyboard.setOnClickListener(this);
+        toggleKeyboard.setOnClickListener(btnL);
 
-        return inflater.inflate(R.layout.fragment_fragment_controlle, container, false);
+        // Sensor
+        sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
+        accSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        accL = new accListener();
+
+        gyroSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+        gyroL = new gyroListener();
+
+        sensorManager.registerListener(accL, accSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(gyroL, gyroSensor, SensorManager.SENSOR_DELAY_NORMAL);
+
+        final EditText editText = (EditText) view.findViewById(R.id.inputbox);
+        editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_DONE || i == EditorInfo.IME_ACTION_NEXT ||
+                        keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                    receiveUserInput(editText.getText().toString());
+
+                    editText.setText("");
+                    editText.setVisibility(View.INVISIBLE);
+                    InputMethodManager keyboard = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    keyboard.hideSoftInputFromWindow(getView().getWindowToken(), InputMethodManager.HIDE_IMPLICIT_ONLY);
+
+                    return true;
+                }
+                return false;
+            }
+        });
+        return view;
     }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onControllerFragmentInteraction(uri);
-        }
-    }
-
-//    @Override
-//    public void onAttach(Activity activity) {
-//        super.onAttach(activity);
-//        try {
-//            mListener = (OnFragmentInteractionListener) activity;
-//        } catch (ClassCastException e) {
-//            throw new ClassCastException(activity.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+
+        sensorManager.unregisterListener(accL);
+        sensorManager.unregisterListener(gyroL);
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onControllerFragmentInteraction(Uri uri);
+    private void receiveUserInput(String input) {
+        Log.d(TAG, "User input is " + input);
+//        try {
+//            dataTransferService.transferStringData(input);
+//        }
+//        catch(RemoteException ex) {
+//            Log.e(TAG, "RemoteException occur: " + ex);
+//        }
+    }
+
+    private class TouchEventListener implements View.OnTouchListener {
+        private final String TAG = "touchEventListener";
+        public boolean onTouch(View v, MotionEvent event) {
+            Log.d(TAG, "x = " + event.getX() + ", y = " + event.getY());
+////        try {
+////            dataTransferService.transferMouseData(event.getX(), event.getY());
+////        }
+////        catch (RemoteException ex) {
+////            Log.e(TAG, "RemoteException occurred: " + ex);
+////        }
+            return true;
+        }
+    }
+
+   // Class for button click(keyboard toggle)
+    private class btnClickListener implements View.OnClickListener {
+        private final String TAG = "btnClickListener";
+        public void onClick(View v) {
+            toggleKeyboard = !toggleKeyboard;
+
+            final EditText editText = (EditText) getView().findViewById(R.id.inputbox);
+            InputMethodManager keyboard = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+
+            if (toggleKeyboard) {
+                editText.setVisibility(View.VISIBLE);
+
+                editText.requestFocus();
+                keyboard.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
+            }
+            else {
+                editText.setText("");
+                editText.setVisibility(View.INVISIBLE);
+                keyboard.hideSoftInputFromWindow(getView().getWindowToken(), InputMethodManager.HIDE_IMPLICIT_ONLY);
+            }
+        }
+    }
+
+    // Classes for SensorEventListener
+    private class accListener implements SensorEventListener {
+        private final String TAG = "accListener";
+        public void onSensorChanged(SensorEvent event) {
+            Log.d(TAG, "[accelometer event] x = " + event.values[0] + ", y = " + event.values[1] + ", z = " + event.values[2]);
+            // When the IDataTransferService is fully implemented, uncomment following block:
+//        try {
+//            dataTransferService.transferAccelData(event.getX(), event.getY());
+//        }
+//        catch (RemoteException ex) {
+//            Log.e(TAG, "RemoteException occurred: " + ex);
+//        }
+        }
+
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+        }
+    }
+
+    private class gyroListener implements SensorEventListener {
+        private final String TAG = "gyroListener";
+        public void onSensorChanged(SensorEvent event) {
+            Log.d(TAG, "[gyroscope event] x = " + event.values[0] + ", y = " + event.values[1] + ", z = " + event.values[2]);
+
+            // When the IDataTransferService is fully implemented, uncomment following block:
+//            try {
+//                dataTransferService.transferGyroData(event.getX(), event.getY());
+//            }
+//            catch (RemoteException ex) {
+//                Log.e(TAG, "RemoteException occurred: " + ex);
+//            }
+        }
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+        }
     }
 }
