@@ -1,13 +1,13 @@
 package thealphalabs.alphaapp;
 
+import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
+import android.app.Notification;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.PictureDrawable;
 import android.os.Bundle;
-import android.os.RemoteException;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -15,19 +15,31 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import java.lang.reflect.Field;
 
 
 public class GlassAppMain extends FragmentActivity implements View.OnClickListener {
     private final String TAG = "GlassAppMain";
+    private String tabs[] = {"Controller", "Appstore", "About"};
+
     // Member variables for fragment
-    int mCurrentFragmentIndex;
+    private int mCurrentFragmentIndex;
     public final static int FRAGMENT_CONTROLLER = 0;
     public final static int FRAGMENT_APPSTORE   = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_glass_app_main);
+
+        // ActionBar
+        ActionBar actionBar = getActionBar();
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.rgb(43, 68, 140)));
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        actionBar.setCustomView(R.layout.custom_actionbar);
 
         // Fragment
         Button bt_controller = (Button) findViewById(R.id.bt_controller);
@@ -38,42 +50,6 @@ public class GlassAppMain extends FragmentActivity implements View.OnClickListen
         mCurrentFragmentIndex = FRAGMENT_CONTROLLER;
         fragmentReplace(mCurrentFragmentIndex);
 
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_glass_app_main, menu);
-        return true;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     public void fragmentReplace(int reqNewFragmentIndex) {
@@ -116,22 +92,4 @@ public class GlassAppMain extends FragmentActivity implements View.OnClickListen
                 break;
         }
     }
-
-    public void onControllerFragmentInteraction(String string)
-    {
-        Log.d(TAG, "controllerFragment");
-    }
-
-    public void onAppstroeFragmentInteraction(String string)
-    {
-        Log.d(TAG, "appstoreFragment");
-    }
-
-    public boolean onTouch(View v, MotionEvent event) {
-        Log.d(TAG, "[onTouch] x = " + event.getX() + ", y = " + event.getY());
-
-        return true;
-    }
-
-
 }
