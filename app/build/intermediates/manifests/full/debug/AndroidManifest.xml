@@ -35,6 +35,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name="thealphalabs.bluetooth.BluetoothTransferService"
+            android:enabled="true" >
+        </service>
+        <service
+            android:name="thealphalabs.wifip2p.WifiTransferService"
+            android:enabled="true" >
+        </service>
     </application>
 
 </manifest>

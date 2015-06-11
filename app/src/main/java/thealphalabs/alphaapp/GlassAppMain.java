@@ -35,6 +35,7 @@ public class GlassAppMain extends FragmentActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_glass_app_main);
 
+<<<<<<< Updated upstream
         // ActionBar
         ActionBar actionBar = getActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.rgb(43, 68, 140)));
@@ -50,6 +51,8 @@ public class GlassAppMain extends FragmentActivity implements View.OnClickListen
         mCurrentFragmentIndex = FRAGMENT_CONTROLLER;
         fragmentReplace(mCurrentFragmentIndex);
 
+=======
+>>>>>>> Stashed changes
     }
 
     public void fragmentReplace(int reqNewFragmentIndex) {
