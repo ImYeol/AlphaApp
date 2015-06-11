@@ -142,7 +142,6 @@
     <eat-comment/>
     <string name="action_settings">Settings</string>
     <string name="app_name">AlphaApp</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello_world">Hello world!</string>
     <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/src/main/res/values/styles.xml -->
     <eat-comment/>
