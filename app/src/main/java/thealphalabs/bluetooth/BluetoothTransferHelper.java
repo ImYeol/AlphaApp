@@ -9,24 +9,23 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
 
-import thealphalabs.Interface.TransferHelperInterface;
 import thealphalabs.alphaapp.IDataTransferService;
 import thealphalabs.util.IntentSender;
 
 /**
  * Created by yeol on 15. 6. 9.
  */
-public class BluetoothTransferHelper implements TransferHelperInterface {
+public class BluetoothTransferHelper {
 
-    private static BluetoothTransferHelper instance;
     private Context context;
-    private IDataTransferService mTransferSerivce;
     private final String TAG="BlueToothTransferHelper";
+    private IDataTransferService mTransferSerivce;
 
     private ServiceConnection mConn=new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             mTransferSerivce=IDataTransferService.Stub.asInterface(service);
+            Log.d(TAG,"service connected");
         }
 
         @Override
@@ -34,35 +33,20 @@ public class BluetoothTransferHelper implements TransferHelperInterface {
             mTransferSerivce=null;
         }
     };
-    private BluetoothTransferHelper(){
-
-    }
-
-    public static BluetoothTransferHelper getInstance(){
-        if(instance == null )
-            instance= new BluetoothTransferHelper();
-        return instance;
-    }
-
-    public void StartConnection(Context context){
+    public BluetoothTransferHelper(Context context) {
         this.context=context;
+    }
+
+    public void StartConnection() {
         Intent localIntent=new Intent(context,BluetoothTransferService.class);
-        IntentSender.getInstance().startService(context,localIntent);
         IntentSender.getInstance().bindService(context,localIntent,mConn,Context.BIND_AUTO_CREATE);
     }
 
-    @Override
-    public void StopConnection(Context context) {
-        Intent localIntent=new Intent(context,BluetoothTransferService.class);
-        IntentSender.getInstance().unbindService(context,mConn);
-        IntentSender.getInstance().stopService(context, localIntent);
-    }
-
-    public void transferMouseData(float x, float y) {
+    public void transferMouseData(float x, float y, int pressure) {
         try {
-            mTransferSerivce.transferMouseData(x,y);
+            mTransferSerivce.transferMouseData(x,y,pressure);
         } catch (RemoteException e) {
-            Log.d(TAG,e.getMessage());
+            Log.d(TAG, e.getMessage());
         }
     }
 
@@ -89,4 +73,17 @@ public class BluetoothTransferHelper implements TransferHelperInterface {
             Log.d(TAG, e.getMessage());
         }
     }
+
+    public void StopConnection() {
+        IntentSender.getInstance().unbindService(context, mConn);
+    }
+
+    public void connectTo(String paramAddress) {
+        try {
+            mTransferSerivce.connectTo(paramAddress);
+        } catch (RemoteException e) {
+            Log.d(TAG,"connectTo :"+ e.getMessage());
+        }
+    }
+
 }

@@ -13,7 +13,7 @@ import thealphalabs.util.IntentSender;
 /**
  * Created by yeol on 15. 6. 9.
  */
-public class WifiTransferHelper implements TransferHelperInterface {
+public class WifiTransferHelper {
     private static WifiTransferHelper instance;
     private Context context;
     private IDataTransferService mTransferSerivce;
@@ -40,7 +40,6 @@ public class WifiTransferHelper implements TransferHelperInterface {
 
     public void StartConnection(Context context) {
         Intent localIntent=new Intent(context,WifiTransferService.class);
-        IntentSender.getInstance().startService(context,new Intent(context,WifiTransferService.class));
-        IntentSender.getInstance().bindService(context,new Intent(context,WifiTransferService.class),mConn);
+    //    IntentSender.getInstance().bindService(context,new Intent(context,WifiTransferService.class),mConn);
     }
 }

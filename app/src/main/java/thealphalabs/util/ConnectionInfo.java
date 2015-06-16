@@ -10,35 +10,33 @@ public class ConnectionInfo {
     // Constants
 
     // Instance
-/*    private static ConnectionInfo mInstance = null;
+    private static ConnectionInfo mInstance = null;
     private Context mContext;
 
     // Target device's MAC address
     private String mDeviceAddress = null;
-
     // Name of the connected device
     private String mDeviceName = null;
 
 
-    private ConnectionInfo(Context c) {
-        mContext = c;
-
+    private ConnectionInfo(Context paramContext) {
+        mContext = paramContext;
         SharedPreferences prefs = mContext.getSharedPreferences(Constants.PREFERENCE_NAME, Context.MODE_PRIVATE);
         mDeviceAddress = prefs.getString(Constants.PREFERENCE_CONN_INFO_ADDRESS, null);
         mDeviceName = prefs.getString(Constants.PREFERENCE_CONN_INFO_NAME, null);
     }
 
-    public synchronized static ConnectionInfo getInstance(Context c) {
+    public synchronized static ConnectionInfo getInstance(Context paramContext) {
         if(mInstance == null) {
-            if(c != null)
-                mInstance = new ConnectionInfo(c);
+            if(paramContext != null)
+                mInstance = new ConnectionInfo(paramContext);
             else
                 return null;
         }
         return mInstance;
     }
 
-    public void resetConnectionInfo() {
+    public void reSetConnectionInfo() {
         mDeviceAddress = null;
         mDeviceName = null;
     }
@@ -65,5 +63,5 @@ public class ConnectionInfo {
 
     public void setDeviceAddress(String address) {
         mDeviceAddress = address;
-    }*/
+    }
 }

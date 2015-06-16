@@ -3,18 +3,24 @@ package thealphalabs.bluetooth;
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothServerSocket;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
-import thealphalabs.Interface.EventData;
-import thealphalabs.alphaapp.EventDataType;
+import java.util.Set;
+
 import thealphalabs.alphaapp.IDataTransferService;
 import thealphalabs.util.ConnectionInfo;
+import thealphalabs.util.Constants;
+import thealphalabs.util.EventDataType;
+import thealphalabs.util.IntentSender;
 
 /**
  * Created by yeol on 15. 6. 9.
@@ -23,26 +29,22 @@ public class BluetoothTransferService extends Service{
 
     public final static String TAG="BLTService";
     private BluetoothAdapter mBluetoothAdapter;
-    private final IBinder mBinder=new EventDataTransferBinder();
-    private Context mContext;
     private ConnectionInfo mConnectionInfo=null;
     private BluetoothManager mBltManager;
-
+    private BluetoothConnectionReceiver mBluetoothConnectionReceiver;
+    private final IBinder mBinder=new EventDataTransferBinder();
 
     private class EventDataTransferBinder extends IDataTransferService.Stub {
 
         @Override
-        public void PrapareToTransfer() throws RemoteException {
-            if(mBltManager == null){
-                SetupBTManager();
-            }
-            mBltManager.listening();
+        public void connectTo(String paramAddress) throws RemoteException {
+            mBltManager.connectTo(paramAddress);
         }
 
         @Override
-        public void transferMouseData(float x, float y) throws RemoteException {
+        public void transferMouseData(float x, float y, int pressure) throws RemoteException {
             int type= EventDataType.EventMouse;
-            mBltManager.SendEventDataToGlass(x,y,type);
+            mBltManager.SendEventDataToGlass(x,y,type,pressure);
         }
 
         @Override
@@ -71,7 +73,6 @@ public class BluetoothTransferService extends Service{
     @Override
     public void onCreate() {
         super.onCreate();
-        mContext=getApplicationContext();
         Init();
     }
 
@@ -79,8 +80,7 @@ public class BluetoothTransferService extends Service{
         Log.d(TAG, "# Service : initialize ---");
 
         // Get connection info instance
-  //      mConnectionInfo = ConnectionInfo.getInstance(mContext);
-
+        mConnectionInfo = ConnectionInfo.getInstance(this);
         // Get local Bluetooth adapter
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
@@ -89,22 +89,62 @@ public class BluetoothTransferService extends Service{
             Toast.makeText(this, "Bluetooth is not available", Toast.LENGTH_LONG).show();
             return;
         }
-
-        if (!mBluetoothAdapter.isEnabled()) {
+        if(!mBluetoothAdapter.isEnabled()) {
             // BT is not on, need to turn on manually.
             // Activity will do this.
+            Intent enableBtIntent = new Intent(
+                    BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            enableBtIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(enableBtIntent);
         } else {
             SetupBTManager();
         }
+        registerBluetoothConnectionReceiver();
     }
-    public void SetupBTManager()
-    {
-        Log.d(TAG,"make bluetooth manager");
+    public void SetupBTManager() {
+        Log.d(TAG, "make bluetooth manager");
         if(mBltManager == null){
-            mBltManager = new BluetoothManager();
+            mBltManager=BluetoothManager.getInstance(this);
+        }
+        BluetoothDevice localDevice=getBondedDevices();
+        if(localDevice != null)
+            mBltManager.connect(localDevice);
+        else {
+            mBluetoothAdapter.startDiscovery();
+            Log.d(TAG,"start discovery");
         }
     }
 
+    private BluetoothDevice getBondedDevices() {
+    //    String localDeviceName=mConnectionInfo.getDeviceName();
+    //    if(localDeviceName == null)
+  //          return null;
+        Set<BluetoothDevice> pairedDevices = mBluetoothAdapter
+                .getBondedDevices();
+        if (pairedDevices.size() > 0) {
+            for (BluetoothDevice device : pairedDevices) {
+                Log.v(TAG, "bonded device - " + device.getName() + ": "
+                        + device.getAddress());
+                if (device.getName().equalsIgnoreCase("SHV-E300K")) {
+                    return device;
+                }
+            }
+        } else {
+            Log.d(TAG,"getBondedDevices failed");
+        }
+        return null;
+    }
+    public void registerBluetoothConnectionReceiver() {
+        mBluetoothConnectionReceiver=new BluetoothConnectionReceiver();
+        IntentFilter localIntentFilter=new IntentFilter();
+        localIntentFilter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED);
+        localIntentFilter.addAction(BluetoothDevice.ACTION_ACL_CONNECTED);
+        this.registerReceiver(mBluetoothConnectionReceiver, localIntentFilter);
+    }
+
+    public void unRegisterBluetoothConnectionReceiver() {
+        this.unregisterReceiver(mBluetoothConnectionReceiver);
+    }
     @Override
     public void onLowMemory() {
         super.onLowMemory();
@@ -123,23 +163,60 @@ public class BluetoothTransferService extends Service{
         if(mBltManager != null)
             mBltManager.Destroy();
         mBltManager = null;
+        unRegisterBluetoothConnectionReceiver();
 
     }
-    /*   public void connectDevice(String address) {
-        Log.d(TAG, "Service - connect to " + address);
 
-        // Get the BluetoothDevice object
-        if(mBluetoothAdapter != null) {
-            BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
+    public class BluetoothConnectionReceiver extends BroadcastReceiver {
 
-            if(device != null && mBltManager != null) {
-                mBltManager.connect(device);
+        private final String TAG="BLTReceiver";
+
+        public BluetoothConnectionReceiver() {
+        }
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            
+            String action = intent.getAction();
+            BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+            String address = device.getAddress();
+            Log.d(TAG,"onReceive action:"+action+" name:"+device.getName());
+
+            if (TextUtils.isEmpty(address))
+                return;
+
+            if (BluetoothDevice.ACTION_ACL_DISCONNECTED.equals(action))
+            {
+                mBltManager.Destroy();
+                reconnect(context, address);
+            }
+            else if (BluetoothDevice.ACTION_ACL_CONNECTED.equals(action))
+            {
+                String lastRequestAddress = mConnectionInfo.getDeviceAddress();
+                if(ShouldBeConnected(lastRequestAddress,address)) {
+                    mConnectionInfo.setDeviceAddress(address);
+                    mConnectionInfo.setDeviceName(device.getName());
+                }
+                mBltManager.setState(BluetoothManager.STATE_CONNECTED);
             }
         }
-    }
-    public void connectDevice(BluetoothDevice device) {
-        if(device != null && mBtManager != null) {
-            mBltManager.connect(device);
+
+        private boolean ShouldBeConnected(String paramLastRequestAddress,String paramCurAddress) {
+            return TextUtils.isEmpty(paramLastRequestAddress)
+                    || !paramLastRequestAddress.equals(paramCurAddress);
         }
-    }*/
+
+        private void reconnect(Context paramContext, String paramAddress) {
+            String lastConnectAddress = mConnectionInfo.getDeviceAddress();
+            if (TextUtils.isEmpty(lastConnectAddress))
+                return;
+
+            // 연결이 끊기면 1분 마다 스캔을 다시 한다.
+            if (paramAddress.equals(lastConnectAddress)) {
+                Log.d(TAG,"autoReconnect");
+                mBltManager.autoReconnect();
+            }
+        }
+
+    }
+
 }
