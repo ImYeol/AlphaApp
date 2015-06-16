@@ -50,9 +50,9 @@ public class FragmentHome extends Fragment implements OnDismissCallback {
     @Override
     public void onDismiss(@NonNull final ViewGroup listView, @NonNull final int[] reverseSortedPositions) {
 //        유저가 해당 아이템을 옆으로 swipe 했을 때(Dismiss 하지 않고 남겨둔다)
-//        for (int position : reverseSortedPositions) {
-//            mGoogleCardsAdapter.remove(position);
-//        }
+        for (int position : reverseSortedPositions) {
+            mGoogleCardsAdapter.remove(position);
+        }
     }
 
     private void prepareDataModel(ArrayList<HomeDataModel> data) {

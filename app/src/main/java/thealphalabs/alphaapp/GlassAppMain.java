@@ -1,8 +1,16 @@
 package thealphalabs.alphaapp;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
+import android.hardware.Sensor;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
+
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
+import thealphalabs.alphaapp.adapter.SensorController;
+import thealphalabs.alphaapp.bluetooth.BluetoothService;
 
 public class GlassAppMain extends MaterialNavigationDrawer {
     private final String TAG = "GlassAppMain";
@@ -26,7 +34,31 @@ public class GlassAppMain extends MaterialNavigationDrawer {
                 new FragmentAbout()).setSectionColor(Color.parseColor("#03a9f4")));
 
         setDefaultSectionLoaded(1);
+
+        // Bluetooth Service
+        SensorController.bltService = new BluetoothService(this, new Handler());
         // create bottom section
 //        this.addBottomSection(newSection("Homepage", R.drawable.ic_settings_black_24dp,new Intent(this,Settings.class)));
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, "onActivityResult " + resultCode);
+        switch (requestCode) {
+            case BluetoothService.REQUEST_CONNECT_DEVICE:
+                if (resultCode == Activity.RESULT_OK) {
+                    SensorController.bltService.getDeviceInfo(data);
+                }
+                break;
+            case BluetoothService.REQUEST_ENABLE_BT:
+                if (resultCode == Activity.RESULT_OK) {
+                    Log.d(TAG, "Request to enable bluetooth");
+                    SensorController.bltService.scanDevice();
+                } else {
+                    Log.d(TAG, "Bluetooth is not enabled");
+                }
+                break;
+        }
     }
 }

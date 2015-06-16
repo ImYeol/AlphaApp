@@ -1,15 +1,18 @@
 package thealphalabs.alphaapp.adapter;
 
+import android.app.Activity;
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -66,6 +69,7 @@ public class ListAdapterOfSetting extends ExpandableListItemAdapter {
                 if (BluetoothAdapter.getDefaultAdapter().isEnabled()) {
                     switcher.setChecked(true);
                     SensorController.BluetoothController.setFlag(true);
+                    expand(i);
                 }
                 break;
             case 1:
@@ -97,6 +101,8 @@ public class ListAdapterOfSetting extends ExpandableListItemAdapter {
             case 0:
                 // 블루투스 아이템항목
                 v = inflater.inflate(R.layout.listitem_setting_bluetooth, viewGroup, false);
+                Button btn = (Button) v.findViewById(R.id.bluetooth_connect_btn);
+                btn.setOnClickListener(new ConnectBtnListener(mContext));
                 break;
             case 1:
                 // 터치 정보
@@ -118,6 +124,20 @@ public class ListAdapterOfSetting extends ExpandableListItemAdapter {
 
     public boolean getSwitchValue(int position) {
         return listeners.get(position).getSwitcher().isChecked();
+    }
+
+    private class ConnectBtnListener implements View.OnClickListener {
+        private Context mContext;
+        ConnectBtnListener(Context context) {
+            mContext = context;
+        }
+        @Override
+        public void onClick(View view) {
+            Log.d("ConnectButton", "button clicked");
+            if (BluetoothAdapter.getDefaultAdapter().isEnabled()) {
+                SensorController.bltService.scanDevice();
+            }
+        }
     }
 
     private class ItemToggleListener implements ExpandableListItemAdapter.ExpandCollapseListener {
@@ -175,15 +195,15 @@ public class ListAdapterOfSetting extends ExpandableListItemAdapter {
                 case 0:
                     // 블루투스
                     if (SensorController.BluetoothController.flag == false) {
-                        SensorController.bltService.setContext(getContentView(index).getContext());
-                        SensorController.bltService.scanDevice();
                         SensorController.bltService.enableBluetooth();
                         SensorController.BluetoothController.setFlag(true);
+                        expand(index);
                     }
                     else {
 //                        사용자가 블루투스를 끄려고 하는 경우
                         BluetoothAdapter.getDefaultAdapter().disable();
                         SensorController.BluetoothController.setFlag(false);
+                        collapse(index);
                     }
                     break;
                 case 1:
@@ -202,7 +222,6 @@ public class ListAdapterOfSetting extends ExpandableListItemAdapter {
                     // 예외 처리
                     Log.e(TAG, "Unexpected case with index = " + index + " in onClick()");
             }
-
         }
     }
 }

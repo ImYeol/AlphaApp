@@ -8,7 +8,7 @@ import thealphalabs.alphaapp.bluetooth.BluetoothService;
  * Created by sukbeom on 15. 6. 15.
  */
 public class SensorController {
-    public static BluetoothService bltService = new BluetoothService(null, new Handler());
+    public static BluetoothService bltService;
     public static class BluetoothController {
         public static boolean flag;
 

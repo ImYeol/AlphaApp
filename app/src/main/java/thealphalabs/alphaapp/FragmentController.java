@@ -61,6 +61,8 @@ public class FragmentController extends Fragment {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
             Log.d(TAG, "x = " + motionEvent.getX() + ", y = " + motionEvent.getY());
+            ((AlphaApplication)getActivity().getApplication()).getBluetoothHelper().transferMouseData(
+                    motionEvent.getX(), motionEvent.getY(), (int)motionEvent.getPressure());
             return true;
         }
     }
@@ -75,7 +77,16 @@ public class FragmentController extends Fragment {
         }
         @Override
         public void onClick(View view) {
+
             Log.d(TAG, "TYPE " + btn_type + " is clicked!");
+            // Button 1 : HOME Button
+            if (btn_type == 0) {
+                ;
+            }
+            // Button 2 : Back Button
+            else {
+                ;
+            }
         }
     }
 }

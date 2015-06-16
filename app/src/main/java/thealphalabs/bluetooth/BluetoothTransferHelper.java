@@ -79,6 +79,7 @@ public class BluetoothTransferHelper {
     }
 
     public void connectTo(String paramAddress) {
+        Log.d(TAG, "connectTo : " + paramAddress);
         try {
             mTransferSerivce.connectTo(paramAddress);
         } catch (RemoteException e) {

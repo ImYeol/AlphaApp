@@ -14,6 +14,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.UUID;
 
+import thealphalabs.alphaapp.AlphaApplication;
+
 /**
  * Created by sukbeom on 15. 6. 16.
  */
@@ -21,9 +23,9 @@ public class BluetoothService {
     private int mState;
     private static final String TAG     = "BluetoothService";
     // Set bluetooth protocol : Serial port service protocol
-    private static final UUID MY_UUID   = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-    private static final int REQUEST_CONNECT_DEVICE = 1;
-    private static final int REQUEST_ENABLE_BT      = 2;
+    public static final UUID MY_UUID   = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+    public static final int REQUEST_CONNECT_DEVICE = 1;
+    public static final int REQUEST_ENABLE_BT      = 2;
     private BluetoothAdapter btAdapter;
 
     private Activity mActivity;
@@ -33,10 +35,10 @@ public class BluetoothService {
     // Threads for bluetooth connection
     private ConnectThread mConnectThread;
     private ConnectedThread mConnectedThread;
-    private static final int STATE_NONE = 0; // we're doing nothing
-    private static final int STATE_LISTEN = 1; // now listening for incoming connections
-    private static final int STATE_CONNECTING = 2; // now initiating an outgoing connection
-    private static final int STATE_CONNECTED = 3; // now connected to a remote device
+    public static final int STATE_NONE = 0; // we're doing nothing
+    public static final int STATE_LISTEN = 1; // now listening for incoming connections
+    public static final int STATE_CONNECTING = 2; // now initiating an outgoing connection
+    public static final int STATE_CONNECTED = 3; // now connected to a remote device
 
     public BluetoothService(Activity ac, Handler h) {
         mHandler = h;
@@ -48,7 +50,6 @@ public class BluetoothService {
     // activity getter and setter
     public void setContext(Context context) {
         this.mContext = context;
-        this.mActivity = (Activity) mContext;
     }
 
     public Context getContext() {
@@ -96,7 +97,8 @@ public class BluetoothService {
 
         Log.d(TAG, "Get Device Info : " + address);
 
-        connect(device);
+//        connect(device);
+        ((AlphaApplication)mActivity.getApplication()).getBluetoothHelper().connectTo(address);
     }
 
     // Bluetooth 상태 set
