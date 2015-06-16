@@ -15,12 +15,6 @@ public class SensorController {
         public static void setFlag(boolean v) {flag = v;}
     }
 
-    public static class TouchEventController {
-        public static boolean flag;
-
-        public static void setFlag(boolean v) {flag = v;}
-    }
-
     public static class GyroController {
         public static boolean flag;
 

@@ -35,8 +35,11 @@ public class GlassAppMain extends MaterialNavigationDrawer {
 
         setDefaultSectionLoaded(1);
 
-        // Bluetooth Service
+        // Initialize SensorController
         SensorController.bltService = new BluetoothService(this, new Handler());
+        SensorController.AccelController.setFlag(true);
+        SensorController.GyroController.setFlag(true);
+
         // create bottom section
 //        this.addBottomSection(newSection("Homepage", R.drawable.ic_settings_black_24dp,new Intent(this,Settings.class)));
     }

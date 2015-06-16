@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/src/main/res/values-large/refs.xml -->
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/src/main/res/values-large/refs.xml -->
     <eat-comment/>
     <item name="fragment_item" type="layout">@layout/fragment_item_grid</item>
 </resources>

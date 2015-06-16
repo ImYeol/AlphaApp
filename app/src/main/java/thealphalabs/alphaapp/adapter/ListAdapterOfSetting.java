@@ -105,14 +105,10 @@ public class ListAdapterOfSetting extends ExpandableListItemAdapter {
                 btn.setOnClickListener(new ConnectBtnListener(mContext));
                 break;
             case 1:
-                // 터치 정보
-                v = inflater.inflate(R.layout.listitem_setting_dummy, viewGroup, false);
-                break;
-            case 2:
                 // 센서 정보
                 v = inflater.inflate(R.layout.listitem_setting_dummy, viewGroup, false);
                 break;
-            case 3:
+            case 2:
                 v = inflater.inflate(R.layout.listitem_setting_dummy, viewGroup, false);
                 break;
             default:
@@ -207,14 +203,10 @@ public class ListAdapterOfSetting extends ExpandableListItemAdapter {
                     }
                     break;
                 case 1:
-                    // 터치 이벤트
-                    SensorController.TouchEventController.setFlag(onFlag);
-                    break;
-                case 2:
                     // 자이로 센서
                     SensorController.GyroController.setFlag(onFlag);
                     break;
-                case 3:
+                case 2:
                     // 엑셀레이터
                     SensorController.AccelController.setFlag(onFlag);
                     break;
