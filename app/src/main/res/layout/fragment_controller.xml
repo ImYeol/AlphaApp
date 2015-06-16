@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_weight="1.25"
+        android:background="@color/material_blue_grey_800"
+        android:layout_gravity="center"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <TextView
+            android:id="@+id/controller_description"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:textColor="@color/abc_primary_text_disable_only_material_dark"
+            android:text="@string/controller_desc"
+            android:textSize="16sp"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical|center_horizontal" />
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/controller_touchpad"
+        android:layout_weight="0.5"
+        android:layout_width="fill_parent"
+        android:background="@color/material_blue_grey_900"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+    </LinearLayout>
+    <LinearLayout
+        android:background="@color/background_material_dark"
+        android:padding="10dp"
+        android:layout_weight="1.45"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/controller_home_btn"
+            android:src="@drawable/ic_home_white_48dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:background="@color/background_material_dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageButton
+            android:layout_toRightOf="@id/controller_home_btn"
+            android:id="@+id/controller_back_btn"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:background="@color/background_material_dark"
+            android:src="@drawable/ic_keyboard_return_white_48dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>

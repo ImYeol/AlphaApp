@@ -1,6 +1,41 @@
 <resources>
     <string name="app_name">AlphaApp</string>
+    <string-array name="navigation_drawer_items_array">
+        <item>Controller</item>
+        <item>Appstore</item>
+        <item>Notice</item>
+        <item>About</item>
+    </string-array>
+    <string name="open_drawer">Open</string>
+    <string name="close_drawer">Close</string>
+
+    <!-- Controller -->
+    <string name="desc_bluetooth">Turn on/off bluetooth service</string>
+    <string name="desc_touchevent">Turn on/off touch event</string>
+    <string name="desc_gyrosensor">Turn on/off gyro sensor</string>
+    <string name="desc_accelerator">Turn on/off accelerator</string>
+    <string name="controller_desc">Control Alpha glass by touching this screen.</string>
+    <string name="controller_desc_fail">Bluetooth should be connected</string>
+
+    <!-- Bluetooth -->
+    <string name="none_paired">Not paired</string>
+    <string name="scanning">Scanning</string>
+    <string name="select_device">Select device</string>
+    <string name="none_found">Not found</string>
+    <string name="title_paired_devices">Paired devices</string>
+    <string name="title_other_devices">Other devices</string>
+    <string name="button_scan">Scan</string>
+
+    <!-- About page -->
+    <string name="about">About</string>
+    <string name="about_version">Version</string>
+    <string name="about_license">License</string>
+    <string name="about_license_desc">AlphaApp is built using open source software.</string>
+    <string name="title_activity_license">LicenseActivity</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_bluetooth">BluetoothActivity</string>
+
+
 </resources>
