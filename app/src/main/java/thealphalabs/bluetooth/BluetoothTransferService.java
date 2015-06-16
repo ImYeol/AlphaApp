@@ -106,34 +106,8 @@ public class BluetoothTransferService extends Service{
         if(mBltManager == null){
             mBltManager=BluetoothManager.getInstance(this);
         }
-        BluetoothDevice localDevice=getBondedDevices();
-        if(localDevice != null)
-            mBltManager.connect(localDevice);
-        else {
-            mBluetoothAdapter.startDiscovery();
-            Log.d(TAG,"start discovery");
-        }
     }
 
-    private BluetoothDevice getBondedDevices() {
-    //    String localDeviceName=mConnectionInfo.getDeviceName();
-    //    if(localDeviceName == null)
-  //          return null;
-        Set<BluetoothDevice> pairedDevices = mBluetoothAdapter
-                .getBondedDevices();
-        if (pairedDevices.size() > 0) {
-            for (BluetoothDevice device : pairedDevices) {
-                Log.v(TAG, "bonded device - " + device.getName() + ": "
-                        + device.getAddress());
-                if (device.getName().equalsIgnoreCase("SHV-E300K")) {
-                    return device;
-                }
-            }
-        } else {
-            Log.d(TAG,"getBondedDevices failed");
-        }
-        return null;
-    }
     public void registerBluetoothConnectionReceiver() {
         mBluetoothConnectionReceiver=new BluetoothConnectionReceiver();
         IntentFilter localIntentFilter=new IntentFilter();
