@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<accessibility-service
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:canRetrieveWindowContent="true"
+    android:enabled="true"
+    android:exported="true"
+    android:accessibilityFlags="flagDefault"
+    android:accessibilityEventTypes="typeNotificationStateChanged"
+    android:accessibilityFeedbackType="feedbackAllMask"
+    android:notificationTimeout="100"
+    android:packageNames="@null" />
+<!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/src/main/res/xml/notification_service_config.xml -->
