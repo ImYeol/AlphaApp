@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/res/values-v21/values.xml -->
+    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/res/values-v21/values.xml -->
     <eat-comment/>
     <dimen name="photoMarginTop">40dp</dimen>
     <dimen name="statusMargin">24dp</dimen>
     <dimen name="userSpace">188dp</dimen>
-    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values-v21/values.xml -->
+    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values-v21/values.xml -->
     <eat-comment/>
     <style name="Base.TextAppearance.AppCompat" parent="android:TextAppearance.Material"/>
     <style name="Base.TextAppearance.AppCompat.Body1" parent="android:TextAppearance.Material.Body1"/>
@@ -296,7 +296,7 @@
     <style name="Base.Widget.AppCompat.TextView.SpinnerItem" parent="android:Widget.Material.TextView.SpinnerItem"/>
     <style name="Base.Widget.AppCompat.Toolbar.Button.Navigation" parent="android:Widget.Material.Toolbar.Button.Navigation">
     </style>
-    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/res/values-v21/values.xml -->
+    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/res/values-v21/values.xml -->
     <eat-comment/>
     <style name="MaterialNavigationDrawerTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowTranslucentStatus">false</item>
@@ -351,7 +351,7 @@
     <style name="MaterialNavigationDrawerTheme.Light.DarkActionBar.TranslucentKitKatStatusBar" parent="MaterialNavigationDrawerTheme.Light.DarkActionBar"/>
     <style name="MaterialNavigationDrawerTheme.Light.TranslucentKitKatStatusBar" parent="MaterialNavigationDrawerTheme.Light"/>
     <style name="MaterialNavigationDrawerTheme.TranslucentKitKatStatusBar" parent="MaterialNavigationDrawerTheme"/>
-    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values-v21/values.xml -->
+    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values-v21/values.xml -->
     <eat-comment/>
     <style name="Platform.AppCompat" parent="android:Theme.Material">
         <item name="android:windowNoTitle">true</item>

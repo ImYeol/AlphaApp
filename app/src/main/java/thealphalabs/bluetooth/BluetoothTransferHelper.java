@@ -59,6 +59,8 @@ public class BluetoothTransferHelper {
     }
 
     public void transferGyroData(float x, float y, float z) {
+        if(mTransferSerivce == null)
+            return;
         try {
             mTransferSerivce.transferGyroData(x,y,z);
         } catch (RemoteException e) {
@@ -67,6 +69,8 @@ public class BluetoothTransferHelper {
     }
 
     public void transferAccelData(float x, float y, float z) {
+        if(mTransferSerivce == null)
+            return;
         try {
             mTransferSerivce.transferAccelData(x,y,z);
         } catch (RemoteException e) {

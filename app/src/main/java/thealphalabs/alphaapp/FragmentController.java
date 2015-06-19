@@ -101,7 +101,7 @@ public class FragmentController extends Fragment {
         public boolean onTouch(View view, MotionEvent motionEvent) {
             Log.d(TAG, "x = " + motionEvent.getX() + ", y = " + motionEvent.getY());
             ((AlphaApplication)getActivity().getApplication()).getBluetoothHelper().transferMouseData(
-                    motionEvent.getX(), motionEvent.getY(), (int)motionEvent.getPressure());
+                    motionEvent.getX(), motionEvent.getY(), motionEvent.getAction());
             return true;
         }
     }
