@@ -62,7 +62,10 @@ public class BluetoothTransferHelper {
         if(mTransferSerivce == null)
             return;
         try {
-            mTransferSerivce.transferGyroData(x,y,z);
+            if (mTransferSerivce != null)
+                mTransferSerivce.transferGyroData(x,y,z);
+            else
+                Log.e(TAG, "mTransferService is null");
         } catch (RemoteException e) {
             Log.d(TAG, e.getMessage());
         }
@@ -72,7 +75,10 @@ public class BluetoothTransferHelper {
         if(mTransferSerivce == null)
             return;
         try {
-            mTransferSerivce.transferAccelData(x,y,z);
+            if (mTransferSerivce != null)
+                mTransferSerivce.transferAccelData(x,y,z);
+            else
+                Log.e(TAG, "mTransferService is null");
         } catch (RemoteException e) {
             Log.d(TAG, e.getMessage());
         }

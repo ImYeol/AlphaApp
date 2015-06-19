@@ -9,13 +9,15 @@
     <string name="open_drawer">Open</string>
     <string name="close_drawer">Close</string>
 
-    <!-- Controller -->
+    <!-- Settings -->
     <string name="desc_bluetooth">Turn on/off bluetooth service</string>
     <string name="desc_touchevent">Turn on/off touch event</string>
     <string name="desc_gyrosensor">Turn on/off gyro sensor</string>
     <string name="desc_accelerator">Turn on/off accelerator</string>
+    <string name="desc_notification">Turn on/off notification</string>
     <string name="controller_desc">Control Alpha glass by touching this screen.</string>
     <string name="controller_desc_fail">Bluetooth should be connected</string>
+
 
     <!-- Bluetooth -->
     <string name="none_paired">Not paired</string>
@@ -37,5 +39,9 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_bluetooth">BluetoothActivity</string>
 
+    <!-- Service label -->
+    <string name="notification_service_label">Notification</string>
+    <string name="notification_service_desc">Capture notification throughout accessibility service</string>
+    <string name="title_activity_fragment_test">fragment_test</string>
 
 </resources>

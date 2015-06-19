@@ -3,12 +3,14 @@ package thealphalabs.alphaapp;
 import android.app.Fragment;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -26,6 +28,7 @@ import java.util.ArrayList;
 
 import thealphalabs.alphaapp.adapter.ListAdapterOfSetting;
 import thealphalabs.alphaapp.adapter.SensorController;
+import thealphalabs.alphaapp.dummy.DummyContent;
 import thealphalabs.alphaapp.view.ListItemOfController;
 import thealphalabs.bluetooth.BluetoothTransferHelper;
 
@@ -102,6 +105,7 @@ public class FragmentController extends Fragment {
             Log.d(TAG, "x = " + motionEvent.getX() + ", y = " + motionEvent.getY());
             ((AlphaApplication)getActivity().getApplication()).getBluetoothHelper().transferMouseData(
                     motionEvent.getX(), motionEvent.getY(), motionEvent.getAction());
+
             return true;
         }
     }

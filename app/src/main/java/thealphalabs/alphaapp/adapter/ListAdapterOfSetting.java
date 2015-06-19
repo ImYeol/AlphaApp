@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import thealphalabs.alphaapp.BluetoothActivity;
 import thealphalabs.alphaapp.R;
 import thealphalabs.alphaapp.bluetooth.BluetoothService;
+import thealphalabs.alphaapp.notification.NotificationController;
 import thealphalabs.alphaapp.view.ListItemOfController;
 
 public class ListAdapterOfSetting extends ExpandableListItemAdapter {
@@ -84,6 +85,12 @@ public class ListAdapterOfSetting extends ExpandableListItemAdapter {
                     switcher.setChecked(true);
                 }
                 break;
+            case 3:
+                // Notification
+                if (NotificationController.flag) {
+                    switcher.setChecked(true);
+                }
+                break;
         }
         return title_view;
     }
@@ -109,6 +116,9 @@ public class ListAdapterOfSetting extends ExpandableListItemAdapter {
                 v = inflater.inflate(R.layout.listitem_setting_dummy, viewGroup, false);
                 break;
             case 2:
+                v = inflater.inflate(R.layout.listitem_setting_dummy, viewGroup, false);
+                break;
+            case 3:
                 v = inflater.inflate(R.layout.listitem_setting_dummy, viewGroup, false);
                 break;
             default:
@@ -209,6 +219,10 @@ public class ListAdapterOfSetting extends ExpandableListItemAdapter {
                 case 2:
                     // 엑셀레이터
                     SensorController.AccelController.setFlag(onFlag);
+                    break;
+                case 3:
+                    // Notification
+                    NotificationController.setFlag(onFlag);
                     break;
                 default:
                     // 예외 처리

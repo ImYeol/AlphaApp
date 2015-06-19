@@ -11,6 +11,7 @@ import android.util.Log;
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
 import thealphalabs.alphaapp.adapter.SensorController;
 import thealphalabs.alphaapp.bluetooth.BluetoothService;
+import thealphalabs.alphaapp.notification.NotificationController;
 
 public class GlassAppMain extends MaterialNavigationDrawer {
     private final String TAG = "GlassAppMain";
@@ -30,15 +31,21 @@ public class GlassAppMain extends MaterialNavigationDrawer {
                 new FragmentAppstore()).setSectionColor(Color.parseColor("#9c27b0")));
         this.addSection(newSection("Setting", R.drawable.ic_settings_black_48dp,
                 new FragmentSetting()).setSectionColor(Color.parseColor("#9c27b0")));
-        this.addSection(newSection("About", R.drawable.ic_help_outline_black_48dp ,
+        this.addSection(newSection("About", R.drawable.ic_help_outline_black_48dp,
                 new FragmentAbout()).setSectionColor(Color.parseColor("#03a9f4")));
 
-        setDefaultSectionLoaded(1);
+        // Test
+        this.addSection(newSection("TEST", R.drawable.ic_home_black_48dp,
+                new FragmentTest()).setSectionColor(Color.parseColor("#0a9f04")));
+
+        setDefaultSectionLoaded(0);
 
         // Initialize SensorController
         SensorController.bltService = new BluetoothService(this, new Handler());
         SensorController.AccelController.setFlag(true);
         SensorController.GyroController.setFlag(true);
+        // Initialize Notification Controller
+        NotificationController.setFlag(true);
 
         // create bottom section
 //        this.addBottomSection(newSection("Homepage", R.drawable.ic_settings_black_24dp,new Intent(this,Settings.class)));
