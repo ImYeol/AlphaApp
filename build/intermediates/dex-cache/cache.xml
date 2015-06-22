@@ -9,20 +9,6 @@
         <dex dex="/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/pre-dexed/debug/classes-188178be64b13aa5a58e21e890445c2d7cb23e30.jar" />
     </item>
     <item
-        jar="/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
-        <dex dex="/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/pre-dexed/debug/classes-6530f483a4c5727d1fcf13ca3e99ddc828c31b9c.jar" />
-    </item>
-    <item
-        jar="/home/yeol/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
-        <dex dex="/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/pre-dexed/debug/library-2.4.0-c73f55cb337967dab714369417a51fbb0b83aa66.jar" />
-    </item>
-    <item
         jar="/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
@@ -30,11 +16,32 @@
         <dex dex="/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/pre-dexed/debug/classes-7d3303b4a892b03f217944f9501ab01f3f51ada8.jar" />
     </item>
     <item
+        jar="/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/pre-dexed/debug/classes-6530f483a4c5727d1fcf13ca3e99ddc828c31b9c.jar" />
+    </item>
+    <item
+        jar="/home/yeol/AndroidSDK/Sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-2b409b0098de24458daa9196bf3534db0066a217.jar" />
+    </item>
+    <item
         jar="/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.nhaarman.listviewanimations/lib-manipulation/3.1.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="5660e4bf78904137e90e62a5d4cc2e987258f02c">
         <dex dex="/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/pre-dexed/debug/classes-e06793e7060f5081f53811b4cd8d0ea43cdf55f4.jar" />
+    </item>
+    <item
+        jar="/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.nhaarman.listviewanimations/lib-core-slh/3.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="49223278ec2ede1d05d00868c5ce3e077b4016f8">
+        <dex dex="/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/pre-dexed/debug/classes-874e95384cf94fd0877595dc25903d676b6da2c4.jar" />
     </item>
     <item
         jar="/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.nhaarman.listviewanimations/lib-core/3.1.0/jars/classes.jar"
@@ -58,18 +65,11 @@
         <dex dex="/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-2f1022dc888cb268dfadc1911b7f80f7755c263e.jar" />
     </item>
     <item
-        jar="/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.nhaarman.listviewanimations/lib-core-slh/3.1.0/jars/classes.jar"
+        jar="/home/yeol/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="49223278ec2ede1d05d00868c5ce3e077b4016f8">
-        <dex dex="/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/pre-dexed/debug/classes-874e95384cf94fd0877595dc25903d676b6da2c4.jar" />
-    </item>
-    <item
-        jar="/home/yeol/AndroidSDK/Sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
-        <dex dex="/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-2b409b0098de24458daa9196bf3534db0066a217.jar" />
+        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
+        <dex dex="/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/pre-dexed/debug/library-2.4.0-c73f55cb337967dab714369417a51fbb0b83aa66.jar" />
     </item>
 
 </items>

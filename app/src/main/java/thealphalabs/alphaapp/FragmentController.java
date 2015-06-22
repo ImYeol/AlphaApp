@@ -99,9 +99,9 @@ public class FragmentController extends Fragment {
         private final String TAG = "TouchEventListener";
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
-            Log.d(TAG, "x = " + motionEvent.getX() + ", y = " + motionEvent.getY());
+        //    Log.d(TAG, "x = " + motionEvent.getX() + ", y = " + motionEvent.getY());
             ((AlphaApplication)getActivity().getApplication()).getBluetoothHelper().transferMouseData(
-                    motionEvent.getX(), motionEvent.getY(), motionEvent.getAction());
+                    motionEvent.getX()/view.getWidth(),motionEvent.getY()/view.getHeight(), motionEvent.getAction());
             return true;
         }
     }
@@ -141,12 +141,12 @@ public class FragmentController extends Fragment {
         }
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
-            Log.d(TAG, "onSensorChanged, type = " + sensor_type);
+        //    Log.d(TAG, "onSensorChanged, type = " + sensor_type);
             if (sensor_type == Sensor.TYPE_GYROSCOPE) {
                 transfer.transferGyroData(sensorEvent.values[0], sensorEvent.values[1], sensorEvent.values[2]);
             }
             else if (sensor_type == Sensor.TYPE_ACCELEROMETER) {
-                transfer.transferGyroData(sensorEvent.values[0], sensorEvent.values[1], sensorEvent.values[2]);
+                transfer.transferAccelData(sensorEvent.values[0], sensorEvent.values[1], sensorEvent.values[2]);
             }
         }
 
