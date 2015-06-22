@@ -61,24 +61,13 @@ MERGED from com.nhaarman.listviewanimations:lib-core-slh:3.1.0:26:5
 	android:icon
 		ADDED from AndroidManifest.xml:16:9
 	android:theme
-<<<<<<< HEAD
-		ADDED from AndroidManifest.xml:18:9
-	android:logo
-		ADDED from AndroidManifest.xml:17:9
-	tools:replace
-=======
->>>>>>> test
 		ADDED from AndroidManifest.xml:19:9
+	android:logo
+		ADDED from AndroidManifest.xml:18:9
 	tools:replace
 		ADDED from AndroidManifest.xml:20:9
 	android:name
-<<<<<<< HEAD
-		ADDED from AndroidManifest.xml:13:9
-=======
 		ADDED from AndroidManifest.xml:14:9
-	android:logo
-		ADDED from AndroidManifest.xml:18:9
->>>>>>> test
 service#thealphalabs.bluetooth.BluetoothTransferService
 ADDED from AndroidManifest.xml:23:9
 	android:enabled
@@ -122,19 +111,11 @@ ADDED from AndroidManifest.xml:43:9
 	android:name
 		ADDED from AndroidManifest.xml:44:13
 meta-data#android.support.v4
-<<<<<<< HEAD
-ADDED from AndroidManifest.xml:36:13
-	android:value
-		ADDED from AndroidManifest.xml:38:17
-	android:name
-		ADDED from AndroidManifest.xml:37:17
-=======
 ADDED from AndroidManifest.xml:48:13
-	android:name
-		ADDED from AndroidManifest.xml:49:17
 	android:value
 		ADDED from AndroidManifest.xml:50:17
->>>>>>> test
+	android:name
+		ADDED from AndroidManifest.xml:49:17
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
 ADDED from AndroidManifest.xml:52:13
 action#android.intent.action.MAIN
