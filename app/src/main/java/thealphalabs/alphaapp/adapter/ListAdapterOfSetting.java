@@ -5,7 +5,7 @@ import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
-import android.hardware.Sensor;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
@@ -24,6 +24,7 @@ import thealphalabs.alphaapp.BluetoothActivity;
 import thealphalabs.alphaapp.R;
 import thealphalabs.alphaapp.bluetooth.BluetoothService;
 import thealphalabs.alphaapp.notification.NotificationController;
+import thealphalabs.alphaapp.services.NotificationService;
 import thealphalabs.alphaapp.view.ListItemOfController;
 
 public class ListAdapterOfSetting extends ExpandableListItemAdapter {
@@ -87,8 +88,13 @@ public class ListAdapterOfSetting extends ExpandableListItemAdapter {
                 break;
             case 3:
                 // Notification
-                if (NotificationController.flag) {
+                if (NotificationService.isAccessibilitySettingsOn(mContext)) {
                     switcher.setChecked(true);
+                    NotificationController.setFlag(true);
+                }
+                else {
+                    switcher.setChecked(false);
+                    NotificationController.setFlag(false);
                 }
                 break;
         }
@@ -219,9 +225,48 @@ public class ListAdapterOfSetting extends ExpandableListItemAdapter {
                 case 2:
                     // 자이로 센서
                     SensorController.GyroController.setFlag(onFlag);
+                    break;
+                case 2:
+                    // 엑셀레이터
+                    SensorController.AccelController.setFlag(onFlag);
+                    break;
                 case 3:
                     // Notification
-                    NotificationController.setFlag(onFlag);
+                    if (onFlag) {
+                        if (NotificationService.isAccessibilitySettingsOn(view.getContext())) {
+                            Log.d(TAG, "Accessibility is enabled");
+                        } else {
+                            Log.d(TAG, "Accessibility is off");
+                            try {
+                                Intent i = new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS);
+                                view.getContext().startActivity(i);
+                            } catch (Exception e) {
+                                Log.e(TAG, "Exception occur because of SDK version");
+                                Intent i = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
+
+                                ((Activity)mContext).startActivityForResult(i, NotificationService.NOTIFICATION_SET);
+                            }
+
+                            Log.d(TAG, "Notification re-check!!!");
+
+                            // 사용자가 notification 켰다면 스위치를 켠다.
+                            if (NotificationService.isAccessibilitySettingsOn(view.getContext())) {
+                                NotificationController.setFlag(true);
+                                switcher.setChecked(true);
+                                Log.d(TAG, "Switch on");
+                            } else {
+                                NotificationController.setFlag(false);
+                                switcher.setChecked(false);
+                                Log.d(TAG, "Switch off");
+                            }
+                        }
+                    }
+                    else {
+                        // 스위치를 끈 경우에 해당 플래그만 false로 설정한다.
+                        // (실제로는 notification이 켜있으나 글래스로 보내지 않는다.
+                        NotificationController.setFlag(onFlag);
+                        Log.d(TAG, "Switch onFlag");
+                    }
                     break;
                 default:
                     // 예외 처리
@@ -229,4 +274,6 @@ public class ListAdapterOfSetting extends ExpandableListItemAdapter {
             }
         }
     }
+
+
 }

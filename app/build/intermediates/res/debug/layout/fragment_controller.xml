@@ -43,6 +43,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <ImageButton
+            android:id="@+id/controller_kbd_btn"
+            android:src="@drawable/ic_keyboard_white_48dp"
+            android:scaleType="centerInside"
+            android:background="@color/background_material_dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageButton
             android:layout_toRightOf="@id/controller_home_btn"
             android:id="@+id/controller_back_btn"
             android:layout_weight="1"
@@ -53,5 +60,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
+    <thealphalabs.alphaapp.view.CustomEditText
+        android:id="@+id/text_kbd"
+        android:visibility="gone"
+        android:imeOptions="actionDone"
+        android:singleLine="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </LinearLayout>
-<!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/src/main/res/layout/fragment_controller.xml -->
+<!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/src/main/res/layout/fragment_controller.xml -->

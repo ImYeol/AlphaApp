@@ -1,6 +1,7 @@
 package thealphalabs.alphaapp;
 
 import android.app.Activity;
+import android.app.Notification;
 import android.content.Intent;
 import android.graphics.Color;
 import android.hardware.Sensor;
@@ -12,6 +13,7 @@ import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
 import thealphalabs.alphaapp.adapter.SensorController;
 import thealphalabs.alphaapp.bluetooth.BluetoothService;
 import thealphalabs.alphaapp.notification.NotificationController;
+import thealphalabs.alphaapp.services.NotificationService;
 
 public class GlassAppMain extends MaterialNavigationDrawer {
     private final String TAG = "GlassAppMain";
@@ -27,6 +29,8 @@ public class GlassAppMain extends MaterialNavigationDrawer {
                 new FragmentHome()).setSectionColor(Color.parseColor("#48a0b2")));
         this.addSection(newSection("Controller", R.drawable.ic_mouse_black_48dp,
                 new FragmentController()).setSectionColor(Color.parseColor("#ccbb14")));
+        this.addSection(newSection("Screen Mirroring", R.drawable.ic_settings_cell_black_48dp,
+                new FragmentScreenMirror()).setSectionColor(Color.parseColor("#03a9f4")));
         this.addSection(newSection("Appstore", R.drawable.ic_shopping_basket_black_48dp,
                 new FragmentAppstore()).setSectionColor(Color.parseColor("#9c27b0")));
         this.addSection(newSection("Setting", R.drawable.ic_settings_black_48dp,
@@ -67,6 +71,17 @@ public class GlassAppMain extends MaterialNavigationDrawer {
                     SensorController.bltService.scanDevice();
                 } else {
                     Log.d(TAG, "Bluetooth is not enabled");
+                }
+                break;
+            case NotificationService.NOTIFICATION_SET:
+                Log.d(TAG, "Notification Service is set");
+                if (NotificationService.isAccessibilitySettingsOn(getApplicationContext())) {
+                    Log.d(TAG, "Notification is enabled.");
+                    NotificationController.setFlag(true);
+                }
+                else {
+                    Log.d(TAG, "Notification is not enabled.");
+                    NotificationController.setFlag(false);
                 }
                 break;
         }

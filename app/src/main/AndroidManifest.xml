@@ -17,6 +17,7 @@
         android:label="@string/app_name"
         android:logo="@mipmap/logo"
         android:theme="@style/AppTheme"
+        android:windowSoftInputMode="adjustUnspecified"
         tools:replace="android:icon" >
 
         <!-- 서비스 -->
@@ -66,10 +67,6 @@
         <activity
             android:name=".bluetooth.DeviceListActivity"
             android:label="DeviceListActivity" />
-        <activity
-            android:name=".fragment_test"
-            android:label="@string/title_activity_fragment_test" >
-        </activity>
     </application>
 
 </manifest>
