@@ -216,15 +216,12 @@ public class ListAdapterOfSetting extends ExpandableListItemAdapter {
                     // 엑셀레이터
                     SensorController.AccelController.setFlag(onFlag);
                     break;
-<<<<<<< HEAD
                 case 2:
                     // 자이로 센서
                     SensorController.GyroController.setFlag(onFlag);
-=======
                 case 3:
                     // Notification
                     NotificationController.setFlag(onFlag);
->>>>>>> 6735622db39a69c8b69bedb99136c97b4ed2ee04
                     break;
                 default:
                     // 예외 처리
