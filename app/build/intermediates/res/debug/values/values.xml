@@ -224,6 +224,7 @@
     <string name="desc_accelerator">Turn on/off accelerator</string>
     <string name="desc_bluetooth">Turn on/off bluetooth service</string>
     <string name="desc_gyrosensor">Turn on/off gyro sensor</string>
+    <string name="desc_notification">Turn on/off notification</string>
     <string name="desc_touchevent">Turn on/off touch event</string>
     <string name="hello_world">Hello world!</string>
     <string name="none_found">Not found</string>
@@ -233,10 +234,13 @@
     <string name="nothing"/>
     <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/src/main/res/values/strings.xml -->
     <eat-comment/>
+    <string name="notification_service_desc">Capture notification throughout accessibility service</string>
+    <string name="notification_service_label">Notification</string>
     <string name="open_drawer">Open</string>
     <string name="scanning">Scanning</string>
     <string name="select_device">Select device</string>
     <string name="title_activity_bluetooth">BluetoothActivity</string>
+    <string name="title_activity_fragment_test">fragment_test</string>
     <string name="title_activity_license">LicenseActivity</string>
     <string name="title_other_devices">Other devices</string>
     <string name="title_paired_devices">Paired devices</string>

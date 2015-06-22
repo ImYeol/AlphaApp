@@ -49,5 +49,7 @@ public class FragmentSetting extends Fragment {
                 "Sensor", getString(R.string.desc_accelerator), false));
         listOfController.add(new ListItemOfController(R.drawable.ic_data_usage_black_48dp,
                 "Gyro Sensor", getString(R.string.desc_gyrosensor), false));
+        listOfController.add(new ListItemOfController(R.drawable.ic_notifications_black_48dp,
+                "Notification", getString(R.string.notification_service_desc), false));
     }
 }

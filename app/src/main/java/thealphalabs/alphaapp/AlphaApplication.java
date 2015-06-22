@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 
+import thealphalabs.alphaapp.services.NotificationService;
 import thealphalabs.bluetooth.BluetoothTransferHelper;
 import thealphalabs.bluetooth.BluetoothTransferService;
 import thealphalabs.wifip2p.WifiTransferHelper;
@@ -29,6 +30,8 @@ public class AlphaApplication extends Application {
     }
     public void init() {
         startService(new Intent(this, BluetoothTransferService.class));
+        startService(new Intent(this, NotificationService.class));
+
         mBluetoothTransferHelper=new BluetoothTransferHelper(getBaseContext());
       //  mWifiTransferHelper=new WifiTransferHelper(getBaseContext());
         mBluetoothTransferHelper.StartConnection();
