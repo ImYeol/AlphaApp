@@ -3,6 +3,7 @@ package thealphalabs.alphaapp;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,14 +22,16 @@ import thealphalabs.alphaapp.view.ListItemOfController;
 public class FragmentSetting extends Fragment {
     private final String TAG = "FragmentController";
     private ArrayList<ListItemOfController> listOfController;
+    private ListAdapterOfSetting adapter;
+    private ListView listview;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         initializeItem();
         View view = inflater.inflate(R.layout.fragment_setting, container, false);
-        ListView listview = (ListView) view.findViewById(R.id.listview_controller);
+        listview = (ListView) view.findViewById(R.id.listview_controller);
 
-        ListAdapterOfSetting adapter = new ListAdapterOfSetting(getActivity().getBaseContext(), listOfController);
+        adapter = new ListAdapterOfSetting(getActivity(), listOfController);
 
         AlphaInAnimationAdapter alphaInAnimationAdapter = new AlphaInAnimationAdapter(adapter);
         alphaInAnimationAdapter.setAbsListView(listview);
@@ -38,6 +41,11 @@ public class FragmentSetting extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
+    }
 
     private void initializeItem() {
         // 멤버 변수 초기화
