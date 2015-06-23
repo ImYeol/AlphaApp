@@ -3,32 +3,23 @@ package thealphalabs.alphaapp;
 import android.app.Fragment;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
+<<<<<<< HEAD
 import com.nhaarman.listviewanimations.appearance.simple.AlphaInAnimationAdapter;
 
 import org.w3c.dom.Text;
@@ -37,11 +28,16 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import thealphalabs.alphaapp.adapter.ListAdapterOfSetting;
+=======
+>>>>>>> f8c4397771dace4cf8bde83c64490341bb007ab8
 import thealphalabs.alphaapp.adapter.SensorController;
-import thealphalabs.alphaapp.dummy.DummyContent;
 import thealphalabs.alphaapp.view.CustomEditText;
-import thealphalabs.alphaapp.view.ListItemOfController;
 import thealphalabs.bluetooth.BluetoothTransferHelper;
+
+/*
+ * Author:  Sukbeom Kim
+ * E-mail:  sbkim@thealphalabs.com
+ */
 
 // 컨트롤러 담당 Fragment
 public class FragmentController extends Fragment {
@@ -105,10 +101,10 @@ public class FragmentController extends Fragment {
                         Sensor.TYPE_GYROSCOPE);
 
         if (SensorController.AccelController.flag) {
-            sensorManager.registerListener(accelListener, sensorAccel, SensorManager.SENSOR_DELAY_NORMAL);
+            sensorManager.registerListener(accelListener, sensorAccel, SensorManager.SENSOR_DELAY_GAME);
         }
         if (SensorController.GyroController.flag) {
-            sensorManager.registerListener(gyroListener, sensorGyro, SensorManager.SENSOR_DELAY_NORMAL);
+            sensorManager.registerListener(gyroListener, sensorGyro, SensorManager.SENSOR_DELAY_FASTEST);
         }
 
         mBltHelper=((AlphaApplication)getActivity().getApplication()).getBluetoothHelper();
@@ -227,10 +223,18 @@ public class FragmentController extends Fragment {
         public void onSensorChanged(SensorEvent sensorEvent) {
         //    Log.d(TAG, "onSensorChanged, type = " + sensor_type);
             if (sensor_type == Sensor.TYPE_GYROSCOPE) {
-                transfer.transferGyroData(sensorEvent.values[0], sensorEvent.values[1], sensorEvent.values[2]);
+                try {
+                    transfer.transferGyroData(sensorEvent.values[0], sensorEvent.values[1], sensorEvent.values[2]);
+                } catch (Exception e) {
+                    Log.e(TAG, "Exception occur: " + e);
+                }
             }
             else if (sensor_type == Sensor.TYPE_ACCELEROMETER) {
-                transfer.transferAccelData(sensorEvent.values[0], sensorEvent.values[1], sensorEvent.values[2]);
+                try {
+                    transfer.transferAccelData(sensorEvent.values[0], sensorEvent.values[1], sensorEvent.values[2]);
+                } catch (Exception e) {
+                    Log.e(TAG, "Exception occur: " + e);
+                }
             }
         }
 

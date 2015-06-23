@@ -54,6 +54,8 @@ MERGED from com.balysv:material-ripple:1.0.1:12:5
 MERGED from com.nhaarman.listviewanimations:lib-core:3.1.0:26:5
 MERGED from com.nhaarman.listviewanimations:lib-manipulation:3.1.0:26:5
 MERGED from com.nhaarman.listviewanimations:lib-core-slh:3.1.0:26:5
+MERGED from com.astuetz:pagerslidingtabstrip:1.0.1:4:5
+MERGED from com.android.support:support-v4:22.0.0:22:5
 	android:label
 		ADDED from AndroidManifest.xml:17:9
 	android:windowSoftInputMode
@@ -157,6 +159,8 @@ MERGED from com.balysv:material-ripple:1.0.1:8:5
 MERGED from com.nhaarman.listviewanimations:lib-core:3.1.0:22:5
 MERGED from com.nhaarman.listviewanimations:lib-manipulation:3.1.0:22:5
 MERGED from com.nhaarman.listviewanimations:lib-core-slh:3.1.0:22:5
+MERGED from com.astuetz:pagerslidingtabstrip:1.0.1:2:5
+MERGED from com.android.support:support-v4:22.0.0:20:5
 	tools:overrideLibrary
 		ADDED from it.neokree:MaterialNavigationDrawer:1.3.3:11:9
 	android:targetSdkVersion

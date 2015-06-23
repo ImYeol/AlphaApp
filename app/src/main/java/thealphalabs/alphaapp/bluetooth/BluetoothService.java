@@ -55,7 +55,7 @@ public class BluetoothService {
     public Context getContext() {
         return this.mContext;
     }
-
+    public ConnectedThread getmConnectedThread() { return mConnectedThread; }
     public boolean getDeviceState() {
         Log.d(TAG, "Check the Bluetooth support");
 
@@ -227,6 +227,8 @@ public class BluetoothService {
 
     }
 
+
+
     //**** ConnectThread and ConnectedThread
     /// ConnectThread definition
     private class ConnectThread extends Thread {
@@ -241,7 +243,7 @@ public class BluetoothService {
             try {
                 //UUID uuid = device.getUuids()[0].getUuid();
                 UUID uuid = MY_UUID;
-                tmp = device.createRfcommSocketToServiceRecord(uuid);
+                tmp = device.createInsecureRfcommSocketToServiceRecord(uuid);
             } catch (IOException e) {
                 Log.e(TAG, "create() failed", e);
             }

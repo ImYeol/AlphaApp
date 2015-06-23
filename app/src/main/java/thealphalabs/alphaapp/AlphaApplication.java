@@ -1,10 +1,12 @@
 package thealphalabs.alphaapp;
 
 import android.app.Application;
+import android.app.Notification;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
@@ -29,6 +31,7 @@ public class AlphaApplication extends Application {
         init();
     }
     public void init() {
+        Log.d(TAG, "Init the bluetoothTransfer Helper");
         startService(new Intent(this, BluetoothTransferService.class));
         startService(new Intent(this, NotificationService.class));
 
@@ -41,7 +44,6 @@ public class AlphaApplication extends Application {
     @Override
     public void onTerminate() {
         super.onTerminate();
-        stopService(new Intent(this, BluetoothTransferService.class));
     }
 
     public BluetoothTransferHelper getBluetoothHelper() {

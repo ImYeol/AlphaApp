@@ -76,6 +76,12 @@ public class BluetoothTransferService extends Service{
         Init();
     }
 
+    @Override
+    public void onDestroy() {
+        stopSelf();
+        super.onDestroy();
+    }
+
     private void Init(){
         Log.d(TAG, "# Service : initialize ---");
 
