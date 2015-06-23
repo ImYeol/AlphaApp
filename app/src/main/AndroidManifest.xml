@@ -66,7 +66,8 @@
         </activity>
         <activity
             android:name=".bluetooth.DeviceListActivity"
-            android:label="DeviceListActivity" />
+            android:label="DeviceListActivity">
+        </activity>
     </application>
 
 </manifest>

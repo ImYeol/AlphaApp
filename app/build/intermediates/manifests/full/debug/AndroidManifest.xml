@@ -71,7 +71,8 @@
         </activity>
         <activity
             android:name="thealphalabs.alphaapp.bluetooth.DeviceListActivity"
-            android:label="DeviceListActivity" />
+            android:label="DeviceListActivity" >
+        </activity>
         <activity android:name="com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.SwipeTouchListenerTestActivity" />
         <activity android:name="com.nhaarman.listviewanimations.itemmanipulation.dragdrop.DynamicListViewTestActivity" />
     </application>

@@ -14,6 +14,7 @@ import thealphalabs.alphaapp.adapter.SensorController;
 import thealphalabs.alphaapp.bluetooth.BluetoothService;
 import thealphalabs.alphaapp.notification.NotificationController;
 import thealphalabs.alphaapp.services.NotificationService;
+import thealphalabs.bluetooth.BluetoothTransferService;
 
 public class GlassAppMain extends MaterialNavigationDrawer {
     private final String TAG = "GlassAppMain";
@@ -85,5 +86,15 @@ public class GlassAppMain extends MaterialNavigationDrawer {
                 }
                 break;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        stopService(new Intent(this, BluetoothTransferService.class));
+        stopService(new Intent(this, NotificationService.class));
+
+        super.onDestroy();
+
+        Log.d(TAG, "onDestroy");
     }
 }
