@@ -42,9 +42,9 @@ public class BluetoothTransferHelper {
         IntentSender.getInstance().bindService(context,localIntent,mConn,Context.BIND_AUTO_CREATE);
     }
 
-    public void transferMouseData(float x,float y, int pressure) {
+    public void transferMouseData(float x,float y, int action) {
         try {
-            mTransferSerivce.transferMouseData(x,y,pressure);
+            mTransferSerivce.transferMouseData(x,y,action);
         } catch (RemoteException e) {
             Log.d(TAG, e.getMessage());
         }

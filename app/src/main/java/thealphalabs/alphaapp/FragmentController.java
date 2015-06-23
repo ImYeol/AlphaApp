@@ -34,6 +34,7 @@ import com.nhaarman.listviewanimations.appearance.simple.AlphaInAnimationAdapter
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import thealphalabs.alphaapp.adapter.ListAdapterOfSetting;
 import thealphalabs.alphaapp.adapter.SensorController;
@@ -49,6 +50,11 @@ public class FragmentController extends Fragment {
     private final int BUTTON_TYPE_BACK = 1;
     private final int BUTTON_TYPE_KBD = 2;
 
+    // distinguish if Click IS
+    private static final int MAX_CLICK_DISTANCE=5;
+    private static final float MAX_CLICK_DURATION=200;
+    private long startClickTime;
+
     // Sensor manager
     private SensorManager sensorManager;
     private Sensor sensorAccel;
@@ -57,6 +63,10 @@ public class FragmentController extends Fragment {
     private SensorListener accelListener;
 
     private CustomEditText editText;
+    private float TouchX=0;
+    private float TouchY=0;
+
+    private BluetoothTransferHelper mBltHelper;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -101,6 +111,7 @@ public class FragmentController extends Fragment {
             sensorManager.registerListener(gyroListener, sensorGyro, SensorManager.SENSOR_DELAY_NORMAL);
         }
 
+        mBltHelper=((AlphaApplication)getActivity().getApplication()).getBluetoothHelper();
         return view;
     }
 
@@ -114,8 +125,7 @@ public class FragmentController extends Fragment {
             sensorManager.unregisterListener(gyroListener);
         }
     }
-    private float x=0;
-    private float y=0;
+
     // Touch Event Listener for "TOUCH PAD" layout
     // 컨트롤러 중앙에 위치한 터치패드 공간의 터치이벤트 처리를 위한 리스너
     private class TouchEventListener implements View.OnTouchListener {
@@ -123,19 +133,46 @@ public class FragmentController extends Fragment {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
             if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                x=motionEvent.getX();
-                y=motionEvent.getY();
+                TouchX=motionEvent.getX();
+                TouchY=motionEvent.getY();
+                startClickTime = Calendar.getInstance().getTimeInMillis();
             }
-            else if(motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
-                float TermX=motionEvent.getX()-x;
-                float TermY=motionEvent.getY()-y;
-                x=motionEvent.getX();
-                y=motionEvent.getY();
-                //    Log.d(TAG, "x = " + motionEvent.getX() + ", y = " + motionEvent.getY());
-                ((AlphaApplication)getActivity().getApplication()).getBluetoothHelper().transferMouseData(
-                        TermX/view.getWidth(),TermY/view.getHeight(), motionEvent.getAction());
+            else if(motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                float x=motionEvent.getX();
+                float y=motionEvent.getY();
+               // TouchX=motionEvent.getX();
+               // TouchY=motionEvent.getY();
+                long clickDuration = Calendar.getInstance().getTimeInMillis() - startClickTime;
+                if(IsClick(clickDuration,getDistance(TouchX,TouchY,x,y))) {
+                    mBltHelper.transferMouseData(x,y,MotionEvent.ACTION_UP);
+                }
+                TouchX=x;
+                TouchY=y;
+            }
+           else if(motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
+                float TermX=motionEvent.getX()-TouchX;
+                float TermY=motionEvent.getY()-TouchY;
+                TouchX=motionEvent.getX();
+                TouchY=motionEvent.getY();
+                if (motionEvent.getPointerCount() >= 2) {  // two touch is for scrolling
+                    mBltHelper.transferMouseData(
+                            TermX / view.getWidth(), TermY / view.getHeight(), MotionEvent.ACTION_SCROLL);
+                }
+                else {   // one point down
+                    mBltHelper.transferMouseData(
+                            TermX / view.getWidth(), TermY / view.getHeight(), motionEvent.getAction());
+                }
             }
             return true;
+        }
+        private float getDistance(float x1,float y1,float x2,float y2) {
+            float dx = x1 - x2;
+            float dy = y1 - y2;
+            return Math.abs(dx+dy);
+        }
+
+        private boolean IsClick(long duration,float distance) {
+            return duration < MAX_CLICK_DURATION && distance < MAX_CLICK_DISTANCE ;
         }
     }
 
