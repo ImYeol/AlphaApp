@@ -95,16 +95,27 @@ public class FragmentController extends Fragment {
             sensorManager.unregisterListener(gyroListener);
         }
     }
-
+    private float x=0;
+    private float y=0;
     // Touch Event Listener for "TOUCH PAD" layout
     // 컨트롤러 중앙에 위치한 터치패드 공간의 터치이벤트 처리를 위한 리스너
     private class TouchEventListener implements View.OnTouchListener {
         private final String TAG = "TouchEventListener";
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
-        //    Log.d(TAG, "x = " + motionEvent.getX() + ", y = " + motionEvent.getY());
-            ((AlphaApplication)getActivity().getApplication()).getBluetoothHelper().transferMouseData(
-                    motionEvent.getX()/view.getWidth(),motionEvent.getY()/view.getHeight(), motionEvent.getAction());
+            if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                x=motionEvent.getX();
+                y=motionEvent.getY();
+            }
+            else if(motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
+                float TermX=motionEvent.getX()-x;
+                float TermY=motionEvent.getY()-y;
+                x=motionEvent.getX();
+                y=motionEvent.getY();
+                //    Log.d(TAG, "x = " + motionEvent.getX() + ", y = " + motionEvent.getY());
+                ((AlphaApplication)getActivity().getApplication()).getBluetoothHelper().transferMouseData(
+                        TermX/view.getWidth(),TermY/view.getHeight(), motionEvent.getAction());
+            }
             return true;
         }
     }
