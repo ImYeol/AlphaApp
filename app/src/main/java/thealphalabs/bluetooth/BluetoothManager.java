@@ -66,8 +66,9 @@ public class BluetoothManager {
     }
 
     public synchronized void connect(BluetoothDevice device) {
-        Log.d(TAG, "Connecting to: " + device);
         int localState=getState();
+
+        Log.d(TAG, "Connecting to: " + device + ", current state = " + localState);
 
         if (localState == STATE_CONNECTED)
             return ;
@@ -156,6 +157,19 @@ public class BluetoothManager {
             try {
                 mDataOutputStream.writeInt(type);
                 mDataOutputStream.writeUTF(text);
+                mDataOutputStream.flush();
+            } catch (IOException e) {
+                Log.d(TAG,"sendData Error : "+e.getMessage());
+            }
+        }
+    }
+    public void SendFileDataToGlass(byte[] bytes, long file_size, int type) {
+        if( getState() == STATE_CONNECTED )
+        {
+            try {
+                mDataOutputStream.writeInt(type);
+                mDataOutputStream.writeLong(file_size);
+                mDataOutputStream.write(bytes);
                 mDataOutputStream.flush();
             } catch (IOException e) {
                 Log.d(TAG,"sendData Error : "+e.getMessage());

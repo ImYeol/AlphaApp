@@ -97,6 +97,33 @@ _arg2 = data.readFloat();
 this.transferAccelData(_arg0, _arg1, _arg2);
 return true;
 }
+case TRANSACTION_transferNotificationData:
+{
+data.enforceInterface(DESCRIPTOR);
+java.lang.String _arg0;
+_arg0 = data.readString();
+java.lang.String _arg1;
+_arg1 = data.readString();
+this.transferNotificationData(_arg0, _arg1);
+return true;
+}
+case TRANSACTION_transferFileData:
+{
+data.enforceInterface(DESCRIPTOR);
+byte[] _arg0;
+int _arg0_length = data.readInt();
+if ((_arg0_length<0)) {
+_arg0 = null;
+}
+else {
+_arg0 = new byte[_arg0_length];
+}
+long _arg1;
+_arg1 = data.readLong();
+this.transferFileData(_arg0, _arg1);
+reply.writeByteArray(_arg0);
+return true;
+}
 }
 return super.onTransact(code, data, reply, flags);
 }
@@ -188,12 +215,45 @@ finally {
 _data.recycle();
 }
 }
+@Override public void transferNotificationData(java.lang.String title, java.lang.String text) throws android.os.RemoteException
+{
+android.os.Parcel _data = android.os.Parcel.obtain();
+try {
+_data.writeInterfaceToken(DESCRIPTOR);
+_data.writeString(title);
+_data.writeString(text);
+mRemote.transact(Stub.TRANSACTION_transferNotificationData, _data, null, android.os.IBinder.FLAG_ONEWAY);
+}
+finally {
+_data.recycle();
+}
+}
+@Override public void transferFileData(byte[] bytes, long file_size) throws android.os.RemoteException
+{
+android.os.Parcel _data = android.os.Parcel.obtain();
+try {
+_data.writeInterfaceToken(DESCRIPTOR);
+if ((bytes==null)) {
+_data.writeInt(-1);
+}
+else {
+_data.writeInt(bytes.length);
+}
+_data.writeLong(file_size);
+mRemote.transact(Stub.TRANSACTION_transferFileData, _data, null, android.os.IBinder.FLAG_ONEWAY);
+}
+finally {
+_data.recycle();
+}
+}
 }
 static final int TRANSACTION_connectTo = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
 static final int TRANSACTION_transferMouseData = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
 static final int TRANSACTION_transferStringData = (android.os.IBinder.FIRST_CALL_TRANSACTION + 2);
 static final int TRANSACTION_transferGyroData = (android.os.IBinder.FIRST_CALL_TRANSACTION + 3);
 static final int TRANSACTION_transferAccelData = (android.os.IBinder.FIRST_CALL_TRANSACTION + 4);
+static final int TRANSACTION_transferNotificationData = (android.os.IBinder.FIRST_CALL_TRANSACTION + 5);
+static final int TRANSACTION_transferFileData = (android.os.IBinder.FIRST_CALL_TRANSACTION + 6);
 }
 /**
      * Demonstrates some basic types that you can use as parameters
@@ -204,4 +264,6 @@ public void transferMouseData(float x, float y, int pressure) throws android.os.
 public void transferStringData(java.lang.String text) throws android.os.RemoteException;
 public void transferGyroData(float x, float y, float z) throws android.os.RemoteException;
 public void transferAccelData(float x, float y, float z) throws android.os.RemoteException;
+public void transferNotificationData(java.lang.String title, java.lang.String text) throws android.os.RemoteException;
+public void transferFileData(byte[] bytes, long file_size) throws android.os.RemoteException;
 }

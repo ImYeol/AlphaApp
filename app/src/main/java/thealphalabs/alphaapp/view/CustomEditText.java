@@ -10,6 +10,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import thealphalabs.alphaapp.AlphaApplication;
+
 /**
  * Created by sukbeom on 15. 6. 22.
  */
@@ -42,8 +44,9 @@ public class CustomEditText extends EditText{
             this.setVisibility(GONE);
             Log.d(TAG, "[From onKeyPreIme]User input : " + getText());
 
-            // 서버로 텍스트 보내고 난 뒤에 텍스트 초기화
-            setText("");
+            // 여기서는 Visibility 만 GONE 으로 처리한다.
+            // 사용자가 실수로 키보드만 닫을 수 있기 때문에, 이 경우 텍스트는 서버로 보내지 않고
+            // 그대로 남겨둔다.
         }
 
         return super.dispatchKeyEvent(event);
@@ -51,6 +54,7 @@ public class CustomEditText extends EditText{
 
     @Override
     public void onEditorAction(int actionCode) {
+        // 사용자가 DONE 버튼을 클릭했을 때에만 서버로 전송한다.
         super.onEditorAction(actionCode);
 
         InputMethodManager imm = (InputMethodManager)mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -59,6 +63,13 @@ public class CustomEditText extends EditText{
         setVisibility(View.GONE);
         Log.d(TAG, "[From onEditorAction]User input : " + getText());
 
+        // 서버로 텍스트 보내고 난 뒤에 텍스트 초기화
+        sendTextData(getText().toString());
         setText("");
+    }
+
+    private void sendTextData(String data) {
+        Log.d(TAG, "sendTextData" + data);
+        ((AlphaApplication)mContext.getApplicationContext()).getBluetoothHelper().transferStringData(data);
     }
 }

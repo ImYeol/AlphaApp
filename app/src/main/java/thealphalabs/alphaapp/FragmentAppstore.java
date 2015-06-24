@@ -16,7 +16,11 @@ import android.widget.Button;
 
 import com.astuetz.PagerSlidingTabStrip;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import thealphalabs.alphaapp.adapter.SensorController;
@@ -45,17 +49,73 @@ public class FragmentAppstore extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        Log.d(TAG, "onClick");
-
         ApplicationInfo app = getActivity().getApplicationContext().getApplicationInfo();
-        String filePath = app.sourceDir;
+        File target = new File("/storage/sdcard0/Download/Catch_5.2.11.apk");
+
+        final byte[][] byteArray = new byte[1][1];
+        try
+        {
+            final InputStream inputStream = new FileInputStream(target);
+            final ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
+            Log.d(TAG, "file size = " + String.valueOf(target.length()));
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    byte[] b = new byte[1024];  // 1024 as buffer size
+
+                    int bytesRead   = 0;
+                    int count       = 0;
+
+                    try {
+                        while ((bytesRead = inputStream.read(b)) != -1)
+                        {
+                            bos.write(b, 0, bytesRead);
+                            count++;
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    byteArray[0] = bos.toByteArray();
+                    Log.d(TAG, "count = " + count + ". This is same as " + count * 1024 + " bytes and outputstream size = " + bos.size());
+
+                    ((AlphaApplication)getActivity().getApplication()).getBluetoothHelper().transferFileData(byteArray[0], bos.size());
+                }
+            });
+
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
 
 
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_SEND);
-        intent.setType("text/plain");
-        Log.d(TAG, "path = " + filePath);
-        intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(filePath)));
-        startActivity(intent);
+    }
+
+    private byte[] fileToByteArray(File f) {
+        byte[] byteArray = null;
+        try
+        {
+            InputStream inputStream = new FileInputStream(f);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
+            Log.d(TAG, "file size = " + Integer.parseInt(String.valueOf(f.length()/1024)));
+            byte[] b = new byte[Integer.parseInt(String.valueOf(f.length()/1024))];
+            int bytesRead =0;
+
+            while ((bytesRead = inputStream.read(b)) != -1)
+            {
+                bos.write(b);
+            }
+
+            byteArray = bos.toByteArray();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return byteArray;
     }
 }

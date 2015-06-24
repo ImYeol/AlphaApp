@@ -49,7 +49,7 @@ public class ReConnectionService {
             @Override
             public void run()
             {
-                Log.d(TAG, "autoReconnect");
+                Log.d(TAG, "autoReconnect with state = " + mBltManager.getState());
                 String localAddress=ConnectionInfo.getInstance(mContext).getDeviceAddress();
                 if(localAddress != null)
                     mBltManager.connectTo(localAddress);

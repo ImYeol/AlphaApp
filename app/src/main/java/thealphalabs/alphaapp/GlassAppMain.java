@@ -1,7 +1,9 @@
 package thealphalabs.alphaapp;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.Notification;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.hardware.Sensor;
@@ -89,12 +91,29 @@ public class GlassAppMain extends MaterialNavigationDrawer {
     }
 
     @Override
+    protected void onResume() {
+        Log.d(TAG, "onResume" + BluetoothTransferService.isEnabled);
+        //
+        // 사용자가 Notification(Accessibility) 를 직접 끄지 않는 경우,
+        // 프로세스가 계속해서 상주하게 된다. 때문에 사용자가 다시 앱을 실행할 때,
+        // NotificationService 를 제외한 다른 서비스들을 다시 실행시켜 주어야 한다.
+
+        if (BluetoothTransferService.isEnabled == false) {
+            Log.d(TAG, "Service restart");
+            startService(new Intent(this, BluetoothTransferService.class));
+        }
+        super.onResume();
+    }
+
+    @Override
     protected void onDestroy() {
+        Log.d(TAG, "onDestroy");
+
         stopService(new Intent(this, BluetoothTransferService.class));
         stopService(new Intent(this, NotificationService.class));
 
         super.onDestroy();
 
-        Log.d(TAG, "onDestroy");
+        BluetoothTransferService.isEnabled = false;
     }
 }

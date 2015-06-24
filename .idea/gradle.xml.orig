@@ -10,7 +10,7 @@
         <option name="gradleJvm" value="1.8" />
 =======
         <option name="gradleJvm" value="1.7" />
->>>>>>> test
+>>>>>>> alphaApp
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />

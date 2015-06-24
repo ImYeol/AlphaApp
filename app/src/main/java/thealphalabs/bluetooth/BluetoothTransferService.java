@@ -26,7 +26,7 @@ import thealphalabs.util.IntentSender;
  * Created by yeol on 15. 6. 9.
  */
 public class BluetoothTransferService extends Service{
-
+    public static boolean isEnabled;
     public final static String TAG="BLTService";
     private BluetoothAdapter mBluetoothAdapter;
     private ConnectionInfo mConnectionInfo=null;
@@ -44,7 +44,7 @@ public class BluetoothTransferService extends Service{
         @Override
         public void transferMouseData(float x, float y, int pressure) throws RemoteException {
             int type= EventDataType.EventMouse;
-            mBltManager.SendEventDataToGlass(x,y,type,pressure);
+            mBltManager.SendEventDataToGlass(x, y, type, pressure);
         }
 
         @Override
@@ -64,6 +64,19 @@ public class BluetoothTransferService extends Service{
             int type= EventDataType.EventAccel;
             mBltManager.SendEventDataToGlass(x,y,z,type);
         }
+
+        @Override
+        public void transferNotificationData(String title, String text) {
+            int type = EventDataType.EventNotification;
+            mBltManager.SendEventDataToGlass(title + "\t\t" + text, type);
+        }
+
+        @Override
+        public void transferFileData(byte[] bytes, long file_size) {
+            int type = EventDataType.EventFileTransfer;
+            mBltManager.SendFileDataToGlass(bytes, file_size, type);
+        }
+
     }
     @Override
     public IBinder onBind(Intent intent) {
@@ -78,13 +91,13 @@ public class BluetoothTransferService extends Service{
 
     @Override
     public void onDestroy() {
-        stopSelf();
         super.onDestroy();
     }
 
     private void Init(){
         Log.d(TAG, "# Service : initialize ---");
 
+        isEnabled = true;
         // Get connection info instance
         mConnectionInfo = ConnectionInfo.getInstance(this);
         // Get local Bluetooth adapter
@@ -192,8 +205,10 @@ public class BluetoothTransferService extends Service{
 
             // 연결이 끊기면 1분 마다 스캔을 다시 한다.
             if (paramAddress.equals(lastConnectAddress)) {
-                Log.d(TAG,"autoReconnect");
-                mBltManager.autoReconnect();
+                if (mBltManager.getState() == BluetoothManager.STATE_NONE) {
+                    Log.d(TAG, "autoReconnect");
+                    mBltManager.autoReconnect();
+                }
             }
         }
 

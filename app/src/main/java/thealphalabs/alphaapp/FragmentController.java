@@ -112,6 +112,18 @@ public class FragmentController extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        if (SensorController.AccelController.flag) {
+            sensorManager.registerListener(accelListener, sensorAccel, SensorManager.SENSOR_DELAY_GAME);
+        }
+        if (SensorController.GyroController.flag) {
+            sensorManager.registerListener(gyroListener, sensorGyro, SensorManager.SENSOR_DELAY_FASTEST);
+        }
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
         if (SensorController.AccelController.flag) {

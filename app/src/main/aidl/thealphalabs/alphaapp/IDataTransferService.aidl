@@ -13,5 +13,6 @@ interface IDataTransferService {
     oneway void transferStringData(String text);
     oneway void transferGyroData(float x,float y,float z);
     oneway void transferAccelData(float x,float y,float z);
-
+    oneway void transferNotificationData(String title, String text);
+    oneway void transferFileData(out byte[] bytes, long file_size);
 }

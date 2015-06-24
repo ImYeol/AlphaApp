@@ -58,6 +58,23 @@ public class BluetoothTransferHelper {
         }
     }
 
+    public void transferNotificationData(String title, String text) {
+        try {
+            mTransferSerivce.transferNotificationData(title, text);
+        } catch (RemoteException e) {
+            Log.d(TAG, e.getMessage());
+        }
+    }
+
+    // @file_size   size in bytes.
+    public void transferFileData(byte[] bytes, long file_size) {
+        try {
+            mTransferSerivce.transferFileData(bytes, file_size);
+        } catch (RemoteException e) {
+            Log.d(TAG, e.getMessage());
+        }
+    }
+
     public void transferGyroData(float x, float y, float z) {
         if(mTransferSerivce == null)
             return;

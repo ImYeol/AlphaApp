@@ -18,6 +18,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import thealphalabs.alphaapp.AlphaApplication;
+
 /**
  * Created by sukbeom on 15. 6. 19.
  */
@@ -36,6 +38,9 @@ public class NotificationService extends AccessibilityService {
     public void onAccessibilityEvent(AccessibilityEvent accessibilityEvent) {
         if (accessibilityEvent.getEventType() == AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED) {
            // Notification이 발생한 경우
+
+            if (accessibilityEvent.getPackageName().toString().equals("android")) return;
+
             Log.d(TAG, "Notification Information:\n"
                     + "Package name : " + accessibilityEvent.getPackageName() + "\n"
                     + "Description : " + accessibilityEvent.getContentDescription() + "\n"
@@ -86,6 +91,8 @@ public class NotificationService extends AccessibilityService {
                     System.out.println("title is: " + text.get(16908310));
                     System.out.println("info is: " + text.get(16909082));
                     System.out.println("text is: " + text.get(16908358));
+
+                    sendNotificationData(text.get(16908310), text.get(16908358));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -96,13 +103,14 @@ public class NotificationService extends AccessibilityService {
 
     @Override
     public void onInterrupt() {
-
+        Log.d(TAG, "onInterrupt");
     }
 
     @Override
     public void onDestroy() {
-        stopSelf();
         super.onDestroy();
+
+        Log.d(TAG, "onDestroy");
     }
 
     @Override
@@ -115,18 +123,23 @@ public class NotificationService extends AccessibilityService {
         setServiceInfo(info);
     }
 
+    private void sendNotificationData(String title, String text) {
+        ((AlphaApplication)getApplication()).getBluetoothHelper().transferNotificationData(title, text);
+
+    }
+
     // Notification이 켜져있는지 확인
     public static boolean isAccessibilitySettingsOn(Context mContext) {
         String TAG = "Notification ";
         int accessibilityEnabled = 0;
         final String service = mContext.getPackageName() + "/" + mContext.getPackageName() + ".services" + ".NotificationService";
-        Log.v(TAG, "service name = " + service);
+        Log.d(TAG, "service name = " + service);
         boolean accessibilityFound = false;
         try {
             accessibilityEnabled = Settings.Secure.getInt(
                     mContext.getApplicationContext().getContentResolver(),
                     android.provider.Settings.Secure.ACCESSIBILITY_ENABLED);
-            Log.v(TAG, "accessibilityEnabled = " + accessibilityEnabled);
+            Log.d(TAG, "accessibilityEnabled = " + accessibilityEnabled);
         } catch (Settings.SettingNotFoundException e) {
             Log.e(TAG, "Error finding setting, default accessibility to not found: "
                     + e.getMessage());
@@ -134,7 +147,7 @@ public class NotificationService extends AccessibilityService {
         TextUtils.SimpleStringSplitter mStringColonSplitter = new TextUtils.SimpleStringSplitter(':');
 
         if (accessibilityEnabled == 1) {
-            Log.v(TAG, "***ACCESSIBILIY IS ENABLED*** -----------------");
+            Log.d(TAG, "***ACCESSIBILIY IS ENABLED*** -----------------");
             String settingValue = Settings.Secure.getString(
                     mContext.getApplicationContext().getContentResolver(),
                     Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);
@@ -152,7 +165,7 @@ public class NotificationService extends AccessibilityService {
                 }
             }
         } else {
-            Log.v(TAG, "***ACCESSIBILIY IS DISABLED***");
+            Log.d(TAG, "***ACCESSIBILIY IS DISABLED***");
         }
 
         return accessibilityFound;

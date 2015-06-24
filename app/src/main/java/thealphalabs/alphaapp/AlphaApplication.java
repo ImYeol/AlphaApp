@@ -41,6 +41,8 @@ public class AlphaApplication extends Application {
 
     }
 
+
+
     @Override
     public void onTerminate() {
         super.onTerminate();
