@@ -18,21 +18,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-<<<<<<< HEAD
-import com.nhaarman.listviewanimations.appearance.simple.AlphaInAnimationAdapter;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.Calendar;
-
-import thealphalabs.alphaapp.adapter.ListAdapterOfSetting;
-=======
->>>>>>> f8c4397771dace4cf8bde83c64490341bb007ab8
 import thealphalabs.alphaapp.adapter.SensorController;
 import thealphalabs.alphaapp.view.CustomEditText;
 import thealphalabs.bluetooth.BluetoothTransferHelper;
+import thealphalabs.util.EventDataType;
 
 /*
  * Author:  Sukbeom Kim
@@ -134,39 +124,64 @@ public class FragmentController extends Fragment {
         }
     }
 
+    private static boolean mScrolling=false;
     // Touch Event Listener for "TOUCH PAD" layout
     // 컨트롤러 중앙에 위치한 터치패드 공간의 터치이벤트 처리를 위한 리스너
     private class TouchEventListener implements View.OnTouchListener {
-        private final String TAG = "TouchEventListener";
+        private final static String TAG = "TouchEventListener";
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
+
+            Log.d(TAG,"onTouch:"+motionEvent.getAction());
             if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                TouchX=motionEvent.getX();
-                TouchY=motionEvent.getY();
+
+                Log.d(TAG,"one touch down");
+                TouchX = motionEvent.getX();
+                TouchY = motionEvent.getY();
+
                 startClickTime = Calendar.getInstance().getTimeInMillis();
             }
-            else if(motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                float x=motionEvent.getX();
-                float y=motionEvent.getY();
-               // TouchX=motionEvent.getX();
-               // TouchY=motionEvent.getY();
-                long clickDuration = Calendar.getInstance().getTimeInMillis() - startClickTime;
-                if(IsClick(clickDuration,getDistance(TouchX,TouchY,x,y))) {
-                    mBltHelper.transferMouseData(x,y,MotionEvent.ACTION_UP);
-                }
-                TouchX=x;
-                TouchY=y;
+            else if(motionEvent.getAction() == MotionEvent.ACTION_POINTER_2_DOWN) {
+                Log.d(TAG,"pointer down");
+                mScrolling=true;
+                mBltHelper.transferMouseData(motionEvent.getX(1) / view.getWidth(),
+                        motionEvent.getY(1) / view.getHeight(),
+                        EventDataType.EventDataFlag.Motion_Two_Touch_Down);
             }
-           else if(motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
-                float TermX=motionEvent.getX()-TouchX;
-                float TermY=motionEvent.getY()-TouchY;
-                TouchX=motionEvent.getX();
-                TouchY=motionEvent.getY();
-                if (motionEvent.getPointerCount() >= 2) {  // two touch is for scrolling
-                    mBltHelper.transferMouseData(
-                            TermX / view.getWidth(), TermY / view.getHeight(), MotionEvent.ACTION_SCROLL);
+            else if(motionEvent.getAction() == MotionEvent.ACTION_POINTER_1_UP) {
+                mBltHelper.transferMouseData(motionEvent.getX(1)/view.getWidth(),motionEvent.getY(1)/view.getHeight(),
+                        EventDataType.EventDataFlag.Motion_Two_Touch_UP);
+            }
+            else if(motionEvent.getAction() == MotionEvent.ACTION_UP) {
+
+                if(mScrolling == false) {
+                    long clickDuration = Calendar.getInstance().getTimeInMillis() - startClickTime;
+                    float x=motionEvent.getX();
+                    float y=motionEvent.getY();
+                    if(IsClick(clickDuration,getDistance(TouchX,TouchY,x,y))) {  // one point click
+                        mBltHelper.transferMouseData(x / view.getWidth(), y / view.getHeight(), MotionEvent.ACTION_UP);
+                    }
+                    else {   // one point move
+
+                    }
+                }
+                mScrolling=false;
+            }
+            else if(motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
+
+                if (mScrolling) {  // two touch is for scrolling
+                    if(motionEvent.getPointerCount() >= 2) {
+                        Log.d(TAG, "two touch x:" + motionEvent.getX(1) + " y:" + motionEvent.getY(1));
+                        mBltHelper.transferMouseData(
+                                motionEvent.getX(1) / view.getWidth(), motionEvent.getY(1) / view.getHeight(),
+                                EventDataType.EventDataFlag.Motion_Two_Touch_Move);
+                    }
                 }
                 else {   // one point down
+                    float TermX=motionEvent.getX()-TouchX;
+                    float TermY=motionEvent.getY()-TouchY;
+                    TouchX=motionEvent.getX();
+                    TouchY=motionEvent.getY();
                     mBltHelper.transferMouseData(
                             TermX / view.getWidth(), TermY / view.getHeight(), motionEvent.getAction());
                 }

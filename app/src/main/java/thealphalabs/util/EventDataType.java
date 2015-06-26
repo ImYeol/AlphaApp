@@ -19,6 +19,10 @@ public class EventDataType {
         public static final int Motion_Touch_Down=2001;
         public static final int Motion_Touch_Move=2002;
 
+        public static final int Motion_Two_Touch_UP=2003;
+        public static final int Motion_Two_Touch_Down=2004;
+        public static final int Motion_Two_Touch_Move=2005;
+
         // Accel
 
         // Gyro
