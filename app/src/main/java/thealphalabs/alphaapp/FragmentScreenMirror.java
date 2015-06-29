@@ -8,7 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.hardware.display.DisplayManager;
 
+import thealphalabs.Interface.ServiceControllerInterface;
+import thealphalabs.controller.MouseViewController;
+
 public class FragmentScreenMirror extends Fragment {
+
+    private ServiceControllerInterface mMouseViewController;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -16,4 +21,10 @@ public class FragmentScreenMirror extends Fragment {
 
         return v;
     }
+
+    private void init(){
+        mMouseViewController=new MouseViewController();
+    }
+
+
 }

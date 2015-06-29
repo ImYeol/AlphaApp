@@ -16,4 +16,6 @@ public class Constants {
     public static final String GET_BLUETOOTH_DEVICES="Alphalabs.bluetooth.device";
     public static final String DEVICE_LIST="bluetooth.list";
     public static final int REQUEST_TO_ENABLE_BT = 100;
+
+    public static final String FILE_PATH_APK="Alpha.wifi.filepath";
 }

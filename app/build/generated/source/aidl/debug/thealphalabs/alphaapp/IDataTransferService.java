@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: /home/sukbeom/AndroidStudioProjects/AlphaApp/app/src/main/aidl/thealphalabs/alphaapp/IDataTransferService.aidl
+ * Original file: /home/yeol/AndroidStudioProjects/AlphaApp/app/src/main/aidl/thealphalabs/alphaapp/IDataTransferService.aidl
  */
 package thealphalabs.alphaapp;
 // Declare any non-default types here with import statements

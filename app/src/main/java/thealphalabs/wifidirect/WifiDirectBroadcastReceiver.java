@@ -37,27 +37,6 @@ import android.util.Log;
 public class WifiDirectBroadcastReceiver extends BroadcastReceiver {
     private final String TAG = "WifiDirectBroadcastReceiver";
 
-    private Channel               channel;
-    private WifiP2pManager        manager;
-    private WifiDirect_DeviceList activity;
-    private Context               mContext;
-
-    public WifiDirectBroadcastReceiver(WifiP2pManager manager, Channel channel,WifiDirect_DeviceList activity) {
-        super();
-        this.manager = manager;
-        this.channel = channel;
-        this.activity = activity;
-        activity.setClientStatus("Client Broadcast receiver created");
-
-    }
-
-    public WifiDirectBroadcastReceiver(WifiP2pManager pWifiManager, Channel pChannel, Context pContext) {
-        manager  = pWifiManager;
-        channel  = pChannel;
-        mContext = pContext;
-    }
-
-
     @Override
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();

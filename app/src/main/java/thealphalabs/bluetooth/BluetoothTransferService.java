@@ -21,6 +21,7 @@ public class BluetoothTransferService extends Service {
     private static BluetoothTransferService instance;
     public  static BluetoothTransferService getInstance() {
         if (instance == null) {
+            instance=new BluetoothTransferService();
             Log.e(TAG, "[FATAL] Service is not running.");
         }
         return instance;

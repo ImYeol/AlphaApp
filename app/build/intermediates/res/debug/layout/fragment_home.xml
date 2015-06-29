@@ -13,4 +13,4 @@
     android:fitsSystemWindows="true"
     android:padding="12dp"
     android:scrollbarStyle="outsideOverlay"
-    tools:ignore="overdraw" /><!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/src/main/res/layout/fragment_home.xml -->
+    tools:ignore="overdraw" /><!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/src/main/res/layout/fragment_home.xml -->

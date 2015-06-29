@@ -26,6 +26,7 @@ import thealphalabs.controller.SensorController;
 import thealphalabs.alphaapp.view.CustomEditText;
 import thealphalabs.bluetooth.BluetoothTransferHelper;
 import thealphalabs.controller.ServiceController;
+import thealphalabs.util.EventDataType;
 
 /*
  * Author:  Sukbeom Kim
@@ -44,13 +45,6 @@ public class FragmentController extends Fragment {
     private static final float MAX_CLICK_DURATION=200;
     private long startClickTime;
 
-    // Sensor manager
-    private SensorManager sensorManager;
-    private Sensor sensorAccel;
-    private Sensor sensorGyro;
-    private SensorListener gyroListener;
-    private SensorListener accelListener;
-
     private CustomEditText editText;
     private float TouchX=0;
     private float TouchY=0;
@@ -58,6 +52,8 @@ public class FragmentController extends Fragment {
     private float tempX = 0;
     private float tempY = 0;
     private BluetoothTransferHelper mBltHelper;
+
+    private static boolean mScrolling=false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -128,7 +124,7 @@ public class FragmentController extends Fragment {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
             // 이전과의 좌표를 비교하여 소수점 이하의 이벤트는 보내지 않는다.
-            if ( Math.abs(tempX - motionEvent.getX()) < 1 &&
+      /*      if ( Math.abs(tempX - motionEvent.getX()) < 1 &&
                     Math.abs(tempY - motionEvent.getY()) < 1)
             {
                 // 차이가 1 미만인 경우
@@ -137,7 +133,7 @@ public class FragmentController extends Fragment {
             else {
                 tempX = motionEvent.getX();
                 tempY = motionEvent.getY();
-            }
+            }*/
 
             if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                 TouchX=motionEvent.getX();
@@ -165,11 +161,12 @@ public class FragmentController extends Fragment {
                         mBltHelper.transferMouseData(x / view.getWidth(), y / view.getHeight(), MotionEvent.ACTION_UP);
                     }
                     else {   // one point move
-
+                        TouchX=x;
+                        TouchY=y;
                     }
                 }
-                TouchX=x;
-                TouchY=y;
+                mScrolling=false;
+
             }
             else if(motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
 
@@ -240,38 +237,4 @@ public class FragmentController extends Fragment {
 
     }
 
-    // 센서 이벤트 리스너
-    private class SensorListener implements SensorEventListener {
-        final String TAG = "SensorListener";
-        BluetoothTransferHelper transfer;
-        int sensor_type;
-
-        SensorListener(BluetoothTransferHelper helper, int sensor_type) {
-            this.transfer = helper;
-            this.sensor_type = sensor_type;
-        }
-        @Override
-        public void onSensorChanged(SensorEvent sensorEvent) {
-        //    Log.d(TAG, "onSensorChanged, type = " + sensor_type);
-            if (sensor_type == Sensor.TYPE_GYROSCOPE) {
-                try {
-                    transfer.transferGyroData(sensorEvent.values[0], sensorEvent.values[1], sensorEvent.values[2]);
-                } catch (Exception e) {
-                    Log.e(TAG, "Exception occur: " + e);
-                }
-            }
-            else if (sensor_type == Sensor.TYPE_ACCELEROMETER) {
-                try {
-                    transfer.transferAccelData(sensorEvent.values[0], sensorEvent.values[1], sensorEvent.values[2]);
-                } catch (Exception e) {
-                    Log.e(TAG, "Exception occur: " + e);
-                }
-            }
-        }
-
-        @Override
-        public void onAccuracyChanged(Sensor sensor, int i) {
-
-        }
-    }
 }

@@ -31,11 +31,11 @@ public class ServiceController {
     /**
      * Service 에 대한 static 변수 정의
      */
-    public static String   BLUETOOTH_SERVICE    = "BLUETOOTH";
-    public static String   WIFIDIRECT_SERVICE   = "WIFIDIRECT";
-    public static String   ACCLSENSOR_SERVICE   = "ACCLSENSOR";
-    public static String   GYROSENSOR_SERVICE   = "GYROSENSOR";
-    public static String   NOTIFICATION_SERVICE = "NOTIFICATION";
+    public static final String   BLUETOOTH_SERVICE    = "BLUETOOTH";
+    public static final String   WIFIDIRECT_SERVICE   = "WIFIDIRECT";
+    public static final String   ACCLSENSOR_SERVICE   = "ACCLSENSOR";
+    public static final String   GYROSENSOR_SERVICE   = "GYROSENSOR";
+    public static final String   NOTIFICATION_SERVICE = "NOTIFICATION";
 
     ArrayMap<String, ServiceControllerInterface> services;
     ServiceController() {

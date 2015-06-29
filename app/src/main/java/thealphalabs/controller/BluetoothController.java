@@ -116,19 +116,6 @@ public class BluetoothController implements ServiceControllerInterface{
         if (state == getState()) return;
         Log.d(TAG, "setState() " + mState + " -> " + state);
         mState = state;
-
-        if (state == STATE_CONNECTING) {
-            mDialog = new ProgressDialog(mContext, ProgressDialog.STYLE_SPINNER);
-            mDialog.setTitle(mContext.getResources().getString(R.string.progress_bluetooth_title));
-            mDialog.setMessage(mContext.getResources().getString(R.string.progress_bluetooth_on));
-            mDialog.setIndeterminate(true);
-            mDialog.setCancelable(false);
-            mDialog.show();
-        }
-        else if (state == STATE_CONNECTED || state == STATE_NONE) {
-            Log.d(TAG, "Dismiss");
-            if (mDialog != null) mDialog.dismiss();
-        }
     }
 
     // 블루투스 상태 얻어오는 함수
