@@ -5,11 +5,14 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.hardware.Sensor;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
 
 import thealphalabs.alphaapp.IDataTransferService;
+import thealphalabs.controller.BluetoothController;
+import thealphalabs.controller.ServiceController;
 import thealphalabs.util.IntentSender;
 
 /**
@@ -93,7 +96,7 @@ public class BluetoothTransferHelper {
             return;
         try {
             if (mTransferSerivce != null)
-                mTransferSerivce.transferAccelData(x,y,z);
+                mTransferSerivce.transferAccelData(x, y, z);
             else
                 Log.e(TAG, "mTransferService is null");
         } catch (RemoteException e) {
@@ -113,5 +116,4 @@ public class BluetoothTransferHelper {
             Log.d(TAG,"connectTo :"+ e.getMessage());
         }
     }
-
 }

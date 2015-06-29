@@ -1,4 +1,4 @@
-package thealphalabs.alphaapp.bluetooth;
+package thealphalabs.bluetooth;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Set;
 
@@ -25,25 +26,10 @@ import thealphalabs.alphaapp.R;
  * Created by sukbeom on 15. 6. 16.
  */
 public class DeviceListActivity extends Activity {
-
-    /**
-     * Tag for Log
-     */
     private static final String TAG = "DeviceListActivity";
-
-    /**
-     * Return Intent extra
-     */
     public static String EXTRA_DEVICE_ADDRESS = "device_address";
 
-    /**
-     * Member fields
-     */
     private BluetoothAdapter mBtAdapter;
-
-    /**
-     * Newly discovered devices
-     */
     private ArrayAdapter<String> mNewDevicesArrayAdapter;
 
     @Override
@@ -62,7 +48,6 @@ public class DeviceListActivity extends Activity {
         scanButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 doDiscovery();
-                v.setVisibility(View.GONE);
             }
         });
 
@@ -140,6 +125,7 @@ public class DeviceListActivity extends Activity {
         }
 
         // Request discover from BluetoothAdapter
+        Toast.makeText(getBaseContext(), R.string.scanning, Toast.LENGTH_SHORT).show();
         mBtAdapter.startDiscovery();
     }
 
@@ -154,8 +140,15 @@ public class DeviceListActivity extends Activity {
 
             // Get the device MAC address, which is the last 17 chars in the View
             String info = ((TextView) v).getText().toString();
-            String address = info.substring(info.length() - 17);
-
+            String address;
+            try {
+                address = info.substring(info.length() - 17);
+            }
+            catch (Exception e) {
+                // 장치가 발견되지 않을 경우에는 substring이 null이므로 exception이 발생한다.
+                // Not found
+                return;
+            }
             // Create the result Intent and include the MAC address
             Intent intent = new Intent();
             intent.putExtra(EXTRA_DEVICE_ADDRESS, address);

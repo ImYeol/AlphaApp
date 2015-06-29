@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/src/main/res/values/colors.xml -->
+    <eat-comment/>
+    <integer-array name="androidcolors">
+        <item>@color/blue</item>
+        <item>@color/purple</item>
+        <item>@color/green</item>
+        <item>@color/orange</item>
+        <item>@color/red</item>
+        <item>@color/darkblue</item>
+        <item>@color/darkpurple</item>
+        <item>@color/darkgreen</item>
+        <item>@color/darkorange</item>
+        <item>@color/darkred</item>
+    </integer-array>
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string-array name="navigation_drawer_items_array">
         <item>Controller</item>
@@ -8,7 +22,7 @@
         <item>Notice</item>
         <item>About</item>
     </string-array>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
     <eat-comment/>
     <attr format="reference" name="drawerArrowStyle"/>
     <attr format="dimension" name="height"/>
@@ -30,10 +44,14 @@
     <color name="background_floating_material_light">#ffeeeeee</color>
     <color name="background_material_dark">#ff303030</color>
     <color name="background_material_light">#ffeeeeee</color>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.astuetz/pagerslidingtabstrip/1.0.1/res/values/values.xml -->
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.astuetz/pagerslidingtabstrip/1.0.1/res/values/values.xml -->
     <eat-comment/>
     <color name="background_tab_pressed">#6633B5E5</color>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/src/main/res/values/colors.xml -->
+    <eat-comment/>
+    <item name="blue" type="color">#FF33B5E5</item>
+    <item name="bluegrey" type="color">#607D8B</item>
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
     <eat-comment/>
     <color name="bright_foreground_disabled_material_dark">#80ffffff</color>
     <color name="bright_foreground_disabled_material_light">#80000000</color>
@@ -43,14 +61,33 @@
     <color name="bright_foreground_material_light">@android:color/black</color>
     <color name="button_material_dark">#ff5a595b</color>
     <color name="button_material_light">#ffd6d7d7</color>
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/src/main/res/values/colors.xml -->
+    <eat-comment/>
+    <item name="darkblue" type="color">#FF0099CC</item>
+    <item name="darkgreen" type="color">#FF669900</item>
+    <item name="darkorange" type="color">#FFFF8800</item>
+    <item name="darkpurple" type="color">#FF9933CC</item>
+    <item name="darkred" type="color">#FFCC0000</item>
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
+    <eat-comment/>
     <color name="dim_foreground_disabled_material_dark">#80bebebe</color>
     <color name="dim_foreground_disabled_material_light">#80323232</color>
     <color name="dim_foreground_material_dark">#ffbebebe</color>
     <color name="dim_foreground_material_light">#ff323232</color>
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/src/main/res/values/colors.xml -->
+    <eat-comment/>
+    <item name="green" type="color">#FF99CC00</item>
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
+    <eat-comment/>
     <color name="highlighted_text_material_dark">#6680cbc4</color>
     <color name="highlighted_text_material_light">#66009688</color>
     <color name="hint_foreground_material_dark">@color/bright_foreground_disabled_material_dark</color>
     <color name="hint_foreground_material_light">@color/bright_foreground_disabled_material_light</color>
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/src/main/res/values/colors.xml -->
+    <eat-comment/>
+    <item name="lightbluegrey" type="color">#CFD8DC</item>
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
+    <eat-comment/>
     <color name="link_text_material_dark">@color/material_deep_teal_200</color>
     <color name="link_text_material_light">@color/material_deep_teal_500</color>
     <color name="material_blue_grey_800">#ff37474f</color>
@@ -58,6 +95,11 @@
     <color name="material_blue_grey_950">#ff21272b</color>
     <color name="material_deep_teal_200">#ff80cbc4</color>
     <color name="material_deep_teal_500">#ff009688</color>
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/src/main/res/values/colors.xml -->
+    <eat-comment/>
+    <item name="orange" type="color">#FFFFBB33</item>
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
+    <eat-comment/>
     <color name="primary_dark_material_dark">#ff000000</color>
     <color name="primary_dark_material_light">#ff757575</color>
     <color name="primary_material_dark">#ff212121</color>
@@ -66,6 +108,12 @@
     <color name="primary_text_default_material_light">#de000000</color>
     <color name="primary_text_disabled_material_dark">#4Dffffff</color>
     <color name="primary_text_disabled_material_light">#39000000</color>
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/src/main/res/values/colors.xml -->
+    <eat-comment/>
+    <item name="purple" type="color">#FFAA66CC</item>
+    <item name="red" type="color">#FFFF4444</item>
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
+    <eat-comment/>
     <color name="ripple_material_dark">#40ffffff</color>
     <color name="ripple_material_light">#40000000</color>
     <color name="secondary_text_default_material_dark">#b3ffffff</color>
@@ -74,7 +122,7 @@
     <color name="secondary_text_disabled_material_light">#24000000</color>
     <color name="switch_thumb_normal_material_dark">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_light">#fff1f1f1</color>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.balysv/material-ripple/1.0.1/res/values/values.xml -->
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.balysv/material-ripple/1.0.1/res/values/values.xml -->
     <eat-comment/>
     <color name="transparent">#00FFFFFF</color>
     <declare-styleable name="ActionBar"><attr name="navigationMode"><enum name="normal" value="0"/><enum name="listMode" value="1"/><enum name="tabMode" value="2"/></attr><attr name="displayOptions"><flag name="none" value="0"/><flag name="useLogo" value="0x1"/><flag name="showHome" value="0x2"/><flag name="homeAsUp" value="0x4"/><flag name="showTitle" value="0x8"/><flag name="showCustom" value="0x10"/><flag name="disableHome" value="0x20"/></attr><attr name="title"/><attr format="string" name="subtitle"/><attr format="reference" name="titleTextStyle"/><attr format="reference" name="subtitleTextStyle"/><attr format="reference" name="icon"/><attr format="reference" name="logo"/><attr format="reference" name="divider"/><attr format="reference" name="background"/><attr format="reference|color" name="backgroundStacked"/><attr format="reference|color" name="backgroundSplit"/><attr format="reference" name="customNavigationLayout"/><attr name="height"/><attr format="reference" name="homeLayout"/><attr format="reference" name="progressBarStyle"/><attr format="reference" name="indeterminateProgressStyle"/><attr format="dimension" name="progressBarPadding"/><attr name="homeAsUpIndicator"/><attr format="dimension" name="itemPadding"/><attr format="boolean" name="hideOnContentScroll"/><attr format="dimension" name="contentInsetStart"/><attr format="dimension" name="contentInsetEnd"/><attr format="dimension" name="contentInsetLeft"/><attr format="dimension" name="contentInsetRight"/><attr format="dimension" name="elevation"/><attr format="reference" name="popupTheme"/></declare-styleable>
@@ -107,7 +155,7 @@
     <declare-styleable name="Toolbar"><attr format="reference" name="titleTextAppearance"/><attr format="reference" name="subtitleTextAppearance"/><attr name="title"/><attr name="subtitle"/><attr name="android:gravity"/><attr format="dimension" name="titleMargins"/><attr format="dimension" name="titleMarginStart"/><attr format="dimension" name="titleMarginEnd"/><attr format="dimension" name="titleMarginTop"/><attr format="dimension" name="titleMarginBottom"/><attr name="contentInsetStart"/><attr name="contentInsetEnd"/><attr name="contentInsetLeft"/><attr name="contentInsetRight"/><attr format="dimension" name="maxButtonHeight"/><attr format="reference" name="theme"/><attr format="reference" name="collapseIcon"/><attr format="string" name="collapseContentDescription"/><attr name="popupTheme"/><attr format="reference" name="navigationIcon"/><attr format="string" name="navigationContentDescription"/><attr name="android:minHeight"/></declare-styleable>
     <declare-styleable name="View"><attr format="dimension" name="paddingStart"/><attr format="dimension" name="paddingEnd"/><attr name="android:focusable"/></declare-styleable>
     <declare-styleable name="ViewStubCompat"><attr name="android:layout"/><attr name="android:inflatedId"/><attr name="android:id"/></declare-styleable>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
     <eat-comment/>
     <dimen name="abc_action_bar_default_height_material">56dp</dimen>
     <dimen name="abc_action_bar_default_padding_material">4dp</dimen>
@@ -151,11 +199,11 @@
     <dimen name="abc_text_size_subtitle_material_toolbar">16dp</dimen>
     <dimen name="abc_text_size_title_material">20sp</dimen>
     <dimen name="abc_text_size_title_material_toolbar">20dp</dimen>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/src/main/res/values/dimens.xml -->
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
     <eat-comment/>
     <item name="dialog_fixed_height_major" type="dimen">80%</item>
     <item name="dialog_fixed_height_minor" type="dimen">100%</item>
@@ -163,16 +211,16 @@
     <item name="dialog_fixed_width_minor" type="dimen">320dp</item>
     <item format="float" name="disabled_alpha_material_dark" type="dimen">0.30</item>
     <item format="float" name="disabled_alpha_material_light" type="dimen">0.26</item>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/res/values/values.xml -->
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/res/values/values.xml -->
     <eat-comment/>
     <dimen name="drawerWidth">-1dp</dimen>
     <dimen name="photoMarginTop">16dp</dimen>
     <dimen name="statusMargin">0dp</dimen>
     <dimen name="userSpace">164dp</dimen>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/src/main/res/values/refs.xml -->
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/src/main/res/values/refs.xml -->
     <eat-comment/>
     <item name="controller_img" type="drawable">@mipmap/controller_img</item>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
     <eat-comment/>
     <item name="action_bar_activity_content" type="id"/>
     <item name="action_bar_spinner" type="id"/>
@@ -183,21 +231,21 @@
     <item name="progress_horizontal" type="id"/>
     <item name="split_action_bar" type="id"/>
     <item name="up" type="id"/>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/res/values/values.xml -->
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/res/values/values.xml -->
     <eat-comment/>
     <integer name="DRAWERTYPE_ACCOUNTS">0</integer>
     <integer name="DRAWERTYPE_CUSTOM">2</integer>
     <integer name="DRAWERTYPE_IMAGE">1</integer>
     <integer name="DRAWERTYPE_NO_HEADER">3</integer>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
     <eat-comment/>
     <integer name="abc_config_activityDefaultDur">220</integer>
     <integer name="abc_config_activityShortDur">150</integer>
     <integer name="abc_max_action_buttons">2</integer>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/src/main/res/values/refs.xml -->
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/src/main/res/values/refs.xml -->
     <eat-comment/>
     <item name="fragment_item" type="layout">@layout/fragment_item_list</item>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
     <eat-comment/>
     <string name="abc_action_bar_home_description">Navigate home</string>
     <string name="abc_action_bar_home_description_format">%1$s, %2$s</string>
@@ -215,7 +263,7 @@
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="about">About</string>
     <string name="about_license">License</string>
@@ -223,35 +271,51 @@
     <string name="about_version">Version</string>
     <string name="action_settings">Settings</string>
     <string name="app_name">AlphaApp</string>
+    <string name="browse_path_button">Browse</string>
     <string name="button_scan">Scan</string>
+    <string name="client_search">Search</string>
+    <string name="client_send_file">Send</string>
+    <string name="client_title">Wifi-direct client</string>
     <string name="close_drawer">Close</string>
-    <string name="controller_desc">Control Alpha glass by touching this screen.</string>
+    <string name="controller_desc">Control Alpha glass by touching this screen</string>
     <string name="controller_desc_fail">Bluetooth should be connected</string>
     <string name="desc_accelerator">Turn on/off accelerator</string>
     <string name="desc_bluetooth">Turn on/off bluetooth service</string>
     <string name="desc_gyrosensor">Turn on/off gyro sensor</string>
     <string name="desc_notification">Turn on/off notification</string>
     <string name="desc_touchevent">Turn on/off touch event</string>
+    <string name="file_browser_title">File browser</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Menu</string>
+    <string name="no_file_selected">No file selected</string>
     <string name="none_found">Not found</string>
     <string name="none_paired">Not paired</string>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/res/values/values.xml -->
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/res/values/values.xml -->
     <eat-comment/>
     <string name="nothing"/>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/src/main/res/values/strings.xml -->
     <eat-comment/>
-    <string name="notification_service_desc">Capture notification throughout accessibility service</string>
-    <string name="notification_service_label">Notification</string>
+    <string name="notification_service_desc">Turn on notification service on glass</string>
+    <string name="notification_service_label">AlphaApp notification</string>
     <string name="open_drawer">Open</string>
+    <string name="progress_bluetooth_on">Connect to device</string>
+    <string name="progress_bluetooth_title">Bluetooth</string>
+    <string name="progress_wifidirect_off">Turning off wifi direct</string>
+    <string name="progress_wifidirect_on">Turning on wifi direct</string>
+    <string name="progress_wifidirect_title">Wifi direct</string>
     <string name="scanning">Scanning</string>
     <string name="select_device">Select device</string>
+    <string name="select_dir">Select directory</string>
     <string name="title_activity_bluetooth">BluetoothActivity</string>
     <string name="title_activity_fragment_test">fragment_test</string>
     <string name="title_activity_license">LicenseActivity</string>
+    <string name="title_activity_wifi_direct__device_list">WifiDirect_DeviceList</string>
     <string name="title_other_devices">Other devices</string>
     <string name="title_paired_devices">Paired devices</string>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/src/main/res/values/styles.xml -->
+    <string name="toast_wifi_direct">Please turn on wifi direct manually</string>
+    <string name="wifidirect_desc">If you turn off this, it would turn off wifi</string>
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AccountsDark" parent="MaterialNavigationDrawerTheme">
         <item name="colorPrimary">#8bc34a</item>
@@ -270,12 +334,15 @@
         <item name="drawerType">@integer/DRAWERTYPE_NO_HEADER</item>
         <item name="toolbarElevation">true</item>
     </style>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
     <eat-comment/>
     <style name="Animation.AppCompat.DropDownUp" parent="Base.Animation.AppCompat.DropDownUp"/>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorControlActivated">@color/darkorange</item>
+        <item name="colorSwitchThumbNormal">@color/darkblue</item>
+        <item name="android:colorForeground">@color/darkgreen</item>
     </style>
     <style name="BackPattern" parent="MaterialNavigationDrawerTheme.Light.DarkActionBar">
         <item name="colorPrimary">#8bc34a</item>
@@ -283,7 +350,7 @@
         <item name="colorAccent">#FFFFFF</item>
         <item name="drawerType">@integer/DRAWERTYPE_NO_HEADER</item>
     </style>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
     <eat-comment/>
     <style name="Base.Animation.AppCompat.DropDownUp" parent="android:Animation">
         <item name="android:windowEnterAnimation">@anim/abc_grow_fade_in_from_bottom</item>
@@ -1138,7 +1205,7 @@
         <item name="android:scaleType">center</item>
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="CustomAccountSection" parent="MaterialNavigationDrawerTheme.Light.DarkActionBar">
         <item name="colorPrimary">#8bc34a</item>
@@ -1155,6 +1222,11 @@
         <item name="colorPrimary">#8bc34a</item>
         <item name="colorPrimaryDark">#558b2f</item>
         <item name="colorAccent">#FFFFFF</item>
+
+        <!-- SwitchCompat 을 위한 Color 부분 -->
+        <item name="colorControlActivated">@color/green</item>
+        <item name="colorSwitchThumbNormal">@color/lightbluegrey</item>
+        <item name="android:colorForeground">@color/bluegrey</item>
     </style>
     <style name="DefaultSectionLoaded" parent="MaterialNavigationDrawerTheme.Light.DarkActionBar">
         <item name="colorPrimary">#8bc34a</item>
@@ -1193,7 +1265,7 @@
         <item name="colorAccent">#FFFFFF</item>
         <item name="drawerType">@integer/DRAWERTYPE_IMAGE</item>
     </style>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/res/values/values.xml -->
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/res/values/values.xml -->
     <eat-comment/>
     <style name="MaterialAccountTheme">
         <item name="titleColor">#FFF</item>
@@ -1268,7 +1340,7 @@
     <style name="MaterialSubheaderTheme.Light">
         <item name="subheaderTitleColor">#000</item>
     </style>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="MockedAccountDark" parent="MaterialNavigationDrawerTheme">
         <item name="colorPrimary">#8bc34a</item>
@@ -1291,14 +1363,14 @@
     <style name="MyNavigationDrawerTheme" parent="Theme.AppCompat">
         <item name="colorPrimary">#8bc34a</item>
         <item name="colorPrimaryDark">#558b2f</item>
-        <item name="colorAccent">#FFFFFF</item>
+        <item name="colorAccent">#558b2f</item>
 
         <!-- Active thumb color & Active track color(30% transparency) -->
         <item name="colorControlActivated">#8bc34a</item>
         <!-- Inactive thumb color -->
         <item name="colorSwitchThumbNormal">#558b2f</item>
         <!-- Inactive track color(30% transparency) -->
-        <item name="android:colorForeground">#ffffff</item>
+        <item name="android:colorForeground">#678fdf</item>
     </style>
     <style name="NoHeaderDark" parent="MaterialNavigationDrawerTheme">
         <item name="colorPrimary">#8bc34a</item>
@@ -1312,7 +1384,7 @@
         <item name="colorAccent">#FFFFFF</item>
         <item name="drawerType">@integer/DRAWERTYPE_NO_HEADER</item>
     </style>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
     <eat-comment/>
     <style name="Platform.AppCompat" parent="android:Theme">
         <item name="android:windowNoTitle">true</item>
@@ -1451,7 +1523,7 @@
         <item name="android:listChoiceIndicatorMultiple">@drawable/abc_btn_check_material</item>
     </style>
     <style name="Platform.AppCompat.Light.Dialog" parent="Platform.AppCompat.Dialog"/>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="RealColorSections" parent="MaterialNavigationDrawerTheme.Light.DarkActionBar">
         <item name="colorPrimary">#8bc34a</item>
@@ -1466,7 +1538,7 @@
         <item name="drawerType">@integer/DRAWERTYPE_NO_HEADER</item>
         <item name="rippleBackport">true</item>
     </style>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
     <eat-comment/>
     <style name="RtlOverlay.Widget.AppCompat.ActionBar.TitleItem" parent="android:Widget">
         <item name="android:layout_gravity">center_vertical|left</item>
@@ -1509,7 +1581,7 @@
     <style name="RtlOverlay.Widget.AppCompat.SearchView.MagIcon" parent="android:Widget">
         <item name="android:layout_marginLeft">@dimen/abc_dropdownitem_text_padding_left</item>
     </style>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="TestTheme" parent="MaterialNavigationDrawerTheme.Light">
         <item name="colorPrimary">#8bc34a</item>
@@ -1517,7 +1589,7 @@
         <item name="colorAccent">#FFFFFF</item>
         <item name="multipaneSupport">true</item>
     </style>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
     <eat-comment/>
     <style name="TextAppearance.AppCompat" parent="Base.TextAppearance.AppCompat"/>
     <style name="TextAppearance.AppCompat.Body1" parent="Base.TextAppearance.AppCompat.Body1"/>
@@ -1604,7 +1676,7 @@
     <style name="ThemeOverlay.AppCompat.Dark" parent="Base.ThemeOverlay.AppCompat.Dark"/>
     <style name="ThemeOverlay.AppCompat.Dark.ActionBar" parent="Base.ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <style name="ThemeOverlay.AppCompat.Light" parent="Base.ThemeOverlay.AppCompat.Light"/>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="UniqueToolbarColor" parent="MaterialNavigationDrawerTheme.Light.DarkActionBar">
         <item name="colorPrimary">#8bc34a</item>
@@ -1613,7 +1685,7 @@
         <item name="drawerType">@integer/DRAWERTYPE_NO_HEADER</item>
         <item name="uniqueToolbarColor">true</item>
     </style>
-    <!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
+    <!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
     <eat-comment/>
     <style name="Widget.AppCompat.ActionBar" parent="Base.Widget.AppCompat.ActionBar">
     </style>

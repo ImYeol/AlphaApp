@@ -5,8 +5,8 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="15"
-        android:targetSdkVersion="17" />
+        android:minSdkVersion="16"
+        android:targetSdkVersion="16" />
 
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -14,7 +14,11 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
     <uses-permission android:name="android.permission.BIND_ACCESSIBILITY_SERVICE" />
-    <uses-permission android:name="ANDROID.PERMISSION.BIND_NOTIFICATION_LISTENER_SERVICE" />
+    <uses-permission android:name="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE" />
+    <!-- Wifi-direct 위한 권한 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name="thealphalabs.alphaapp.AlphaApplication"
@@ -26,14 +30,10 @@
         android:windowSoftInputMode="adjustUnspecified" >
 
         <!-- 서비스 -->
+        <service android:name="thealphalabs.bluetooth.BluetoothTransferService" />
+        <service android:name="thealphalabs.wifip2p.WifiTransferService" />
         <service
-            android:name="thealphalabs.bluetooth.BluetoothTransferService"
-            android:enabled="true" />
-        <service
-            android:name="thealphalabs.wifip2p.WifiTransferService"
-            android:enabled="true" />
-        <service
-            android:name="thealphalabs.alphaapp.services.NotificationService"
+            android:name="thealphalabs.notification.NotificationService"
             android:label="@string/notification_service_label"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE" >
             <intent-filter>
@@ -70,9 +70,14 @@
             android:label="@string/title_activity_bluetooth" >
         </activity>
         <activity
-            android:name="thealphalabs.alphaapp.bluetooth.DeviceListActivity"
+            android:name="thealphalabs.bluetooth.DeviceListActivity"
             android:label="DeviceListActivity" >
         </activity>
+        <activity
+            android:name="thealphalabs.wifidirect.WifiDirect_DeviceList"
+            android:label="@string/title_activity_wifi_direct__device_list" >
+        </activity>
+        <activity android:name="thealphalabs.wifidirect.FileBrowser" />
         <activity android:name="com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.SwipeTouchListenerTestActivity" />
         <activity android:name="com.nhaarman.listviewanimations.itemmanipulation.dragdrop.DynamicListViewTestActivity" />
     </application>

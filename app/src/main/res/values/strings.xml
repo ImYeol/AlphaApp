@@ -15,8 +15,12 @@
     <string name="desc_gyrosensor">Turn on/off gyro sensor</string>
     <string name="desc_accelerator">Turn on/off accelerator</string>
     <string name="desc_notification">Turn on/off notification</string>
-    <string name="controller_desc">Control Alpha glass by touching this screen.</string>
+    <string name="controller_desc">Control Alpha glass by touching this screen</string>
     <string name="controller_desc_fail">Bluetooth should be connected</string>
+    <string name="wifidirect_desc">If you turn off this, it would turn off wifi</string>
+
+    <!-- Toast message -->
+    <string name="toast_wifi_direct">Please turn on wifi direct manually</string>
 
 
     <!-- Bluetooth -->
@@ -40,11 +44,26 @@
     <string name="title_activity_bluetooth">BluetoothActivity</string>
 
     <!-- Service label -->
-    <string name="notification_service_label">Notification</string>
-    <string name="notification_service_desc">Capture notification throughout accessibility service</string>
+    <string name="notification_service_label">AlphaApp notification</string>
+    <string name="notification_service_desc">Turn on notification service on glass</string>
     <string name="title_activity_fragment_test">fragment_test</string>
 
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- Progress Dialog -->
+    <string name="progress_wifidirect_title">Wifi direct</string>
+    <string name="progress_wifidirect_on">Turning on wifi direct</string>
+    <string name="progress_wifidirect_off">Turning off wifi direct</string>
+    <string name="progress_bluetooth_title">Bluetooth</string>
+    <string name="progress_bluetooth_on">Connect to device</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_wifi_direct__device_list">WifiDirect_DeviceList</string>
+    <string name="client_title">Wifi-direct client</string>
+    <string name="browse_path_button">Browse</string>
+    <string name="client_search">Search</string>
+    <string name="client_send_file">Send</string>
+    <string name="no_file_selected">No file selected</string>
+    <string name="file_browser_title">File browser</string>
+    <string name="select_dir">Select directory</string>
+    <string name="menu_settings">Menu</string>
 
 </resources>

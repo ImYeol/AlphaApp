@@ -9,4 +9,4 @@
     android:accessibilityFeedbackType="feedbackAllMask"
     android:notificationTimeout="100"
     android:packageNames="@null" />
-<!-- From: file:/home/yeol/AndroidStudioProjects/AlphaApp/app/src/main/res/xml/notification_service_config.xml -->
+<!-- From: file:/home/sukbeom/AndroidStudioProjects/AlphaApp/app/src/main/res/xml/notification_service_config.xml -->

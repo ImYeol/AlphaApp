@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingBottom="10dp"
+    android:paddingTop="3dp"
+    android:paddingBottom="13dp"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <ImageView
         android:id="@+id/listitem_title_icon"
         android:layout_centerVertical="true"
+        android:scaleType="centerInside"
+        android:scaleX="0.7"
+        android:scaleY="0.7"
         android:paddingRight="5dp"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
     <TextView
         android:layout_toRightOf="@id/listitem_title_icon"
+        android:layout_toEndOf="@id/listitem_title_icon"
         android:id="@+id/listitem_title_title"
         android:paddingTop="10dp"
         android:textStyle="bold"
@@ -21,6 +26,7 @@
         android:layout_height="fill_parent" />
     <TextView
         android:id="@+id/listitem_title_desc"
+        android:layout_toEndOf="@id/listitem_title_icon"
         android:layout_toRightOf="@id/listitem_title_icon"
         android:layout_below="@id/listitem_title_title"
         android:layout_width="fill_parent"
@@ -32,6 +38,5 @@
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         app:showText="false"
-        android:checked="false"
-        style="@style/Theme.AppCompat" />
+        android:checked="false" />
 </RelativeLayout>

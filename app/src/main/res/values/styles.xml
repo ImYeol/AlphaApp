@@ -1,19 +1,21 @@
 <resources>
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorControlActivated">@color/darkorange</item>
+        <item name="colorSwitchThumbNormal">@color/darkblue</item>
+        <item name="android:colorForeground">@color/darkgreen</item>
     </style>
     <style name="MyNavigationDrawerTheme" parent="Theme.AppCompat">
         <item name="colorPrimary">#8bc34a</item>
         <item name="colorPrimaryDark">#558b2f</item>
-        <item name="colorAccent">#FFFFFF</item>
+        <item name="colorAccent">#558b2f</item>
 
         <!-- Active thumb color & Active track color(30% transparency) -->
         <item name="colorControlActivated">#8bc34a</item>
         <!-- Inactive thumb color -->
         <item name="colorSwitchThumbNormal">#558b2f</item>
         <!-- Inactive track color(30% transparency) -->
-        <item name="android:colorForeground">#ffffff</item>
+        <item name="android:colorForeground">#678fdf</item>
     </style>
-    <!-- Light Themes-->
 
     <!-- Mocked Account -->
     <style name="MockedAccountLight" parent="MaterialNavigationDrawerTheme.Light.DarkActionBar">
@@ -51,6 +53,11 @@
         <item name="colorPrimary">#8bc34a</item>
         <item name="colorPrimaryDark">#558b2f</item>
         <item name="colorAccent">#FFFFFF</item>
+
+        <!-- SwitchCompat 을 위한 Color 부분 -->
+        <item name="colorControlActivated">@color/green</item>
+        <item name="colorSwitchThumbNormal">@color/lightbluegrey</item>
+        <item name="android:colorForeground">@color/bluegrey</item>
     </style>
 
     <!-- Dark Themes-->

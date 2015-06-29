@@ -16,6 +16,13 @@ import java.util.ArrayList;
 import thealphalabs.alphaapp.R;
 import thealphalabs.alphaapp.model.HomeDataModel;
 
+/**
+ * GoogleCardAdapter
+ *  HOME 섹션 부분을 그려주기 위해 사용되는 Adapter 클래스이다.
+ *
+ * @version : 1.0
+ * @author  : Sukbeom Kim(sbkim@thealphalabs.com)
+ */
 public class GoogleCardsAdapter extends ArrayAdapter<HomeDataModel> {
 
     private final Context mContext;

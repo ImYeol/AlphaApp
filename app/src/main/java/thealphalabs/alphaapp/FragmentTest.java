@@ -1,18 +1,14 @@
 package thealphalabs.alphaapp;
 
 import android.app.Fragment;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
+import android.os.Looper;
 import android.provider.Settings;
-import android.service.notification.NotificationListenerService;
-import android.service.notification.StatusBarNotification;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.SwitchCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,13 +16,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import thealphalabs.alphaapp.services.NotificationService;
+import thealphalabs.wifidirect.WifiDirectBroadcastReceiver;
 
 /**
  * Created by sukbeom on 15. 6. 19.
  */
 public class FragmentTest extends Fragment implements View.OnClickListener{
     private final String TAG = "FragmentTest";
+    IntentFilter intentFilter = new IntentFilter();
+    WifiP2pManager manager;
+    WifiP2pManager.Channel channel;
+    WifiDirectBroadcastReceiver mReceiver;
+
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Notification 발생시키는 버튼
         View v = inflater.inflate(R.layout.activity_fragment_test, container, false);
@@ -47,6 +48,33 @@ public class FragmentTest extends Fragment implements View.OnClickListener{
                 startActivity(new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS));
             }
         }
+
+
+        // Wifi Direct 테스트
+        manager = (WifiP2pManager) getActivity().getSystemService(Context.WIFI_P2P_SERVICE);
+        channel = manager.initialize(getActivity(), Looper.getMainLooper(), null);
+
+
+        intentFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
+        intentFilter.addAction(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION);
+        intentFilter.addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION);
+        intentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
+
+        manager.discoverPeers(channel, new WifiP2pManager.ActionListener() {
+            // 양쪽에서 동시에 discovery
+            @Override
+            public void onSuccess() {
+                Log.d(TAG, "discovery success");
+            }
+
+            @Override
+            public void onFailure(int i) {
+                Log.d(TAG, "discovery fail");
+            }
+        });
+
+        getActivity().registerReceiver(mReceiver, intentFilter);
+
 
 
         return v;
@@ -98,15 +126,19 @@ public class FragmentTest extends Fragment implements View.OnClickListener{
     public void onClick(View view) {
         Log.d(TAG, "onClick");
 
-//      Notification 생성
-        NotificationManager nm = (NotificationManager)getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
-        Notification notification = new Notification(R.drawable.ic_launcher, "Nomal Notification", System.currentTimeMillis());
-        notification.flags = Notification.FLAG_AUTO_CANCEL;
-        notification.defaults = Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE ;
-        notification.number = 13;
-        PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 0, new Intent(getActivity(), GlassAppMain.class), PendingIntent.FLAG_UPDATE_CURRENT);
-        notification.setLatestEventInfo(getActivity(), "Nomal Title", "Nomal Summary", pendingIntent);
+//        manager.requestPeers();
+////      Notification 생성
+//        NotificationManager nm = (NotificationManager)getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+//        Notification notification;
+//        notification = new Notification(R.drawable.ic_launcher, "Nomal Notification", System.currentTimeMillis());
+//        notification.flags = Notification.FLAG_AUTO_CANCEL;
+//        notification.defaults = Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE ;
+//        notification.number = 13;
+//        PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 0, new Intent(getActivity(), GlassAppMain.class), PendingIntent.FLAG_UPDATE_CURRENT);
+//        notification.setLatestEventInfo(getActivity(), "Nomal Title", "Nomal Summary", pendingIntent);
+//
+//        nm.notify(1234, notification);
 
-        nm.notify(1234, notification);
+
     }
 }

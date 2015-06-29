@@ -9,8 +9,13 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
     <uses-permission android:name="android.permission.BIND_ACCESSIBILITY_SERVICE" />
-    <uses-permission android:name="ANDROID.PERMISSION.BIND_NOTIFICATION_LISTENER_SERVICE" />
-        <application
+    <uses-permission android:name="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE" />
+    <!-- Wifi-direct 위한 권한 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
         android:name=".AlphaApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,13 +27,11 @@
 
         <!-- 서비스 -->
         <service
-            android:name="thealphalabs.bluetooth.BluetoothTransferService"
-            android:enabled="true" />
+            android:name="thealphalabs.bluetooth.BluetoothTransferService" />
         <service
-            android:name="thealphalabs.wifip2p.WifiTransferService"
-            android:enabled="true" />
+            android:name="thealphalabs.wifip2p.WifiTransferService" />
         <service
-            android:name=".services.NotificationService"
+            android:name="thealphalabs.notification.NotificationService"
             android:label="@string/notification_service_label"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE" >
             <intent-filter>
@@ -65,9 +68,14 @@
             android:label="@string/title_activity_bluetooth" >
         </activity>
         <activity
-            android:name=".bluetooth.DeviceListActivity"
-            android:label="DeviceListActivity">
+            android:name="thealphalabs.bluetooth.DeviceListActivity"
+            android:label="DeviceListActivity" >
         </activity>
+        <activity
+            android:name="thealphalabs.wifidirect.WifiDirect_DeviceList"
+            android:label="@string/title_activity_wifi_direct__device_list" >
+        </activity>
+        <activity android:name="thealphalabs.wifidirect.FileBrowser" />
     </application>
 
 </manifest>

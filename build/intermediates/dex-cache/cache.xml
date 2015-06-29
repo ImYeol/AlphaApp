@@ -2,27 +2,68 @@
 <items version="2" >
 
     <item
+<<<<<<< HEAD
         jar="/home/yeol/AndroidSDK/Sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
+=======
+        jar="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/exploded-aar/com.astuetz/pagerslidingtabstrip/1.0.1/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
-        <dex dex="/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-2b409b0098de24458daa9196bf3534db0066a217.jar" />
+        sha1="7912610ed96381c25c36d986eba422731b9641b6">
+        <dex dex="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/pre-dexed/debug/classes-d1031c8b932e2b3a9632022df5a49bf4d0401697.jar" />
     </item>
     <item
+        jar="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/exploded-aar/com.balysv/material-ripple/1.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.0 rc2"
+        sha1="aba9317bc403d69d8a571c0a72acfe95698a5db0">
+        <dex dex="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/pre-dexed/debug/classes-66f870b26abf7b60b62b4cf94db3bea3d460910a.jar" />
+    </item>
+    <item
+        jar="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.0 rc2"
+        sha1="0640bc34b0f25196f82fe1e707a437bd4a405933">
+        <dex dex="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/pre-dexed/debug/classes-e9c548f5627bb17a5884834c90f54fb38bcb7c14.jar" />
+    </item>
+    <item
+        jar="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/exploded-aar/com.androidhuman/support-material/0.1.2/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.0 rc2"
+        sha1="c19c50e4dd6997f09465a00a435a1c3b2f0b8c71">
+        <dex dex="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/pre-dexed/debug/classes-0279c96bea19b346c68eef8616acebe897429b53.jar" />
+    </item>
+    <item
+        jar="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/jars/classes.jar"
+>>>>>>> Improve structure
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
+        <dex dex="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/pre-dexed/debug/classes-a37b9ddd565d4874a4ed70bc4a34cfdee5e09aa2.jar" />
+    </item>
+    <item
+<<<<<<< HEAD
         jar="/home/yeol/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
         <dex dex="/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/pre-dexed/debug/library-2.4.0-c73f55cb337967dab714369417a51fbb0b83aa66.jar" />
-    </item>
-    <item
-        jar="/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/jars/classes.jar"
+=======
+        jar="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/exploded-aar/com.nhaarman.listviewanimations/lib-core/3.1.0/jars/classes.jar"
         jumboMode="false"
-        revision="22.0.1"
-        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
-        <dex dex="/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/pre-dexed/debug/classes-f90d18691e8790939edf2944108b4eaa85dd7f24.jar" />
+        revision="23.0.0 rc2"
+        sha1="acf66033b1418ccf9e15c8e77750981e4809c4ea">
+        <dex dex="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/pre-dexed/debug/classes-65b823f0e59cd400846a38f2385764df6883785d.jar" />
+>>>>>>> Improve structure
     </item>
     <item
+        jar="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.0 rc2"
+        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
+        <dex dex="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/pre-dexed/debug/classes-a37b9ddd565d4874a4ed70bc4a34cfdee5e09aa2.jar" />
+    </item>
+    <item
+<<<<<<< HEAD
         jar="/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/jars/libs/internal_impl-22.0.0.jar"
         jumboMode="false"
         revision="22.0.1"
@@ -35,12 +76,41 @@
         revision="22.0.1"
         sha1="acf66033b1418ccf9e15c8e77750981e4809c4ea">
         <dex dex="/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/pre-dexed/debug/classes-3400b438e2cc77f745137f5f879760731b985804.jar" />
+=======
+        jar="/home/chaoxifer/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar"
+        jumboMode="false"
+        revision="23.0.0 rc2"
+        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
+        <dex dex="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/pre-dexed/debug/library-2.4.0-203698c3596fc5b13f2f2e1c8b057588dfe43579.jar" />
     </item>
     <item
-        jar="/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/exploded-aar/com.nhaarman.listviewanimations/lib-core-slh/3.1.0/jars/classes.jar"
+        jar="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/exploded-aar/com.nhaarman.listviewanimations/lib-manipulation/3.1.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
+        sha1="5660e4bf78904137e90e62a5d4cc2e987258f02c">
+        <dex dex="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/pre-dexed/debug/classes-09bacfaf3f0fef706c2b7795c66df66020eb1b08.jar" />
+    </item>
+    <item
+        jar="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/exploded-aar/com.astuetz/pagerslidingtabstrip/1.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.0 rc2"
+        sha1="7912610ed96381c25c36d986eba422731b9641b6">
+        <dex dex="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/pre-dexed/debug/classes-d1031c8b932e2b3a9632022df5a49bf4d0401697.jar" />
+    </item>
+    <item
+        jar="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/pre-dexed/debug/classes-e931d7345f81cb45a6e539fa5097cc925b0bc49e.jar" />
+>>>>>>> Improve structure
+    </item>
+    <item
+        jar="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/exploded-aar/com.nhaarman.listviewanimations/lib-core-slh/3.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.0 rc2"
         sha1="49223278ec2ede1d05d00868c5ce3e077b4016f8">
+<<<<<<< HEAD
         <dex dex="/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/pre-dexed/debug/classes-874e95384cf94fd0877595dc25903d676b6da2c4.jar" />
     </item>
     <item
@@ -77,6 +147,86 @@
         revision="22.0.1"
         sha1="5660e4bf78904137e90e62a5d4cc2e987258f02c">
         <dex dex="/home/yeol/AndroidStudioProjects/AlphaApp/app/build/intermediates/pre-dexed/debug/classes-e06793e7060f5081f53811b4cd8d0ea43cdf55f4.jar" />
+=======
+        <dex dex="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/pre-dexed/debug/classes-62489d038c0e20ca16b8c7a204f7c122de1232dc.jar" />
+    </item>
+    <item
+        jar="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/exploded-aar/com.nhaarman.listviewanimations/lib-manipulation/3.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.0 rc2"
+        sha1="5660e4bf78904137e90e62a5d4cc2e987258f02c">
+        <dex dex="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/pre-dexed/debug/classes-09bacfaf3f0fef706c2b7795c66df66020eb1b08.jar" />
+    </item>
+    <item
+        jar="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/jars/libs/internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="23.0.0 rc2"
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-55cb7598a3180b0c5edf075e9ad17bb3c5e0e0d2.jar" />
+    </item>
+    <item
+        jar="/opt/android-sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-2311f65db913e9716cba51cfdfd166692a07aac0.jar" />
+    </item>
+    <item
+        jar="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/exploded-aar/com.nhaarman.listviewanimations/lib-core-slh/3.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="49223278ec2ede1d05d00868c5ce3e077b4016f8">
+        <dex dex="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/pre-dexed/debug/classes-62489d038c0e20ca16b8c7a204f7c122de1232dc.jar" />
+    </item>
+    <item
+        jar="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/jars/libs/internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-55cb7598a3180b0c5edf075e9ad17bb3c5e0e0d2.jar" />
+    </item>
+    <item
+        jar="/home/chaoxifer/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
+        <dex dex="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/pre-dexed/debug/library-2.4.0-203698c3596fc5b13f2f2e1c8b057588dfe43579.jar" />
+    </item>
+    <item
+        jar="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/exploded-aar/com.balysv/material-ripple/1.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="aba9317bc403d69d8a571c0a72acfe95698a5db0">
+        <dex dex="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/pre-dexed/debug/classes-66f870b26abf7b60b62b4cf94db3bea3d460910a.jar" />
+    </item>
+    <item
+        jar="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/exploded-aar/com.nhaarman.listviewanimations/lib-core/3.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="acf66033b1418ccf9e15c8e77750981e4809c4ea">
+        <dex dex="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/pre-dexed/debug/classes-65b823f0e59cd400846a38f2385764df6883785d.jar" />
+    </item>
+    <item
+        jar="/opt/android-sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
+        jumboMode="false"
+        revision="23.0.0 rc2"
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-2311f65db913e9716cba51cfdfd166692a07aac0.jar" />
+    </item>
+    <item
+        jar="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.0 rc2"
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/pre-dexed/debug/classes-e931d7345f81cb45a6e539fa5097cc925b0bc49e.jar" />
+    </item>
+    <item
+        jar="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.3/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="0640bc34b0f25196f82fe1e707a437bd4a405933">
+        <dex dex="/home/chaoxifer/AndroidStudioProjects/FromGithub/AlphaApp/app/build/intermediates/pre-dexed/debug/classes-e9c548f5627bb17a5884834c90f54fb38bcb7c14.jar" />
+>>>>>>> Improve structure
     </item>
 
 </items>

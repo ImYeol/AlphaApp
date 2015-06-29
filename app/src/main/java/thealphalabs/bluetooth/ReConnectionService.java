@@ -6,6 +6,7 @@ import android.util.Log;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import thealphalabs.controller.BluetoothController;
 import thealphalabs.util.ConnectionInfo;
 
 /**
@@ -17,17 +18,17 @@ public class ReConnectionService {
     private Context mContext;
     private Timer mReConnectiongTimer;
     private final String TAG="ReConnectionService";
-    private BluetoothManager mBltManager;
+    private BluetoothController mBltManager;
 
 
-    public static ReConnectionService getInstance(Context paramContext,BluetoothManager paramBltManager)
+    public static ReConnectionService getInstance(Context paramContext,BluetoothController paramBltManager)
     {
         if (instance == null)
             instance = new ReConnectionService(paramContext,paramBltManager);
         return instance;
     }
 
-    private ReConnectionService(Context paramContext,BluetoothManager paramBltManager)
+    public ReConnectionService(Context paramContext, BluetoothController paramBltManager)
     {
         super();
         mContext = paramContext;
@@ -42,7 +43,7 @@ public class ReConnectionService {
      */
     public void autoReconnect()
     {
-        if(mBltManager.getState() != BluetoothManager.STATE_NONE)
+        if(mBltManager.getState() != BluetoothController.STATE_NONE)
             return ;
         TimerTask task = new TimerTask()
         {
@@ -57,7 +58,6 @@ public class ReConnectionService {
         };
         mReConnectiongTimer = new Timer();
         mReConnectiongTimer.schedule(task, 5000, 10000);// 매 분마다 다시 연결한다
-
     }
 
 

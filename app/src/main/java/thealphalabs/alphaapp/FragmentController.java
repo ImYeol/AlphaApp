@@ -18,11 +18,14 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import java.util.Calendar;
-import thealphalabs.alphaapp.adapter.SensorController;
+
+import thealphalabs.controller.BluetoothController;
+import thealphalabs.controller.SensorController;
 import thealphalabs.alphaapp.view.CustomEditText;
 import thealphalabs.bluetooth.BluetoothTransferHelper;
-import thealphalabs.util.EventDataType;
+import thealphalabs.controller.ServiceController;
 
 /*
  * Author:  Sukbeom Kim
@@ -52,6 +55,8 @@ public class FragmentController extends Fragment {
     private float TouchX=0;
     private float TouchY=0;
 
+    private float tempX = 0;
+    private float tempY = 0;
     private BluetoothTransferHelper mBltHelper;
 
     @Override
@@ -81,21 +86,8 @@ public class FragmentController extends Fragment {
             desc.setText(getString(R.string.controller_desc_fail));
         }
 
-        // SensorManager 인스턴스 초기화
-        sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
-        sensorAccel = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        sensorGyro  = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
-        accelListener = new SensorListener(((AlphaApplication) getActivity().getApplication()).getBluetoothHelper(),
-                Sensor.TYPE_ACCELEROMETER);
-        gyroListener = new SensorListener(((AlphaApplication) getActivity().getApplication()).getBluetoothHelper(),
-                        Sensor.TYPE_GYROSCOPE);
-
-        if (SensorController.AccelController.flag) {
-            sensorManager.registerListener(accelListener, sensorAccel, SensorManager.SENSOR_DELAY_GAME);
-        }
-        if (SensorController.GyroController.flag) {
-            sensorManager.registerListener(gyroListener, sensorGyro, SensorManager.SENSOR_DELAY_FASTEST);
-        }
+        ServiceController.resumeService(ServiceController.ACCLSENSOR_SERVICE);
+        ServiceController.resumeService(ServiceController.GYROSENSOR_SERVICE);
 
         mBltHelper=((AlphaApplication)getActivity().getApplication()).getBluetoothHelper();
         return view;
@@ -104,41 +96,52 @@ public class FragmentController extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
-        if (SensorController.AccelController.flag) {
-            sensorManager.registerListener(accelListener, sensorAccel, SensorManager.SENSOR_DELAY_GAME);
-        }
-        if (SensorController.GyroController.flag) {
-            sensorManager.registerListener(gyroListener, sensorGyro, SensorManager.SENSOR_DELAY_FASTEST);
-        }
+        ServiceController.resumeService(ServiceController.ACCLSENSOR_SERVICE);
+        ServiceController.resumeService(ServiceController.GYROSENSOR_SERVICE);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        if (SensorController.AccelController.flag) {
-            sensorManager.unregisterListener(accelListener);
-        }
-        if (SensorController.GyroController.flag) {
-            sensorManager.unregisterListener(gyroListener);
-        }
+
+        ServiceController.pauseService(ServiceController.GYROSENSOR_SERVICE);
+        ServiceController.pauseService(ServiceController.ACCLSENSOR_SERVICE);
     }
 
-    private static boolean mScrolling=false;
+    /**
+     * onDestroy()
+     *  자이로와 엑셀로미터 센서를 pause하는 이유는 사용자가 설정한 값(flag)을 초기화하지
+     *  않기 위해서 stopService 대신 pauseService를 호출한다.
+     */
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        ServiceController.pauseService(ServiceController.GYROSENSOR_SERVICE);
+        ServiceController.pauseService(ServiceController.ACCLSENSOR_SERVICE);
+    }
+
     // Touch Event Listener for "TOUCH PAD" layout
     // 컨트롤러 중앙에 위치한 터치패드 공간의 터치이벤트 처리를 위한 리스너
     private class TouchEventListener implements View.OnTouchListener {
-        private final static String TAG = "TouchEventListener";
+        private final String TAG = "TouchEventListener";
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
+            // 이전과의 좌표를 비교하여 소수점 이하의 이벤트는 보내지 않는다.
+            if ( Math.abs(tempX - motionEvent.getX()) < 1 &&
+                    Math.abs(tempY - motionEvent.getY()) < 1)
+            {
+                // 차이가 1 미만인 경우
+                return true;
+            }
+            else {
+                tempX = motionEvent.getX();
+                tempY = motionEvent.getY();
+            }
 
-            Log.d(TAG,"onTouch:"+motionEvent.getAction());
             if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-
-                Log.d(TAG,"one touch down");
-                TouchX = motionEvent.getX();
-                TouchY = motionEvent.getY();
-
+                TouchX=motionEvent.getX();
+                TouchY=motionEvent.getY();
                 startClickTime = Calendar.getInstance().getTimeInMillis();
             }
             else if(motionEvent.getAction() == MotionEvent.ACTION_POINTER_2_DOWN) {
@@ -165,7 +168,8 @@ public class FragmentController extends Fragment {
 
                     }
                 }
-                mScrolling=false;
+                TouchX=x;
+                TouchY=y;
             }
             else if(motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
 

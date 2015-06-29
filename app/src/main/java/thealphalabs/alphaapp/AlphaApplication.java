@@ -1,19 +1,11 @@
 package thealphalabs.alphaapp;
 
 import android.app.Application;
-import android.app.Notification;
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.ServiceConnection;
-import android.os.IBinder;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 
-import java.util.ArrayList;
-
-import thealphalabs.alphaapp.services.NotificationService;
+import thealphalabs.notification.NotificationService;
 import thealphalabs.bluetooth.BluetoothTransferHelper;
-import thealphalabs.bluetooth.BluetoothTransferService;
 import thealphalabs.wifip2p.WifiTransferHelper;
 
 /**
@@ -32,13 +24,13 @@ public class AlphaApplication extends Application {
     }
     public void init() {
         Log.d(TAG, "Init the bluetoothTransfer Helper");
-        startService(new Intent(this, BluetoothTransferService.class));
+
+        // 서비스 실행 부분
+        // 나머지 서비스는 Manifest 에서 enabled 설정되어 앱 실행시 자동으로 실행된다.
         startService(new Intent(this, NotificationService.class));
 
         mBluetoothTransferHelper=new BluetoothTransferHelper(getBaseContext());
-      //  mWifiTransferHelper=new WifiTransferHelper(getBaseContext());
         mBluetoothTransferHelper.StartConnection();
-
     }
 
 
@@ -49,6 +41,9 @@ public class AlphaApplication extends Application {
     }
 
     public BluetoothTransferHelper getBluetoothHelper() {
+        if (mBluetoothTransferHelper == null) {
+            mBluetoothTransferHelper = new BluetoothTransferHelper(this.getBaseContext());
+        }
         return mBluetoothTransferHelper;
     }
 

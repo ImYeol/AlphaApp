@@ -54,7 +54,7 @@ public class ConnectionInfo {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(Constants.PREFERENCE_CONN_INFO_ADDRESS, mDeviceAddress);
         editor.putString(Constants.PREFERENCE_CONN_INFO_NAME, mDeviceName);
-        editor.commit();
+        editor.apply();
     }
 
     public String getDeviceAddress() {

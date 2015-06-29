@@ -1,10 +1,12 @@
 package thealphalabs.alphaapp.adapter;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.WifiManager;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.SwitchCompat;
@@ -20,19 +22,35 @@ import com.nhaarman.listviewanimations.itemmanipulation.expandablelistitem.Expan
 
 import java.util.ArrayList;
 
-import thealphalabs.alphaapp.BluetoothActivity;
 import thealphalabs.alphaapp.R;
-import thealphalabs.alphaapp.bluetooth.BluetoothService;
-import thealphalabs.alphaapp.notification.NotificationController;
-import thealphalabs.alphaapp.services.NotificationService;
+import thealphalabs.controller.BluetoothController;
+import thealphalabs.controller.SensorController;
+import thealphalabs.controller.NotificationController;
+import thealphalabs.controller.ServiceController;
+import thealphalabs.notification.NotificationService;
+import thealphalabs.controller.WifiDirectController;
 import thealphalabs.alphaapp.view.ListItemOfController;
+import thealphalabs.wifidirect.WifiDirect_DeviceList;
 
+/**
+ * 설정 Fragment 의 ListView 아이템을 위한 Adapter 클래스
+ * @version : 1.0
+ * @author  : Sukbeom Kim(sbkim@thealphalabs.com)
+ */
 public class ListAdapterOfSetting extends ExpandableListItemAdapter {
     private final String TAG = "ListAdapterOfSetting";
+
     private Context mContext;
     private ArrayList<ListItemOfController> itemList;
     private ArrayList<SwitchCompatListener> listeners = new ArrayList<>();
 
+    /**
+     * ListAdapterOfSetting: Constructor
+     *
+     * @param context   context 저장을 위한 파라미터
+     * @param itemList  어댑터 클래스가 호출되기 전 itemList 가 준비되어 있어야 한다.
+     *
+     */
     public ListAdapterOfSetting(Context context, ArrayList<ListItemOfController> itemList) {
         super(context);
         this.setExpandCollapseListener(new ItemToggleListener(this));
@@ -44,114 +62,183 @@ public class ListAdapterOfSetting extends ExpandableListItemAdapter {
             listeners.add(new SwitchCompatListener(this, i, null));
         }
     }
+
+    /**
+     * listView 에서 한 행(row)에서 title view 로 출력될 View를 정의하여 리턴한다.
+     * 처음 설정 fragment 가 로드되었을 때 보여질 뷰를 설정한다.
+     *
+     * @param   i         listView 에서 아이템의 index
+     * @param   view      view
+     * @param   viewGroup viewGroup
+     * @return  row 에 해당하는 View
+     */
     @NonNull
     @Override
     public View getTitleView(int i, View view, @NonNull ViewGroup viewGroup) {
-        Log.d(TAG, "getTitleView called");
         ListItemOfController target   = itemList.get(i);
         LayoutInflater       inflater = (LayoutInflater) mContext.getSystemService(Service.LAYOUT_INFLATER_SERVICE);
 
         View title_view = inflater.inflate(R.layout.listitem_setting_title, viewGroup, false);
 
+        // 아이템 리스트에 있는 내용들로 View 의 구성 요소들을 셋팅한다.
         TextView     title    = (TextView) title_view.findViewById(R.id.listitem_title_title);
         TextView     desc     = (TextView) title_view.findViewById(R.id.listitem_title_desc);
         ImageView    icon     = (ImageView) title_view.findViewById(R.id.listitem_title_icon);
         SwitchCompat switcher = (SwitchCompat) title_view.findViewById(R.id.listitem_title_switch);
 
-        title.setText(target.getTitle());
-        desc.setText(target.getDesc());
-        icon.setImageResource(target.getIconResId());
+        // 타이틀, 설명, 아이콘 등록
+        title.  setText(target.getTitle());
+        desc.   setText(target.getDesc());
+        icon.   setImageResource(target.getIconResId());
+
+        // 이벤트 리스너 등록
+        // 1. 스위치 리스너 등록
+        //  각 리스너들은 스위치에 대한 레퍼런스를 갖는다(리스너에서 스위치를 변경가능하도록 하기 위해)
         switcher.setOnClickListener(listeners.get(i));
         listeners.get(i).setSwitcher(switcher);
+
+        // 2. 뷰 클릭 리스너 등록
+        //  기본적으로 title view 클릭 시 toggle 되는 것을 막고 switch 를 대신 제어하기 위해 등록
+        title_view.setOnClickListener(new ItemClickListener(i, switcher));
 
         // 각 아이템별 스위치 설정
         switch (i) {
             case 0:
                 // 블루투스
-                if (BluetoothAdapter.getDefaultAdapter().isEnabled()) {
+                if (ServiceController.isServiceEnabled(ServiceController.BLUETOOTH_SERVICE)) {
                     switcher.setChecked(true);
-                    SensorController.BluetoothController.setFlag(true);
                     expand(i);
+                }
+                else {
+                    switcher.setChecked(false);
                 }
                 break;
             case 1:
-                // 센서
-                if (SensorController.AccelController.flag) {
+                // 엑셀로미터 센서
+                if (ServiceController.isServiceEnabled(ServiceController.ACCLSENSOR_SERVICE)) {
                     switcher.setChecked(true);
+                }
+                else {
+                    switcher.setChecked(false);
                 }
                 break;
             case 2:
-                // 자이로
-                if (SensorController.GyroController.flag) {
+                // 자이로 센서
+                if (ServiceController.isServiceEnabled(ServiceController.GYROSENSOR_SERVICE)) {
                     switcher.setChecked(true);
                 }
                 break;
             case 3:
                 // Notification
-                if (NotificationService.isAccessibilitySettingsOn(mContext)) {
+                if (ServiceController.isServiceEnabled(ServiceController.NOTIFICATION_SERVICE)) {
                     switcher.setChecked(true);
-                    NotificationController.setFlag(true);
                 }
                 else {
                     switcher.setChecked(false);
-                    NotificationController.setFlag(false);
+                }
+                break;
+            case 4:
+                // Wifi direct
+                if (ServiceController.isServiceEnabled(ServiceController.WIFIDIRECT_SERVICE)) {
+                    switcher.setChecked(true);
+                    expand(i);
+                }
+                else {
+                    switcher.setChecked(false);
                 }
                 break;
         }
         return title_view;
     }
 
+
+    /**
+     * getContentView
+     *
+     *  listView 의 아이템에서(row) content view 로 출력될 View를 정의하여 리턴한다.
+     *
+     * @param   i         listView 에서 아이템의 index (row index)
+     * @param   view      view
+     * @param   viewGroup viewGroup
+     * @return  row(content view) 에 해당하는 View
+     */
     @NonNull
     @Override
     public View getContentView(int i, View view, @NonNull ViewGroup viewGroup) {
-        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Service.LAYOUT_INFLATER_SERVICE);
         View v = null;
 
-        /*
-         * 실제로 사용되는 레이아웃은 listitem_controller_bluetooth이다.
-         */
+        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Service.LAYOUT_INFLATER_SERVICE);
+
+        // 블루투스 부분을 제외한 나머지 부분은 dummy 사용
         switch (i) {
             case 0:
                 // 블루투스 아이템항목
                 v = inflater.inflate(R.layout.listitem_setting_bluetooth, viewGroup, false);
                 Button btn = (Button) v.findViewById(R.id.bluetooth_connect_btn);
-                btn.setOnClickListener(new ConnectBtnListener(mContext));
+                btn.setOnClickListener(new ConnectBtnListener(mContext, ConnectBtnListener.BTN_BLUETOOTH));
+
+                BluetoothController.mConnectBtn = btn;
                 break;
             case 1:
-                // 센서 정보
-                v = inflater.inflate(R.layout.listitem_setting_dummy, viewGroup, false);
-                break;
             case 2:
-                v = inflater.inflate(R.layout.listitem_setting_dummy, viewGroup, false);
-                break;
             case 3:
                 v = inflater.inflate(R.layout.listitem_setting_dummy, viewGroup, false);
                 break;
+            case 4:
+                v = inflater.inflate(R.layout.listitem_setting_wifidirect, viewGroup, false);
+                btn = (Button) v.findViewById(R.id.wifidirect_connect_btn);
+                btn.setOnClickListener(new ConnectBtnListener(mContext, ConnectBtnListener.BTN_WIFIDIRECT));
+                break;
             default:
-                Log.e(TAG, "Unexpected error");
+                Log.e(TAG, "Unhandled index of content view item.");
         }
 
         return v;
     }
 
+    /**
+     * getSwitchValue
+     *  position(index) 에 있는 switch 값을 가져온다.
+     * @param   position
+     * @return  position 에 있는 switchcompat의 값 (체크: true)
+     */
     public boolean getSwitchValue(int position) {
         return listeners.get(position).getSwitcher().isChecked();
     }
 
+    /**
+     * ConnectBtnListener
+     *  블루투스 연결을 위한 Connect 버튼 리스너 클래스
+     */
     private class ConnectBtnListener implements View.OnClickListener {
-        private Context mContext;
-        ConnectBtnListener(Context context) {
-            mContext = context;
+        public static final int BTN_BLUETOOTH  = 0;
+        public static final int BTN_WIFIDIRECT = 1;
+
+        int type;
+
+        ConnectBtnListener(Context context, int type) {
+            mContext    = context;
+            this.type   = type;
         }
         @Override
         public void onClick(View view) {
-            Log.d("ConnectButton", "button clicked");
-            if (BluetoothAdapter.getDefaultAdapter().isEnabled()) {
-                SensorController.bltService.scanDevice();
+            switch (type) {
+                case BTN_BLUETOOTH:
+                    BluetoothController.getInstance().scanDevice();
+                    break;
+                case BTN_WIFIDIRECT:
+                    Intent i = new Intent(mContext, WifiDirect_DeviceList.class);
+                    ((Activity)mContext).startActivityForResult(i, BluetoothController.REQUEST_CONNECT_DEVICE);
+                    break;
             }
+
         }
     }
 
+    /**
+     * ItemToggleListener
+     *  ListView의 각 행 (row) 를 클릭했을 때 펼쳐지는지 닫히는지에 대한 이벤트 리스너
+     */
     private class ItemToggleListener implements ExpandableListItemAdapter.ExpandCollapseListener {
         private final String TAG = "ItemToggleListener";
         private ExpandableListItemAdapter adapter;
@@ -162,7 +249,6 @@ public class ListAdapterOfSetting extends ExpandableListItemAdapter {
 
         @Override
         public void onItemExpanded(int i) {
-            Log.d(TAG, "onItemExpanded");
             ListItemOfController target = (ListItemOfController) getItem(i);
             target.setExpanded(true);
 
@@ -170,25 +256,54 @@ public class ListAdapterOfSetting extends ExpandableListItemAdapter {
 
         @Override
         public void onItemCollapsed(int i) {
-            Log.d(TAG, "onItemCollapsed");
             ListItemOfController target = (ListItemOfController) getItem(i);
             target.setExpanded(false);
         }
     }
 
+    /**
+     * ItemClickListener
+     *  TitleView의 OnClickListener를 위해 만든 클래스이다.
+     *  타이틀뷰를 클릭했을 때 contentView 가 toggle 되는 것을 막고 스위치를 제어하기 위한 클래스
+     */
+    private class ItemClickListener implements View.OnClickListener {
+        private final String TAG = "ItemClickListener";
+
+        // 아이템의 index 를 변수로 갖는다
+        private int          mIndex;
+        private SwitchCompat mSwitch;
+
+        ItemClickListener(int pIndex, SwitchCompat pSwitch) {
+            mIndex  = pIndex;
+            mSwitch = pSwitch;
+        }
+        @Override
+        public void onClick(View v) {
+            // 토글 후 스위치에 등록된 리스너를 호출한다.
+            mSwitch.toggle();
+            mSwitch.callOnClick();
+        }
+    }
+
+    /**
+     * SwitchCompatListener
+     *  각 titleView 에서 Switchcompat을 위한 스위치 리스너
+     */
     private class SwitchCompatListener implements View.OnClickListener {
         private final String TAG = "SwitchCompatListener";
-        private ListAdapterOfSetting adapter;
-        private SwitchCompat switcher;
-        private int index;
+
+        private ListAdapterOfSetting    adapter;
+        private SwitchCompat            switcher;
+        private int                     index;
 
         public SwitchCompatListener(ListAdapterOfSetting adapter, int index, SwitchCompat switcher) {
             super();
-            this.adapter = adapter;
-            this.index = index;
-            this.switcher = switcher;
+            this.adapter    = adapter;
+            this.index      = index;
+            this.switcher   = switcher;
         }
 
+        /* switch 에 대한 getter 와 setter */
         public SwitchCompat getSwitcher() {
             return this.switcher;
         }
@@ -197,72 +312,36 @@ public class ListAdapterOfSetting extends ExpandableListItemAdapter {
             this.switcher = target;
         }
 
+        /**
+         * onClick      리스너 onClick 메서드 부분
+         * @param view  view -
+         */
         @Override
         public void onClick(View view) {
             boolean onFlag = adapter.getSwitchValue(index);
-            Log.d(TAG, "onClick() is called with index = " + index + ", onFlag = " + onFlag);
 
-            // onFlag가 true인 경우에 센서플래그를 킨다.
             switch (index) {
                 case 0:
                     // 블루투스
-                    if (SensorController.BluetoothController.flag == false) {
-                        SensorController.bltService.enableBluetooth();
-                        SensorController.BluetoothController.setFlag(true);
-                        expand(index);
-                    }
-                    else {
-//                        사용자가 블루투스를 끄려고 하는 경우
-                        BluetoothAdapter.getDefaultAdapter().disable();
-                        SensorController.BluetoothController.setFlag(false);
-                        collapse(index);
-                    }
+                    ServiceController.controlService(onFlag, ServiceController.BLUETOOTH_SERVICE);
+                    toggle(index);
                     break;
                 case 1:
                     // 엑셀레이터
-                    SensorController.AccelController.setFlag(onFlag);
+                    ServiceController.controlService(onFlag, ServiceController.ACCLSENSOR_SERVICE);
                     break;
                 case 2:
                     // 자이로 센서
-                    SensorController.GyroController.setFlag(onFlag);
+                    ServiceController.controlService(onFlag, ServiceController.GYROSENSOR_SERVICE);
                     break;
                 case 3:
                     // Notification
-                    if (onFlag) {
-                        if (NotificationService.isAccessibilitySettingsOn(view.getContext())) {
-                            Log.d(TAG, "Accessibility is enabled");
-                        } else {
-                            Log.d(TAG, "Accessibility is off");
-                            try {
-                                Intent i = new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS);
-                                view.getContext().startActivity(i);
-                            } catch (Exception e) {
-                                Log.e(TAG, "Exception occur because of SDK version");
-                                Intent i = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
-
-                                ((Activity)mContext).startActivityForResult(i, NotificationService.NOTIFICATION_SET);
-                            }
-
-                            Log.d(TAG, "Notification re-check!!!");
-
-                            // 사용자가 notification 켰다면 스위치를 켠다.
-                            if (NotificationService.isAccessibilitySettingsOn(view.getContext())) {
-                                NotificationController.setFlag(true);
-                                switcher.setChecked(true);
-                                Log.d(TAG, "Switch on");
-                            } else {
-                                NotificationController.setFlag(false);
-                                switcher.setChecked(false);
-                                Log.d(TAG, "Switch off");
-                            }
-                        }
-                    }
-                    else {
-                        // 스위치를 끈 경우에 해당 플래그만 false로 설정한다.
-                        // (실제로는 notification이 켜있으나 글래스로 보내지 않는다.
-                        NotificationController.setFlag(onFlag);
-                        Log.d(TAG, "Switch onFlag");
-                    }
+                    ServiceController.controlService(onFlag, ServiceController.NOTIFICATION_SERVICE);
+                    break;
+                case 4:
+                    // Wifi direct 제어
+                    ServiceController.controlService(onFlag, ServiceController.WIFIDIRECT_SERVICE);
+                    toggle(index);
                     break;
                 default:
                     // 예외 처리
@@ -270,6 +349,4 @@ public class ListAdapterOfSetting extends ExpandableListItemAdapter {
             }
         }
     }
-
-
 }

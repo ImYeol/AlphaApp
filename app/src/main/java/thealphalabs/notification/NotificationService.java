@@ -1,24 +1,22 @@
-package thealphalabs.alphaapp.services;
+package thealphalabs.notification;
 
 import android.accessibilityservice.AccessibilityService;
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Notification;
 import android.content.Context;
-import android.content.Intent;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.RemoteViews;
-import android.widget.Toast;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import thealphalabs.alphaapp.AlphaApplication;
+import thealphalabs.controller.NotificationController;
 
 /**
  * Created by sukbeom on 15. 6. 19.
@@ -31,7 +29,6 @@ public class NotificationService extends AccessibilityService {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d(TAG, "NotificationService onCreate() called");
     }
 
     @Override
@@ -48,6 +45,7 @@ public class NotificationService extends AccessibilityService {
 
             Notification notification = (Notification) accessibilityEvent.getParcelableData();
             if (notification == null) {
+                // Toast로 메세지가 뜨는 경우도 여기에 포함
                 Log.e(TAG, "notification is null");
                 return;
             }
@@ -124,22 +122,30 @@ public class NotificationService extends AccessibilityService {
     }
 
     private void sendNotificationData(String title, String text) {
-        ((AlphaApplication)getApplication()).getBluetoothHelper().transferNotificationData(title, text);
-
+        if (NotificationController.getInstance().isEnabled()) {
+            // Notification 설정이 켜져 있을 때에만 데이터를 보낸다.
+            ((AlphaApplication) getApplication()).getBluetoothHelper().transferNotificationData(title, text);
+        }
     }
 
-    // Notification이 켜져있는지 확인
+    /**
+     * isAccessibilitySettingsOn
+     *  Notification이 켜져있는지 확인한다.
+     * @param mContext
+     * @return  Notification이 켜져있다면 true를 반환한다.
+     */
     public static boolean isAccessibilitySettingsOn(Context mContext) {
-        String TAG = "Notification ";
+        String TAG = "NotificationService";
         int accessibilityEnabled = 0;
-        final String service = mContext.getPackageName() + "/" + mContext.getPackageName() + ".services" + ".NotificationService";
+
+        final String service    = mContext.getPackageName() + "/" + NotificationService.class.getName();
+
         Log.d(TAG, "service name = " + service);
         boolean accessibilityFound = false;
         try {
             accessibilityEnabled = Settings.Secure.getInt(
                     mContext.getApplicationContext().getContentResolver(),
                     android.provider.Settings.Secure.ACCESSIBILITY_ENABLED);
-            Log.d(TAG, "accessibilityEnabled = " + accessibilityEnabled);
         } catch (Settings.SettingNotFoundException e) {
             Log.e(TAG, "Error finding setting, default accessibility to not found: "
                     + e.getMessage());
@@ -147,7 +153,6 @@ public class NotificationService extends AccessibilityService {
         TextUtils.SimpleStringSplitter mStringColonSplitter = new TextUtils.SimpleStringSplitter(':');
 
         if (accessibilityEnabled == 1) {
-            Log.d(TAG, "***ACCESSIBILIY IS ENABLED*** -----------------");
             String settingValue = Settings.Secure.getString(
                     mContext.getApplicationContext().getContentResolver(),
                     Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);
@@ -157,7 +162,6 @@ public class NotificationService extends AccessibilityService {
                 while (splitter.hasNext()) {
                     String accessabilityService = splitter.next();
 
-                    Log.v(TAG, "-------------- > accessabilityService :: " + accessabilityService);
                     if (accessabilityService.equalsIgnoreCase(service)) {
                         Log.v(TAG, "We've found the correct setting - accessibility is switched on!");
                         return true;
