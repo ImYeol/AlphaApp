@@ -1,13 +1,7 @@
 package thealphalabs.alphaapp.adapter;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
 import android.app.Service;
-import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
-import android.content.Intent;
-import android.net.wifi.WifiManager;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
@@ -24,13 +18,8 @@ import java.util.ArrayList;
 
 import thealphalabs.alphaapp.R;
 import thealphalabs.controller.BluetoothController;
-import thealphalabs.controller.SensorController;
-import thealphalabs.controller.NotificationController;
 import thealphalabs.controller.ServiceController;
-import thealphalabs.notification.NotificationService;
-import thealphalabs.controller.WifiDirectController;
 import thealphalabs.alphaapp.view.ListItemOfController;
-import thealphalabs.wifidirect.WifiDirect_DeviceList;
 
 /**
  * 설정 Fragment 의 ListView 아이템을 위한 Adapter 클래스
@@ -227,8 +216,7 @@ public class ListAdapterOfSetting extends ExpandableListItemAdapter {
                     BluetoothController.getInstance().scanDevice();
                     break;
                 case BTN_WIFIDIRECT:
-                    Intent i = new Intent(mContext, WifiDirect_DeviceList.class);
-                    ((Activity)mContext).startActivityForResult(i, BluetoothController.REQUEST_CONNECT_DEVICE);
+
                     break;
             }
 

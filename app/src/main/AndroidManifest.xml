@@ -71,16 +71,13 @@
             android:name="thealphalabs.bluetooth.DeviceListActivity"
             android:label="DeviceListActivity" >
         </activity>
-        <activity
-            android:name="thealphalabs.wifidirect.WifiDirect_DeviceList"
-            android:label="@string/title_activity_wifi_direct__device_list" >
-        </activity>
         <activity android:name="thealphalabs.wifidirect.FileBrowser" />
-        <receiver android:name="thealphalabs.wifidirect.WifiDirectBroadcastReceiver">
-            <intent-filter>
-                <action android:name="arabiannight.tistory.com.sendreciver.gogogo">
-                </action></intent-filter>
-        </receiver>
+        <activity android:name="thealphalabs.wifidirect.WifiDeviceListDialog">
+
+        </activity>
+        <service android:name="thealphalabs.wifidirect.FileTransferService">
+
+        </service>
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package thealphalabs.alphaapp;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,6 +16,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
+import thealphalabs.util.Constants;
+import thealphalabs.wifidirect.WifiDeviceListDialog;
 
 public class FragmentAppstore extends Fragment implements View.OnClickListener {
     private final String TAG = "FragmentAppstore";
@@ -41,9 +45,17 @@ public class FragmentAppstore extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         ApplicationInfo app = getActivity().getApplicationContext().getApplicationInfo();
-        final File target = new File("/mnt/sdcard/Download/Catch_5.2.11.apk");
+        String name="/storage/sdcard0/Girl/20130319163541.png";
+        final File target = new File(name);
 
-        try
+        if(target.exists()){
+            Intent intent=new Intent(getActivity().getBaseContext(), WifiDeviceListDialog.class);
+            intent.putExtra(Constants.FILE_PATH_APK,name);
+            getActivity().startActivity(intent);
+        }
+        else
+            Log.d(TAG,"File does not exist");
+    /*    try
         {
             final InputStream inputStream = new FileInputStream(target);
             final ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -75,7 +87,7 @@ public class FragmentAppstore extends Fragment implements View.OnClickListener {
             e.printStackTrace();
         }
 
-
+    */
     }
 
     private byte[] fileToByteArray(File f) {

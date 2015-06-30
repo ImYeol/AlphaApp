@@ -458,7 +458,7 @@ int id action_menu_presenter 0x7f0e0003
 int id action_mode_bar 0x7f0e002e
 int id action_mode_bar_stub 0x7f0e002d
 int id action_mode_close_button 0x7f0e0020
-int id action_settings 0x7f0e0082
+int id action_settings 0x7f0e0084
 int id activity_chooser_view_content 0x7f0e0021
 int id always 0x7f0e0016
 int id apk_btn 0x7f0e0059
@@ -517,7 +517,7 @@ int id listitem_title_switch 0x7f0e007c
 int id listitem_title_title 0x7f0e007a
 int id listitem_wd_name 0x7f0e007e
 int id listview_controller 0x7f0e0066
-int id menu_settings 0x7f0e0081
+int id menu_settings 0x7f0e0083
 int id middle 0x7f0e0015
 int id never 0x7f0e0019
 int id new_devices 0x7f0e0042
@@ -571,6 +571,8 @@ int id user_photo 0x7f0e006b
 int id user_photo_2 0x7f0e006c
 int id user_photo_3 0x7f0e006d
 int id user_switcher 0x7f0e0072
+int id wifi_devices_list 0x7f0e0081
+int id wifi_dialog_cancel 0x7f0e0082
 int id wifidirect_connect_btn 0x7f0e007d
 int id withText 0x7f0e001a
 int id wrap_content 0x7f0e001d
@@ -622,7 +624,7 @@ int layout fragment_controller 0x7f040025
 int layout fragment_fragment_controlle 0x7f040026
 int layout fragment_home 0x7f040027
 int layout fragment_home_card 0x7f040028
-int layout fragment_item 0x7f04003d
+int layout fragment_item 0x7f04003e
 int layout fragment_item_grid 0x7f040029
 int layout fragment_item_list 0x7f04002a
 int layout fragment_screen_mirror 0x7f04002b
@@ -643,6 +645,7 @@ int layout listitem_setting_wifidirect 0x7f040039
 int layout listitem_wdlist 0x7f04003a
 int layout support_simple_spinner_dropdown_item 0x7f04003b
 int layout tab_controller_layout 0x7f04003c
+int layout wifi_device_list_dialog 0x7f04003d
 int menu activity_file_browser 0x7f0f0000
 int menu activity_wd_list 0x7f0f0001
 int menu menu_bluetooth 0x7f0f0002

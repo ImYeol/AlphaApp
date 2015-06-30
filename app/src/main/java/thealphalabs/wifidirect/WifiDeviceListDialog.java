@@ -9,11 +9,15 @@ import android.net.wifi.p2p.WifiP2pDevice;
 import android.net.wifi.p2p.WifiP2pInfo;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
-import android.view.View.OnClickListener
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -28,6 +32,7 @@ import thealphalabs.wifip2p.WifiDirectConnectionManager;
  */
 public class WifiDeviceListDialog extends Activity implements WifiDeviceListCallback {
 
+    private static final String TAG="WifiDialog";
     public final int fileRequestID = 98;
     public final int port = 7236;
 
@@ -36,11 +41,18 @@ public class WifiDeviceListDialog extends Activity implements WifiDeviceListCall
     private ArrayAdapter<String> mAdapter;
     private ArrayList<String> DeviceList=new ArrayList<String>();
     private WifiDirectConnectionManager mWifiDirectConnectionManager;
+    private Button cancelBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wifi_device_list_dialog);
+        cancelBtn=(Button)findViewById(R.id.wifi_dialog_cancel);
+        FilePathToTransfer=getIntent().getExtras().getString(Constants.FILE_PATH_APK);
+        if(CheckIfFileExist(FilePathToTransfer) == false) {
+            showToast("File not exist");
+            finish();
+        }
         WifiDeviceListView=(ListView)findViewById(R.id.wifi_devices_list);
         mWifiDirectConnectionManager = WifiDirectConnectionManager.getInstance();
         mWifiDirectConnectionManager.registerWifiDeviceCallback(this);
@@ -48,20 +60,35 @@ public class WifiDeviceListDialog extends Activity implements WifiDeviceListCall
         DeviceList.addAll(mWifiDirectConnectionManager.getWifiDevices());
         mAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_single_choice, DeviceList);
-
-        FilePathToTransfer=getIntent().getExtras().getString(Constants.FILE_PATH_APK);
         WifiDeviceListView.setAdapter(mAdapter);
         WifiDeviceListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ListView localListView = (ListView) parent;
                 String item = (String) localListView.getItemAtPosition(position);
-                mWifiDirectConnectionManager.connectTo(item);
+                Log.d(TAG,"onItemClick:"+item);
+                mWifiDirectConnectionManager.connectTo(item, FilePathToTransfer);
+            }
+        });
+        cancelBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
     }
 
+    private boolean CheckIfFileExist(String FileName){
+        File file=new File(FileName);
+        return file.exists();
+    }
+
+    private void showToast(String s) {
+        Toast toast = Toast.makeText(getApplicationContext(),s, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 

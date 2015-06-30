@@ -6,6 +6,7 @@ import android.util.Log;
 
 import thealphalabs.notification.NotificationService;
 import thealphalabs.bluetooth.BluetoothTransferHelper;
+import thealphalabs.wifip2p.WifiDirectConnectionManager;
 import thealphalabs.wifip2p.WifiTransferHelper;
 
 /**
@@ -31,6 +32,8 @@ public class AlphaApplication extends Application {
 
         mBluetoothTransferHelper=new BluetoothTransferHelper(getBaseContext());
         mBluetoothTransferHelper.StartConnection();
+
+        WifiDirectConnectionManager.getInstance(this).registerBroadCastReceiver();
     }
 
 

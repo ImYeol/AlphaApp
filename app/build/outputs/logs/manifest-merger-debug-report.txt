@@ -152,16 +152,18 @@ ADDED from AndroidManifest.xml:70:9
 		ADDED from AndroidManifest.xml:72:13
 	android:name
 		ADDED from AndroidManifest.xml:71:13
-activity#thealphalabs.wifidirect.WifiDirect_DeviceList
-ADDED from AndroidManifest.xml:74:9
-	android:label
-		ADDED from AndroidManifest.xml:76:13
-	android:name
-		ADDED from AndroidManifest.xml:75:13
 activity#thealphalabs.wifidirect.FileBrowser
+ADDED from AndroidManifest.xml:74:9
+	android:name
+		ADDED from AndroidManifest.xml:74:19
+activity#thealphalabs.wifidirect.WifiDeviceListDialog
+ADDED from AndroidManifest.xml:75:9
+	android:name
+		ADDED from AndroidManifest.xml:75:19
+service#thealphalabs.wifidirect.FileTransferService
 ADDED from AndroidManifest.xml:78:9
 	android:name
-		ADDED from AndroidManifest.xml:78:19
+		ADDED from AndroidManifest.xml:78:18
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 MERGED from com.android.support:appcompat-v7:22.0.0:20:5

@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 import thealphalabs.Interface.ServiceControllerInterface;
 import thealphalabs.alphaapp.R;
-import thealphalabs.wifidirect.WifiDirectBdReceiver;
 
 /**
  * WifiDirectController
@@ -48,9 +47,6 @@ public class WifiDirectController implements ServiceControllerInterface {
     private WifiP2pManager.Channel mChannel;
     public  WifiP2pManager.Channel getChannel()      { return mChannel; }
 
-    private WifiDirectBdReceiver mReceiver;
-    public  WifiDirectBdReceiver      getReceiver()     { return mReceiver; }
-
     private IntentFilter           mIntentFilter;
 
     // UI 위한 ProgressDialog
@@ -72,7 +68,6 @@ public class WifiDirectController implements ServiceControllerInterface {
 
         mWifiManager = (WifiP2pManager) mContext.getSystemService(Context.WIFI_P2P_SERVICE);
         mChannel     = mWifiManager.initialize(mContext, Looper.getMainLooper(), null);
-        mReceiver    = new WifiDirectBdReceiver(mWifiManager, mChannel, mContext);
 
         mIntentFilter   = new IntentFilter();
         mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
@@ -91,11 +86,11 @@ public class WifiDirectController implements ServiceControllerInterface {
     }
 
     public void startWifiDirectService() {
-        mContext.registerReceiver(mReceiver, mIntentFilter);
+        //mContext.registerReceiver(mReceiver, mIntentFilter);
     }
 
     public void stopWifiDirectService() {
-        mContext.unregisterReceiver(mReceiver);
+       // mContext.unregisterReceiver(mReceiver);
     }
 
     @Override

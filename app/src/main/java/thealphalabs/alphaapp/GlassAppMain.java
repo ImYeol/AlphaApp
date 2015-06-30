@@ -18,6 +18,7 @@ import thealphalabs.controller.SensorController;
 import thealphalabs.controller.ServiceController;
 import thealphalabs.controller.WifiDirectController;
 import thealphalabs.notification.NotificationService;
+import thealphalabs.wifip2p.WifiDirectConnectionManager;
 
 public class GlassAppMain extends MaterialNavigationDrawer {
     private final String TAG = "GlassAppMain";
@@ -117,7 +118,8 @@ public class GlassAppMain extends MaterialNavigationDrawer {
 //        WifiDirectController.getInstance().stopWifiDirectService();
 
         super.onDestroy();
-
+        WifiDirectConnectionManager.getInstance().unRegisterBroadCastReceiver();
+        WifiDirectConnectionManager.getInstance().stopTransferService();
 //        BluetoothTransferService.isEnabled = false;
     }
 }

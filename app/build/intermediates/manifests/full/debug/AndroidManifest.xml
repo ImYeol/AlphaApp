@@ -73,11 +73,13 @@
             android:name="thealphalabs.bluetooth.DeviceListActivity"
             android:label="DeviceListActivity" >
         </activity>
-        <activity
-            android:name="thealphalabs.wifidirect.WifiDirect_DeviceList"
-            android:label="@string/title_activity_wifi_direct__device_list" >
-        </activity>
         <activity android:name="thealphalabs.wifidirect.FileBrowser" />
+        <activity android:name="thealphalabs.wifidirect.WifiDeviceListDialog" >
+        </activity>
+
+        <service android:name="thealphalabs.wifidirect.FileTransferService" >
+        </service>
+
         <activity android:name="com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.SwipeTouchListenerTestActivity" />
         <activity android:name="com.nhaarman.listviewanimations.itemmanipulation.dragdrop.DynamicListViewTestActivity" />
     </application>

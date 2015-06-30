@@ -23,7 +23,7 @@ public class FragmentScreenMirror extends Fragment {
     }
 
     private void init(){
-        mMouseViewController=new MouseViewController();
+      //  mMouseViewController=new MouseViewController();
     }
 
 

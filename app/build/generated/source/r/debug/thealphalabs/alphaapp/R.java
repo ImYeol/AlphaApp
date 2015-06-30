@@ -1749,7 +1749,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f0e002e;
         public static final int action_mode_bar_stub=0x7f0e002d;
         public static final int action_mode_close_button=0x7f0e0020;
-        public static final int action_settings=0x7f0e0082;
+        public static final int action_settings=0x7f0e0084;
         public static final int activity_chooser_view_content=0x7f0e0021;
         public static final int always=0x7f0e0016;
         public static final int apk_btn=0x7f0e0059;
@@ -1808,7 +1808,7 @@ containing a value of this type.
         public static final int listitem_title_title=0x7f0e007a;
         public static final int listitem_wd_name=0x7f0e007e;
         public static final int listview_controller=0x7f0e0066;
-        public static final int menu_settings=0x7f0e0081;
+        public static final int menu_settings=0x7f0e0083;
         public static final int middle=0x7f0e0015;
         public static final int never=0x7f0e0019;
         public static final int new_devices=0x7f0e0042;
@@ -1862,6 +1862,8 @@ containing a value of this type.
         public static final int user_photo_2=0x7f0e006c;
         public static final int user_photo_3=0x7f0e006d;
         public static final int user_switcher=0x7f0e0072;
+        public static final int wifi_devices_list=0x7f0e0081;
+        public static final int wifi_dialog_cancel=0x7f0e0082;
         public static final int wifidirect_connect_btn=0x7f0e007d;
         public static final int withText=0x7f0e001a;
         public static final int wrap_content=0x7f0e001d;
@@ -1917,7 +1919,7 @@ containing a value of this type.
         public static final int fragment_fragment_controlle=0x7f040026;
         public static final int fragment_home=0x7f040027;
         public static final int fragment_home_card=0x7f040028;
-        public static final int fragment_item=0x7f04003d;
+        public static final int fragment_item=0x7f04003e;
         public static final int fragment_item_grid=0x7f040029;
         public static final int fragment_item_list=0x7f04002a;
         public static final int fragment_screen_mirror=0x7f04002b;
@@ -1938,6 +1940,7 @@ containing a value of this type.
         public static final int listitem_wdlist=0x7f04003a;
         public static final int support_simple_spinner_dropdown_item=0x7f04003b;
         public static final int tab_controller_layout=0x7f04003c;
+        public static final int wifi_device_list_dialog=0x7f04003d;
     }
     public static final class menu {
         public static final int activity_file_browser=0x7f0f0000;

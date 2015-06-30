@@ -29,7 +29,7 @@ public class MouseViewController implements ServiceControllerInterface {
 
     MouseViewController(@Nullable Context context) {
         mContext = context;
-        init();
+        //init();
     }
     @Override
     public void start() {
