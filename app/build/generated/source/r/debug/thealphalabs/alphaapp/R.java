@@ -1701,7 +1701,7 @@ containing a value of this type.
         public static final int abc_textfield_search_material=0x7f020036;
         public static final int background_tab=0x7f020037;
         public static final int black_gradient=0x7f020038;
-        public static final int controller_img=0x7f020057;
+        public static final int controller_img=0x7f020058;
         public static final int ic_arrow_back_white_24dp=0x7f020039;
         public static final int ic_arrow_drop_down_white_24dp=0x7f02003a;
         public static final int ic_arrow_drop_up_white_24dp=0x7f02003b;
@@ -1732,6 +1732,7 @@ containing a value of this type.
         public static final int ic_shopping_basket_black_48dp=0x7f020054;
         public static final int ic_wifi_black_48dp=0x7f020055;
         public static final int mat2=0x7f020056;
+        public static final int transparent_round=0x7f020057;
     }
     public static final class id {
         public static final int about_license=0x7f0e0058;

@@ -68,6 +68,7 @@ public class WifiDeviceListDialog extends Activity implements WifiDeviceListCall
                 String item = (String) localListView.getItemAtPosition(position);
                 Log.d(TAG,"onItemClick:"+item);
                 mWifiDirectConnectionManager.connectTo(item, FilePathToTransfer);
+                WifiDeviceListDialog.this.finish();
             }
         });
         cancelBtn.setOnClickListener(new OnClickListener() {

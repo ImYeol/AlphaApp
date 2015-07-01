@@ -14,17 +14,13 @@ import android.net.wifi.p2p.WifiP2pInfo;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
 import android.os.ResultReceiver;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.util.Log;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import thealphalabs.Interface.WifiDeviceListCallback;
-import thealphalabs.alphaapp.IDataTransferService;
-import thealphalabs.controller.WifiDirectController;
 import thealphalabs.util.IntentSender;
 import thealphalabs.wifidirect.FileTransferService;
 import thealphalabs.wifidirect.RarpImpl;
@@ -61,6 +57,8 @@ public class WifiDirectConnectionManager {
 
     private String mP2pInterfaceName;
     private Timer mArpTableObservationTimer;
+
+    private boolean IsAppBoot=false;
 
     public static WifiDirectConnectionManager getInstance(Context context) {
         if (instance == null) {
@@ -140,6 +138,26 @@ public class WifiDirectConnectionManager {
             }
         }
     }
+
+    public void connectToDeviceIP(String ip) {
+        WifiP2pConfig config = new WifiP2pConfig();
+        config.deviceAddress = ip;
+        Log.d(TAG,"WifiP2P connect IP!!!");
+        mWifiP2pManager.connect(wifichannel, config, new WifiP2pManager.ActionListener() {
+            public void onSuccess() {
+                Log.d(TAG, "success to connect wifidevice IP");
+                //if(IsDeviceConnected)
+                //   startTransferService();
+                //setClientStatus("Connection to " + targetDevice.deviceName + " sucessful");
+            }
+
+            public void onFailure(int reason) {
+                //setClientStatus("Connection to " + targetDevice.deviceName + " failed");
+                Log.d(TAG, "failed to connect wifidevice " + reason);
+                IsDeviceConnected=false;
+            }
+        });
+    }
     public void connectToPeer(final WifiP2pDevice wifiPeer) {
         this.targetDevice = wifiPeer;
 
@@ -149,8 +167,10 @@ public class WifiDirectConnectionManager {
         mWifiP2pManager.connect(wifichannel, config, new WifiP2pManager.ActionListener() {
             public void onSuccess() {
                 Log.d(TAG, "success to connect wifidevice");
-                if(IsDeviceConnected)
-                    startTransferService();
+                IsAppBoot=true;
+                startTransfer();
+                //if(IsDeviceConnected)
+                 //   startTransferService();
                 //setClientStatus("Connection to " + targetDevice.deviceName + " sucessful");
             }
 
@@ -209,13 +229,14 @@ public class WifiDirectConnectionManager {
                     Log.d(TAG,"networkstat is connected");
                     IsDeviceConnected=true;
                     //set client state so that all needed fields to make a transfer are ready
-                    startTransferService();
+                    startTransfer();
                 }
                 else
                 {
                     //set variables to disable file transfer and reset client back to original state
                     mWifiP2pManager.cancelConnect(wifichannel, null);
                     IsDeviceConnected=false;
+                    Settings.System.putInt(mContext.getContentResolver(),"show_touches",0);
                 }
                 //activity.setClientStatus(networkState.isConnected());
 
@@ -270,9 +291,9 @@ public class WifiDirectConnectionManager {
         }
     }
 
-    private boolean checkResource(){
-        if()
-    }
+  /*  private boolean checkResource(){
+        //if()
+    }*/
     private void startTransfer() {
 
         mWifiP2pManager.requestGroupInfo(wifichannel, new WifiP2pManager.GroupInfoListener() {
@@ -291,7 +312,34 @@ public class WifiDirectConnectionManager {
                     ArpTableObservationTask task = new ArpTableObservationTask();
                     mArpTableObservationTimer.scheduleAtFixedRate(task, 10, 1*1000); // 10ms後から1秒間隔でarpファイルをチェック
                 } else { // this device is not G.O. get G.O. address
-                    invokeSink2nd();
+                   requestConnectionInfo();
+                }
+            }
+        });
+    }
+
+    private void requestConnectionInfo(){
+        mWifiP2pManager.requestConnectionInfo(wifichannel, new WifiP2pManager.ConnectionInfoListener() {
+            // requestConnectionInfo()実行後、非同期応答あり
+            public void onConnectionInfoAvailable(WifiP2pInfo info) {
+                Log.d(TAG,"　onConnectionInfoAvailable():");
+
+                Log.d(TAG,"groupFormed:" + info.groupFormed);
+                Log.d(TAG,"IsGroupOwner:" + info.isGroupOwner);
+                Log.d(TAG,"groupOwnerAddress:" + info.groupOwnerAddress);
+
+                if (!info.groupFormed) {
+                    Log.d(TAG,"  not yet groupFormed!");
+                    return;
+                }
+
+                if (info.isGroupOwner) {
+                    Log.d(TAG,"  I'm G.O.? Illegal State!!");
+                    return;
+                } else {
+                    wifiInfo=info;
+                    if(IsAppBoot)
+                        startTransferService();
                 }
             }
         });
@@ -316,9 +364,8 @@ public class WifiDirectConnectionManager {
                 }
                 return;
             }
-
             mArpTableObservationTimer.cancel();
-
+            connectToDeviceIP(source_ip);
         }
     }
 

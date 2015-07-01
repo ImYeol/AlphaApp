@@ -36,6 +36,7 @@ public class ServiceController {
     public static final String   ACCLSENSOR_SERVICE   = "ACCLSENSOR";
     public static final String   GYROSENSOR_SERVICE   = "GYROSENSOR";
     public static final String   NOTIFICATION_SERVICE = "NOTIFICATION";
+    public static final String   MOUSEVIEW_SERVICE    = "MOUSEVIEW";
 
     ArrayMap<String, ServiceControllerInterface> services;
     ServiceController() {

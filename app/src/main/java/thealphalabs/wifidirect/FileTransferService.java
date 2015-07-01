@@ -56,11 +56,10 @@ public class FileTransferService extends IntentService {
             OutputStream outputStream = null;
 
             try {
-
                 clientSocket = new Socket(targetIP, port);
                 outputStream = clientSocket.getOutputStream();
                 DataOutputStream dataOutputStream=new DataOutputStream(outputStream);
-                byte[] buffer = new byte[4092];
+                byte[] buffer = new byte[8192];
 
                 File file=new File(FileName);
                 FileInputStream fis = new FileInputStream(file);

@@ -41,6 +41,7 @@ public class AlphaApplication extends Application {
     @Override
     public void onTerminate() {
         super.onTerminate();
+        WifiDirectConnectionManager.getInstance().unRegisterBroadCastReceiver();
     }
 
     public BluetoothTransferHelper getBluetoothHelper() {

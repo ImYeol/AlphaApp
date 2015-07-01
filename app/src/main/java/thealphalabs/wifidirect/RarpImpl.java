@@ -29,7 +29,7 @@ public class RarpImpl {
     public String execRarp(String netIf) {
         ArrayList<String> lines = readFile(ARP_PATH);
         if (lines == null || lines.size() == 0) {
-            Log.w(TAG, "execRarp() readFile("+ARP_PATH+") returns 0");
+            Log.d(TAG, "execRarp() readFile("+ARP_PATH+") returns 0");
             return null;
         }
 
@@ -59,7 +59,7 @@ public class RarpImpl {
     public ArrayList<ArpType> getArpTable() {
         ArrayList<String> lines = readFile(ARP_PATH);
         if (lines == null || lines.size() == 0) {
-            Log.w(TAG, "getArpTable() readFile("+ARP_PATH+") returns 0");
+            Log.d(TAG, "getArpTable() readFile("+ARP_PATH+") returns 0");
             return null;
         }
 
